@@ -6,7 +6,7 @@
 * Create burndown chart
 * Learn Android Studio
 * UML
-  * Class diagram
+  * ~~Class diagram~~
   * Use case diagram
 * Create test cases
 * Write the code
