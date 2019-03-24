@@ -18,3 +18,17 @@
   * Use SQL, mySQL, mongoDB or something else
 * Host the database on a remote server
   * Have to learn how to create the backend or use firebase
+
+# Burndown List
+
+Item | Approximate Time
+:--- | ---:
+Android Studio | 4 weeks*
+~~Class Diagram~~ | ~~1.5~~ 2 hours
+Use Case Diagram | 2 hours
+Testing | 1.5 week**
+Coding (including documentation) | 3 weeks**
+
+*Quoted from Udacity
+
+**Subject to change after completing use case diagram
