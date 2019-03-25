@@ -2,8 +2,8 @@
 
 # TODO
 
-* Create burndown list
-* Create burndown chart
+* ~~Create burndown list~~
+* ~~Create burndown chart~~
 * Learn Android Studio
 * ~~UML~~
   * ~~Class diagram~~
@@ -26,9 +26,9 @@ Item | Approximate Time
 Android Studio | 4 weeks*
 ~~Class Diagram~~ | ~~1.5~~ 2 hours
 ~~Use Case Diagram~~ | 2 hours
-Testing | 1.5 week**
-Coding (including documentation) | 3 weeks**
+Testing | 1.5 week
+Coding (including documentation) | 3 weeks
 
-*Quoted from Udacity
+\*Quoted from Udacity
 
-**Subject to change after completing use case diagram
+![alt text](https://github.com/dennis12hahn/CSE248ParkingGarage/blobl/master/burndown-chart.svg "Burndown Chart")
