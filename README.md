@@ -31,4 +31,4 @@ Coding (including documentation) | 3 weeks
 
 \*Quoted from Udacity
 
-![alt text](https://github.com/dennis12hahn/CSE248ParkingGarage/blobl/master/burndown-chart.svg "Burndown Chart")
+![alt text](https://github.com/Dennis12Hahn/CSE248ParkingGarage/blob/master/burndown-chart.svg "Burndown Chart")
