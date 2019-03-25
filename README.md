@@ -5,9 +5,9 @@
 * Create burndown list
 * Create burndown chart
 * Learn Android Studio
-* UML
+* ~~UML~~
   * ~~Class diagram~~
-  * Use case diagram
+  * ~~Use case diagram~~
 * Create test cases
 * Write the code
   * Create JavaDoc as code is written
@@ -25,7 +25,7 @@ Item | Approximate Time
 :--- | ---:
 Android Studio | 4 weeks*
 ~~Class Diagram~~ | ~~1.5~~ 2 hours
-Use Case Diagram | 2 hours
+~~Use Case Diagram~~ | 2 hours
 Testing | 1.5 week**
 Coding (including documentation) | 3 weeks**
 
