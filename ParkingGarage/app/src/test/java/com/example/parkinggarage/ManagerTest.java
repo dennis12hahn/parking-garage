@@ -2,16 +2,12 @@ package com.example.parkinggarage;
 
 import com.example.parkinggarage.model.Attendant;
 import com.example.parkinggarage.model.Manager;
-import com.example.parkinggarage.model.User;
-import com.example.parkinggarage.model.UserBag;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ManagerTest {
 
