@@ -1,11 +1,11 @@
-package com.example.parkinggarage.model;
+package com.example.parkinggarage.model.users;
 
 /**
  * The Manager class is a subclass of the User class. A manager has the ability to create attendants.
  * This will be used upon the arrival of an attendant to the parking garage.
  *
  * @author Dennis Hahn
- * @version 1.0, 03/29/2019
+ * @version 1, 03/29/2019
  */
 public class Manager extends User {
 

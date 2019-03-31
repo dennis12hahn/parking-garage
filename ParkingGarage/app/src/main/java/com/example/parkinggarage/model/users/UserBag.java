@@ -1,6 +1,11 @@
-package com.example.parkinggarage.model;
+package com.example.parkinggarage.model.users;
+
+import com.example.parkinggarage.model.users.Attendant;
+import com.example.parkinggarage.model.users.Manager;
+import com.example.parkinggarage.model.users.User;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The UserBag class contains a HashMap of users. A user can be an Attendant or a Manager.
@@ -8,12 +13,12 @@ import java.util.HashMap;
  * User which will be the actual user object. As of right now there is no maximum size.
  *
  * @author Dennis Hahn
- * @version 1.0, 03/29/2019
+ * @version 1, 03/29/2019
  */
 
 public class UserBag {
 
-    private HashMap<String, User> users;
+    private Map<String, User> users;
 
     public UserBag() {
         this.users = new HashMap<>();

@@ -1,9 +1,7 @@
 package com.example.parkinggarage;
 
-import com.example.parkinggarage.model.Manager;
-import com.example.parkinggarage.model.UserBag;
+import com.example.parkinggarage.model.users.UserBag;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.example.parkinggarage.model;
+package com.example.parkinggarage.model.users;
 
 /**
  * The User class is not instantiable and is the super class of Attendants and the Manager
@@ -6,7 +6,7 @@ package com.example.parkinggarage.model;
  * associated with the account, the user's password, and the unique id
  *
  * @author Dennis Hahn
- * @version 1.0, 03/28/2019
+ * @version 1, 03/28/2019
  */
 
 public abstract class User {

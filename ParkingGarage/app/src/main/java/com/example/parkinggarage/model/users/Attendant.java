@@ -1,4 +1,11 @@
-package com.example.parkinggarage.model;
+package com.example.parkinggarage.model.users;
+
+import com.example.parkinggarage.model.spaces.Space;
+import com.example.parkinggarage.model.vehicles.Car;
+import com.example.parkinggarage.model.vehicles.Motorcycle;
+import com.example.parkinggarage.model.vehicles.Truck;
+import com.example.parkinggarage.model.vehicles.Vehicle;
+import com.example.parkinggarage.model.vehicles.VehicleBag;
 
 /**
  * The Attendant class extends the User class and controls the following:
@@ -10,18 +17,18 @@ package com.example.parkinggarage.model;
  * the vehicles currently associated with the attendant
  *
  * @author Dennis Hahn
- * @version 1.0, 03/28/2019
+ * @version 1, 03/28/2019
  */
 
 public class Attendant extends User {
 
     private double amountReceivable;
-    // todo
-    // add vehicles as a Vehicle Bag
+    private VehicleBag vehicles;
 
     public Attendant(String firstName, String lastName, String password) {
         super(firstName, lastName, password);
         this.amountReceivable = 0;
+        this.vehicles = new VehicleBag();
     }
 
     public double getAmountReceivable() {
@@ -29,10 +36,8 @@ public class Attendant extends User {
     }
 
     /**
-     *
      * @param payment: the amount being paid by the attendant
      * @return the change from the payment, -1 if payment is less than or equal to 0
-     *
      * @author Dennis Hahn
      * @hahn.precondition payment must be greater than 0
      * @hahn.postcondition amountReceivable must be greater than or equal to 0
@@ -56,10 +61,8 @@ public class Attendant extends User {
     }
 
     /**
-     *
      * @param chargeAmount: amount to charge on the account
      * @return the amountReceivable on the account, -1 if the chargeAmount is less than or equal to 0
-     *
      * @author Dennis Hahn
      * @hahn.precondition chargeAmount must be greater than 0
      */
@@ -71,6 +74,31 @@ public class Attendant extends User {
     }
 
 
-    // todo
-    // add park, exit, and addVehicle methods
+    public boolean addVehicle(Vehicle vehicle) {
+        return vehicles.addVehicle(vehicle);
+    }
+
+    public boolean addMotorcycle(String license, String make, String model, int year, boolean parked) {
+        return vehicles.addMotorcycle(license, make, model, year, parked);
+    }
+
+    public boolean addCar(String license, String make, String model, int year, boolean parked) {
+        return vehicles.addCar(license, make, model, year, parked);
+    }
+
+    public boolean addTruck(String license, String make, String model, int year, boolean parked) {
+        return vehicles.addTruck(license, make, model, year, parked);
+    }
+
+    public void park(Vehicle vehicle, Space space) {
+        if (vehicle.isParkable(space, vehicle)) {
+            vehicle.setParked(true);
+            space.setOccupied(true);
+        }
+    }
+
+    public void exit(Vehicle vehicle, Space space) {
+        vehicle.setParked(false);
+        space.setOccupied(false);
+    }
 }
