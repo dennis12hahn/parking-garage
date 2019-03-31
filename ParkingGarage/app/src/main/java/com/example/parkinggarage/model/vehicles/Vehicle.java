@@ -1,5 +1,7 @@
 package com.example.parkinggarage.model.vehicles;
 
+import com.example.parkinggarage.model.spaces.Space;
+
 /**
  * The Vehicle class consists of Strings representing the license, make, and model of a vehicle object.
  * It also consists of the year of the vehicle and the size of the vehicle. The size will be an integer
@@ -10,7 +12,7 @@ package com.example.parkinggarage.model.vehicles;
  * @version 1, 03/31/2019
  */
 
-public abstract class Vehicle implements Parkable {
+public abstract class Vehicle {
 
     private String license, make, model;
     private int year, size;
@@ -23,6 +25,10 @@ public abstract class Vehicle implements Parkable {
         this.year = year;
         this.size = size;
         this.parked = parked;
+    }
+
+    public boolean isParkable(Space space) {
+        return this.getSize() <= space.getSize() && !space.isOccupied();
     }
 
     public String getLicense() {

@@ -91,7 +91,7 @@ public class Attendant extends User {
     }
 
     public void park(Vehicle vehicle, Space space) {
-        if (vehicle.isParkable(space, vehicle)) {
+        if (vehicle.isParkable(space)) {
             vehicle.setParked(true);
             space.setOccupied(true);
         }
