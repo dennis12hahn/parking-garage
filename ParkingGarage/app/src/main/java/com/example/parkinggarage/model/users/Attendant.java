@@ -1,11 +1,12 @@
 package com.example.parkinggarage.model.users;
 
+import com.example.parkinggarage.model.payment.Document;
 import com.example.parkinggarage.model.spaces.Space;
-import com.example.parkinggarage.model.vehicles.Car;
-import com.example.parkinggarage.model.vehicles.Motorcycle;
-import com.example.parkinggarage.model.vehicles.Truck;
 import com.example.parkinggarage.model.vehicles.Vehicle;
 import com.example.parkinggarage.model.vehicles.VehicleBag;
+
+import java.time.LocalDateTime;
+import java.util.Stack;
 
 /**
  * The Attendant class extends the User class and controls the following:
@@ -24,11 +25,13 @@ public class Attendant extends User {
 
     private double amountReceivable;
     private VehicleBag vehicles;
+    private Stack<Document> docs;
 
     public Attendant(String firstName, String lastName, String password) {
         super(firstName, lastName, password);
         this.amountReceivable = 0;
         this.vehicles = new VehicleBag();
+        this.docs = new Stack<>();
     }
 
     public double getAmountReceivable() {
@@ -78,27 +81,38 @@ public class Attendant extends User {
         return vehicles.addVehicle(vehicle);
     }
 
-    public boolean addMotorcycle(String license, String make, String model, int year, boolean parked) {
-        return vehicles.addMotorcycle(license, make, model, year, parked);
+    public boolean addMotorcycle(String license, String make, String model, int year) {
+        return vehicles.addMotorcycle(license, make, model, year);
     }
 
-    public boolean addCar(String license, String make, String model, int year, boolean parked) {
-        return vehicles.addCar(license, make, model, year, parked);
+    public boolean addCar(String license, String make, String model, int year) {
+        return vehicles.addCar(license, make, model, year);
     }
 
-    public boolean addTruck(String license, String make, String model, int year, boolean parked) {
-        return vehicles.addTruck(license, make, model, year, parked);
+    public boolean addTruck(String license, String make, String model, int year) {
+        return vehicles.addTruck(license, make, model, year);
     }
 
-    public void park(Vehicle vehicle, Space space) {
+    public String[] park(Vehicle vehicle, Space space) {
         if (vehicle.isParkable(space)) {
+            vehicles.addVehicle(vehicle);
             vehicle.setParked(true);
             space.setOccupied(true);
+            return docs.push(new Document(this, vehicle, space)).getTicketInfo();
         }
+        return null;
     }
 
-    public void exit(Vehicle vehicle, Space space) {
-        vehicle.setParked(false);
-        space.setOccupied(false);
+    public String[] exit(Vehicle vehicle, Space space, double payment) {
+        if (vehicle.isParked() && space.isOccupied()) {
+            docs.peek().setTimeRetrieved(LocalDateTime.now());
+            docs.peek().setPaid(payment);
+            charge(docs.peek().calculateCharge());
+            pay(payment);
+            vehicle.setParked(false);
+            space.setOccupied(false);
+            return docs.peek().getReceiptInfo();
+        }
+        return null;
     }
 }

@@ -6,7 +6,7 @@ public class TruckSpace extends Space {
     private final static double EARLY_BIRD_PRICE = 40.0;
     private final static double RATE = 5.0;
 
-    public TruckSpace(double distanceToExit, boolean occupied) {
-        super(distanceToExit, RATE, EARLY_BIRD_PRICE, occupied, SIZE);
+    public TruckSpace() {
+        super(RATE, EARLY_BIRD_PRICE, SIZE);
     }
 }

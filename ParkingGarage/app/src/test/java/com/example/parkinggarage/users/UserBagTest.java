@@ -1,4 +1,4 @@
-package com.example.parkinggarage;
+package com.example.parkinggarage.users;
 
 import com.example.parkinggarage.model.users.UserBag;
 

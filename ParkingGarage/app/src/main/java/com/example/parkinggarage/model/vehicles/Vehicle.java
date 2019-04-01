@@ -18,17 +18,17 @@ public abstract class Vehicle {
     private int year, size;
     private boolean parked;
 
-    public Vehicle(String license, String make, String model, int year, int size, boolean parked) {
+    public Vehicle(String license, String make, String model, int year, int size) {
         this.license = license;
         this.make = make;
         this.model = model;
         this.year = year;
         this.size = size;
-        this.parked = parked;
+        this.parked = false;
     }
 
     public boolean isParkable(Space space) {
-        return this.getSize() <= space.getSize() && !space.isOccupied();
+        return this.getSize() <= space.getSize() && !space.isOccupied() && !this.isParked();
     }
 
     public String getLicense() {

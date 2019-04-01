@@ -59,14 +59,6 @@ public abstract class User {
         }
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
     /**
      * Verifies an incoming password with the password stored in the account.
      *
@@ -75,5 +67,21 @@ public abstract class User {
      */
     public boolean verifyPassword(String inputPassword) {
         return password.equals(inputPassword);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

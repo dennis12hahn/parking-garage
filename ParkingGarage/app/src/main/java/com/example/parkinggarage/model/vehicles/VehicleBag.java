@@ -11,8 +11,8 @@ public class VehicleBag {
         this.vehicles = new HashMap<>();
     }
 
-    public boolean addMotorcycle(String license, String make, String model, int year, boolean parked) {
-        Vehicle motorcycle = new Motorcycle(license, make, model, year, parked);
+    public boolean addMotorcycle(String license, String make, String model, int year) {
+        Vehicle motorcycle = new Motorcycle(license, make, model, year);
 
         if (vehicles.containsKey(license)) {
             return false;
@@ -22,8 +22,8 @@ public class VehicleBag {
         return true;
     }
 
-    public boolean addCar(String license, String make, String model, int year, boolean parked) {
-        Vehicle motorcycle = new Car(license, make, model, year, parked);
+    public boolean addCar(String license, String make, String model, int year) {
+        Vehicle motorcycle = new Car(license, make, model, year);
 
         if (vehicles.containsKey(license)) {
             return false;
@@ -33,8 +33,8 @@ public class VehicleBag {
         return true;
     }
 
-    public boolean addTruck(String license, String make, String model, int year, boolean parked) {
-        Vehicle motorcycle = new Truck(license, make, model, year, parked);
+    public boolean addTruck(String license, String make, String model, int year) {
+        Vehicle motorcycle = new Truck(license, make, model, year);
 
         if (vehicles.containsKey(license)) {
             return false;
