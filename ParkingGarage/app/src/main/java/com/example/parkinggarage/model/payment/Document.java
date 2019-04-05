@@ -27,7 +27,7 @@ public class Document {
     }
 
     public String[] getTicketInfo() {
-        return new String[] {
+        return new String[]{
                 attendant.getFirstName() + " " + attendant.getLastName(),
                 vehicle.getLicense(),
                 space.getClass().getSimpleName(),
@@ -37,7 +37,7 @@ public class Document {
     }
 
     public String[] getReceiptInfo() {
-        return new String[] {
+        return new String[]{
                 attendant.getFirstName() + " " + attendant.getLastName(),
                 vehicle.getLicense(),
                 space.getClass().getSimpleName(),

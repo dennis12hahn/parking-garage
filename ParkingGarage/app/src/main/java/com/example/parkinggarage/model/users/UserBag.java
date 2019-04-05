@@ -25,7 +25,7 @@ public class UserBag {
     }
 
     /**
-     * Will add a Manager object to the userbag.
+     * Will addSpace a Manager object to the userbag.
      *
      * @param firstName
      * @param lastName
@@ -45,7 +45,7 @@ public class UserBag {
     }
 
     /**
-     * Will add an Attendant object to the userbag.
+     * Will addSpace an Attendant object to the userbag.
      *
      * @param firstName
      * @param lastName
