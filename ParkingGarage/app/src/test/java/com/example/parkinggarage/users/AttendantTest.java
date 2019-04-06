@@ -104,7 +104,7 @@ public class AttendantTest {
     public void testPark() {
         assertFalse(car1.isParked());
         assertFalse(carSpace1.isOccupied());
-        String[] tokens = attendant3.park(car1, carSpace1);
+        String[] tokens = attendant3.park(car1, carSpace1).getTicketInfo();
         assertNotNull(tokens);
         assertTrue(car1.isParked());
         assertTrue(carSpace1.isOccupied());
@@ -121,7 +121,7 @@ public class AttendantTest {
     public void testExit() throws InterruptedException {
         attendant1.park(car2, carSpace2);
         Thread.sleep(1000);
-        String[] tokens = attendant1.exit(car2, carSpace2, 1);
+        String[] tokens = attendant1.exit(1).getReceiptInfo();
         System.out.println(Arrays.toString(tokens));
         assertNotNull(tokens);
         assertFalse(car2.isParked());

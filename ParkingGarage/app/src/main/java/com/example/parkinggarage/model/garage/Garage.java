@@ -14,107 +14,38 @@ import java.util.PriorityQueue;
 
 public class Garage {
 
-    private PriorityQueue<Space> spaces;
+    private PriorityQueue<MotorcycleSpace> motorcycleSpaces;
+    private PriorityQueue<CarSpace> carSpaces;
+    private PriorityQueue<TruckSpace> truckSpaces;
 
     public Garage() {
-        this.spaces = new PriorityQueue<>();
+        this.motorcycleSpaces = new PriorityQueue<>();
+        this.carSpaces = new PriorityQueue<>();
+        this.truckSpaces = new PriorityQueue<>();
     }
 
     public boolean addSpace(Space space) {
-        return spaces.add(space);
-    }
-
-    public Space peekSpaces() {
-        return spaces.peek();
-    }
-
-    private Space getClosestSmallestSpace(Vehicle vehicle) {
-        Iterator<Space> iterator = spaces.iterator();
-        Space space = iterator.next();
-
-        while (iterator.hasNext()) {
-            if (space.isOccupied()) {
-                return space;
-            }
-
-            space = iterator.next();
-
-            if (vehicle instanceof Motorcycle && space instanceof MotorcycleSpace) {
-                return space;
-            }
-
-            if (vehicle instanceof Car && space instanceof CarSpace) {
-                return space;
-            }
-
-            if (vehicle instanceof Truck && space instanceof TruckSpace) {
-                return space;
-            }
+        if (space instanceof MotorcycleSpace) {
+            return motorcycleSpaces.add((MotorcycleSpace) space);
         }
 
-        return space;
-    }
-
-    private Space getClosestLargerSpace(Vehicle vehicle) {
-        Iterator<Space> iterator = spaces.iterator();
-        Space space = iterator.next();
-
-        while (iterator.hasNext()) {
-            if (space.isOccupied()) {
-                return space;
-            }
-
-            space = iterator.next();
-
-            if (vehicle instanceof Motorcycle && space instanceof CarSpace) {
-                return space;
-            }
-
-            if (vehicle instanceof Car && space instanceof TruckSpace) {
-                return space;
-            }
+        if (space instanceof CarSpace) {
+            return carSpaces.add((CarSpace) space);
         }
 
-        return space;
-    }
-
-    private Space getClosestLargestSpace(Vehicle vehicle) {
-        Iterator<Space> iterator = spaces.iterator();
-        Space space = iterator.next();
-
-        while (iterator.hasNext()) {
-            if (space.isOccupied()) {
-                return space;
-            }
-
-            space = iterator.next();
-
-            if (vehicle instanceof Motorcycle && space instanceof TruckSpace) {
-                return space;
-            }
-        }
-
-        return space;
+        return truckSpaces.add((TruckSpace) space);
     }
 
     public Space getClosestSpace(Vehicle vehicle) {
-
-        Space space = getClosestSmallestSpace(vehicle);
-
-        if (space.isOccupied() && !(vehicle instanceof Truck)) {
-            space = getClosestLargerSpace(vehicle);
+        if (vehicle instanceof Motorcycle) {
+            return motorcycleSpaces.peek();
         }
 
-        if (space.isOccupied() && !(vehicle instanceof Car)) {
-            space = getClosestLargestSpace(vehicle);
+        if (vehicle instanceof Car) {
+            return carSpaces.peek();
         }
 
-        return space;
-
-    }
-
-    public PriorityQueue<Space> getSpaces() {
-        return spaces;
+        return truckSpaces.peek();
     }
 
     public void generateSpaces(int totalMotorcycleSpaces, int totalCarSpaces, int totalTruckSpaces) {
@@ -131,7 +62,27 @@ public class Garage {
         }
     }
 
-    public Space pollSpaces() {
-        return spaces.poll();
+    public MotorcycleSpace peekMotorcycleSpace() {
+        return motorcycleSpaces.peek();
+    }
+
+    public CarSpace peekCarSpaces() {
+        return carSpaces.peek();
+    }
+
+    public TruckSpace peekTruckSpace() {
+        return truckSpaces.peek();
+    }
+
+    public MotorcycleSpace pollMotorcycleSpaces() {
+        return motorcycleSpaces.poll();
+    }
+
+    public CarSpace pollCarSpaces() {
+        return carSpaces.poll();
+    }
+
+    public TruckSpace pollTruckSpaces() {
+        return truckSpaces.poll();
     }
 }

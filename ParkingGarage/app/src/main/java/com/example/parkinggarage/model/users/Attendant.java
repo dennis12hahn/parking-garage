@@ -26,12 +26,14 @@ public class Attendant extends User {
     private double amountReceivable;
     private VehicleBag vehicles;
     private Stack<Document> docs;
+    private boolean parked;
 
     public Attendant(String firstName, String lastName, String password) {
         super(firstName, lastName, password);
         this.amountReceivable = 0;
         this.vehicles = new VehicleBag();
         this.docs = new Stack<>();
+        this.parked = false;
     }
 
     public double getAmountReceivable() {
@@ -93,26 +95,42 @@ public class Attendant extends User {
         return vehicles.addTruck(license, make, model, year);
     }
 
-    public String[] park(Vehicle vehicle, Space space) {
-        if (vehicle.isParkable(space)) {
+    public void setParked(boolean parked) {
+        this.parked = parked;
+    }
+
+    public Document park(Vehicle vehicle, Space space) {
+        if (space != null && vehicle.isParkable(space) && !parked) {
             vehicles.addVehicle(vehicle);
             vehicle.setParked(true);
             space.setOccupied(true);
-            return docs.push(new Document(this, vehicle, space)).getTicketInfo();
+            setParked(true);
+            return docs.push(new Document(this, vehicle, space));
         }
         return null;
     }
 
-    public String[] exit(Vehicle vehicle, Space space, double payment) {
-        if (vehicle.isParked() && space.isOccupied()) {
-            docs.peek().setTimeRetrieved(LocalDateTime.now());
-            docs.peek().setPaid(payment);
-            charge(docs.peek().calculateCharge());
-            pay(payment);
-            vehicle.setParked(false);
-            space.setOccupied(false);
-            return docs.peek().getReceiptInfo();
+    public Document exit(double payment) {
+        if (!docs.isEmpty()) {
+            Document doc = docs.peek();
+            Space space = doc.getSpace();
+            Vehicle vehicle = doc.getVehicle();
+
+            if (vehicle.isParked() && space.isOccupied() && parked) {
+                doc.setTimeRetrieved(LocalDateTime.now());
+                doc.setPaid(payment);
+                charge(doc.calculateCharge());
+                pay(payment);
+                vehicle.setParked(false);
+                space.setOccupied(false);
+                setParked(false);
+                return doc;
+            }
         }
         return null;
+    }
+
+    public Document peekDocs() {
+        return docs.peek();
     }
 }

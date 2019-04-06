@@ -77,4 +77,11 @@ public class Document {
         return (int) diff / 3600;
     }
 
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public Space getSpace() {
+        return space;
+    }
 }
