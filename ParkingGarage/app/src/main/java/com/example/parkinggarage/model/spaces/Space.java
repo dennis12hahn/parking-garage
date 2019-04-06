@@ -3,9 +3,9 @@ package com.example.parkinggarage.model.spaces;
 public abstract class Space implements Comparable<Space> {
 
     private static int distanceCounter = 0;
-    private double distanceToExit, rate, earlyBirdPrice;
+    private double rate, earlyBirdPrice;
     private boolean occupied;
-    private int size;
+    private int distanceToExit, size;
 
     public Space(double rate, double earlyBirdPrice, int size) {
         this.distanceToExit = ++distanceCounter;
@@ -17,16 +17,16 @@ public abstract class Space implements Comparable<Space> {
 
     @Override
     public int compareTo(Space space) {
-        if (!this.isOccupied() && space.isOccupied()) {
+        if (this.isOccupied() && !space.isOccupied()) {
             return 1;
-        } else if (this.isOccupied() && !space.isOccupied()) {
+        } else if (!this.isOccupied() && space.isOccupied()) {
             return -1;
         } else {
-            return Double.compare(this.getDistanceToExit(), space.getDistanceToExit());
+            return Integer.compare(this.getDistanceToExit(), space.getDistanceToExit());
         }
     }
 
-    public double getDistanceToExit() {
+    public int getDistanceToExit() {
         return distanceToExit;
     }
 
