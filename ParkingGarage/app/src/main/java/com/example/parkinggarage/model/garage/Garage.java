@@ -9,7 +9,6 @@ import com.example.parkinggarage.model.vehicles.Motorcycle;
 import com.example.parkinggarage.model.vehicles.Truck;
 import com.example.parkinggarage.model.vehicles.Vehicle;
 
-import java.util.Iterator;
 import java.util.PriorityQueue;
 
 public class Garage {
@@ -36,16 +35,56 @@ public class Garage {
         return truckSpaces.add((TruckSpace) space);
     }
 
-    public Space getClosestSpace(Vehicle vehicle) {
-        if (vehicle instanceof Motorcycle) {
+    private Space getClosestSpaceForMotorcycle() {
+        if (!motorcycleSpaces.peek().isOccupied()) {
             return motorcycleSpaces.peek();
         }
 
-        if (vehicle instanceof Car) {
+        if (!carSpaces.peek().isOccupied()) {
             return carSpaces.peek();
         }
 
-        return truckSpaces.peek();
+        if (!truckSpaces.peek().isOccupied()) {
+            return truckSpaces.peek();
+        }
+
+        return null;
+    }
+
+    private Space getClosestSpaceForCar() {
+        if (!carSpaces.peek().isOccupied()) {
+            return carSpaces.peek();
+        }
+
+        if (!truckSpaces.peek().isOccupied()) {
+            return truckSpaces.peek();
+        }
+
+        return null;
+    }
+
+    private Space getClosestSpaceForTruck() {
+        if (!truckSpaces.peek().isOccupied()) {
+            return truckSpaces.peek();
+        }
+
+        return null;
+    }
+
+    public Space getClosestSpace(Vehicle vehicle) {
+        if (vehicle instanceof Motorcycle) {
+            return getClosestSpaceForMotorcycle();
+        }
+
+        if (vehicle instanceof Car) {
+            return getClosestSpaceForCar();
+        }
+
+        if (vehicle instanceof Truck) {
+            return getClosestSpaceForTruck();
+        }
+
+        return null;
     }
 
     public void generateSpaces(int totalMotorcycleSpaces, int totalCarSpaces, int totalTruckSpaces) {

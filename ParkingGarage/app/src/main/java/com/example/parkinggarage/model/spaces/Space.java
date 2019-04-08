@@ -62,6 +62,7 @@ public abstract class Space implements Comparable<Space> {
                 ", earlyBirdPrice=" + earlyBirdPrice +
                 ", occupied=" + occupied +
                 ", size=" + size +
+                ", class=" + getClass() +
                 '}';
     }
 }

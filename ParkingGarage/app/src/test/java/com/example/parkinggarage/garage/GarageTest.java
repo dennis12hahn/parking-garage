@@ -112,6 +112,34 @@ public class GarageTest {
 
         Document doc10 = attendant4.exit(7);
         assertNull(doc10);
+    }
+
+    @Test
+    public void testClosestLargerSpace() {
+        Garage garage = new Garage();
+        Attendant attendant1 = new Attendant("first", "last", "password");
+        Attendant attendant2 = new Attendant("first", "last", "password");
+        Vehicle vehicle1 = new Car("123", "just a ", "car", 2);
+        Vehicle vehicle2 = new Motorcycle("456", "small", "bike", 3);
+        Vehicle vehicle3 = new Truck("789", "big", "truck", 3);
+        Vehicle vehicle4 = new Car("123456", "no more", "spaces", 6);
+        Vehicle vehicle5 = new Motorcycle("123d456", "no more", "spaces", 6);
+        garage.generateSpaces(1, 1, 1);
+
+        Document doc1 = attendant1.park(vehicle2, garage.getClosestSpace(vehicle2));
+        assertTrue(doc1.getSpace() instanceof MotorcycleSpace);
+
+        Space space1 = garage.getClosestSpace(vehicle5);
+        assertTrue(space1 instanceof CarSpace);
+
+        Space space2 = garage.getClosestSpace(vehicle4);
+        assertTrue(space2 instanceof CarSpace);
+
+        attendant2.park(vehicle5, space1);
+
+        space2 = garage.getClosestSpace(vehicle4);
+        assertTrue(space2 instanceof TruckSpace);
+
 
     }
 
