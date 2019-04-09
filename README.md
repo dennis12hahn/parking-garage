@@ -1,4 +1,4 @@
-# CSE248ParkingGarage
+# Parking Garage
 
 # Use of Data Structures
 
