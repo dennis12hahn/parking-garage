@@ -14,10 +14,7 @@ import com.example.parkinggarage.model.vehicles.Vehicle;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -53,7 +50,7 @@ public class GarageTest {
     }
 
     @Test
-    public void testGenerateSpaces() {
+    void testGenerateSpaces() {
         Garage garage = new Garage();
         garage.generateSpaces(10, 20, 10);
 
@@ -79,68 +76,38 @@ public class GarageTest {
         Attendant attendant4 = new Attendant("attendant", "4", "password");
         Vehicle vehicle1 = new Car("123", "just a ", "car", 2);
         Vehicle vehicle2 = new Motorcycle("456", "small", "bike", 3);
-        Vehicle vehicle3 = new Truck("789", "big", "truck", 3);
-        Vehicle vehicle4 = new Car("123456", "no more", "spaces", 6);
-        garage.generateSpaces(1, 1, 1);
+        Vehicle vehicle3 = new Car("123456", "no more", "spaces", 6);
+        Vehicle vehicle4 = new Truck("789", "big", "truck", 3);
+        garage.generateSpaces(2, 1, 2);
 
-        Document doc1 = attendant1.park(vehicle1, garage.getClosestSpace(vehicle1));
+        Space space = garage.getClosestSpace(vehicle1);
+        Document doc1 = attendant1.park(vehicle1, space);
         assertNotNull(doc1);
+        garage.addSpace(space);
 
-        Document doc2 = attendant1.park(vehicle2, garage.getClosestSpace(vehicle2));
+        space = garage.getClosestSpace(vehicle1);
+        Document doc2 = attendant1.park(vehicle1, space);
         assertNull(doc2);
+        garage.addSpace(space);
 
-        Document doc3 = attendant2.park(vehicle2, garage.getClosestSpace(vehicle2));
+        space = garage.getClosestSpace(vehicle2);
+        Document doc3 = attendant2.park(vehicle2, space);
         assertNotNull(doc3);
+        assertTrue(space instanceof MotorcycleSpace);
+        garage.addSpace(space);
 
-        Document doc4 = attendant3.park(vehicle1, garage.getClosestSpace(vehicle1));
-        assertNull(doc4);
+        space = garage.getClosestSpace(vehicle3);
+        Document doc4 = attendant3.park(vehicle3, space);
+        assertNotNull(doc4);
+        assertTrue(space instanceof TruckSpace);
+        garage.addSpace(space);
 
-        Document doc5 = attendant3.park(vehicle3, garage.getClosestSpace(vehicle3));
+        space = garage.getClosestSpace(vehicle4);
+        Document doc5 = attendant4.park(vehicle4, space);
         assertNotNull(doc5);
+        garage.addSpace(space);
 
-        Document doc6 = attendant4.park(vehicle4, garage.getClosestSpace(vehicle4));
-        assertNull(doc6);
-
-        Document doc7 = attendant1.exit(20);
-        assertNotNull(doc7);
-
-        Document doc8 = attendant2.exit(50);
-        assertNotNull(doc8);
-
-        Document doc9 = attendant3.exit(1);
-        assertNotNull(doc9);
-
-        Document doc10 = attendant4.exit(7);
-        assertNull(doc10);
-    }
-
-    @Test
-    public void testClosestLargerSpace() {
-        Garage garage = new Garage();
-        Attendant attendant1 = new Attendant("first", "last", "password");
-        Attendant attendant2 = new Attendant("first", "last", "password");
-        Vehicle vehicle1 = new Car("123", "just a ", "car", 2);
-        Vehicle vehicle2 = new Motorcycle("456", "small", "bike", 3);
-        Vehicle vehicle3 = new Truck("789", "big", "truck", 3);
-        Vehicle vehicle4 = new Car("123456", "no more", "spaces", 6);
-        Vehicle vehicle5 = new Motorcycle("123d456", "no more", "spaces", 6);
-        garage.generateSpaces(1, 1, 1);
-
-        Document doc1 = attendant1.park(vehicle2, garage.getClosestSpace(vehicle2));
-        assertTrue(doc1.getSpace() instanceof MotorcycleSpace);
-
-        Space space1 = garage.getClosestSpace(vehicle5);
-        assertTrue(space1 instanceof CarSpace);
-
-        Space space2 = garage.getClosestSpace(vehicle4);
-        assertTrue(space2 instanceof CarSpace);
-
-        attendant2.park(vehicle5, space1);
-
-        space2 = garage.getClosestSpace(vehicle4);
-        assertTrue(space2 instanceof TruckSpace);
-
-
+        garage.displayAllSpaces();
     }
 
 }

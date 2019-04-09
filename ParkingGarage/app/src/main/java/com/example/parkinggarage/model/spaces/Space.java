@@ -1,5 +1,7 @@
 package com.example.parkinggarage.model.spaces;
 
+import android.text.BoringLayout;
+
 public abstract class Space implements Comparable<Space> {
 
     private static int distanceCounter = 0;
@@ -17,13 +19,15 @@ public abstract class Space implements Comparable<Space> {
 
     @Override
     public int compareTo(Space space) {
-        if (this.isOccupied() && !space.isOccupied()) {
-            return 1;
-        } else if (!this.isOccupied() && space.isOccupied()) {
+        if (!this.occupied && space.occupied) {
             return -1;
-        } else {
-            return Integer.compare(this.getDistanceToExit(), space.getDistanceToExit());
         }
+
+        if (this.occupied && !space.occupied) {
+            return 1;
+        }
+
+        return Integer.compare(this.distanceToExit, space.distanceToExit);
     }
 
     public int getDistanceToExit() {
@@ -56,13 +60,12 @@ public abstract class Space implements Comparable<Space> {
 
     @Override
     public String toString() {
-        return "Space{" +
+        return '\n' + getClass().getSimpleName() + "{" +
                 "distanceToExit=" + distanceToExit +
                 ", rate=" + rate +
                 ", earlyBirdPrice=" + earlyBirdPrice +
                 ", occupied=" + occupied +
                 ", size=" + size +
-                ", class=" + getClass() +
                 '}';
     }
 }

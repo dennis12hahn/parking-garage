@@ -24,6 +24,10 @@ public class Garage {
     }
 
     public boolean addSpace(Space space) {
+        if (space == null) {
+            return false;
+        }
+
         if (space instanceof MotorcycleSpace) {
             return motorcycleSpaces.add((MotorcycleSpace) space);
         }
@@ -36,36 +40,36 @@ public class Garage {
     }
 
     private Space getClosestSpaceForMotorcycle() {
-        if (!motorcycleSpaces.peek().isOccupied()) {
-            return motorcycleSpaces.peek();
+        if (motorcycleSpaces.peek() != null && !motorcycleSpaces.peek().isOccupied()) {
+            return motorcycleSpaces.poll();
         }
 
-        if (!carSpaces.peek().isOccupied()) {
-            return carSpaces.peek();
+        if (carSpaces.peek() != null && !carSpaces.peek().isOccupied()) {
+            return carSpaces.poll();
         }
 
-        if (!truckSpaces.peek().isOccupied()) {
-            return truckSpaces.peek();
+        if (truckSpaces.peek() != null && !truckSpaces.peek().isOccupied()) {
+            return truckSpaces.poll();
         }
 
         return null;
     }
 
     private Space getClosestSpaceForCar() {
-        if (!carSpaces.peek().isOccupied()) {
-            return carSpaces.peek();
+        if (carSpaces.peek() != null && !carSpaces.peek().isOccupied()) {
+            return carSpaces.poll();
         }
 
-        if (!truckSpaces.peek().isOccupied()) {
-            return truckSpaces.peek();
+        if (truckSpaces.peek() != null && !truckSpaces.peek().isOccupied()) {
+            return truckSpaces.poll();
         }
 
         return null;
     }
 
     private Space getClosestSpaceForTruck() {
-        if (!truckSpaces.peek().isOccupied()) {
-            return truckSpaces.peek();
+        if (truckSpaces.peek() != null && !truckSpaces.peek().isOccupied()) {
+            return truckSpaces.poll();
         }
 
         return null;
@@ -123,5 +127,40 @@ public class Garage {
 
     public TruckSpace pollTruckSpaces() {
         return truckSpaces.poll();
+    }
+
+    public PriorityQueue<MotorcycleSpace> getMotorcycleSpaces() {
+        return motorcycleSpaces;
+    }
+
+    public PriorityQueue<CarSpace> getCarSpaces() {
+        return carSpaces;
+    }
+
+    public PriorityQueue<TruckSpace> getTruckSpaces() {
+        return truckSpaces;
+    }
+
+    public void displayAllSpaces() {
+        PriorityQueue<Space> motos = new PriorityQueue<>(motorcycleSpaces);
+        PriorityQueue<Space> cars = new PriorityQueue<>(carSpaces);
+        PriorityQueue<Space> trucks = new PriorityQueue<>(truckSpaces);
+
+        System.out.print("\n\n\nMotorcycles: ");
+        while (!motos.isEmpty()) {
+            System.out.print(motos.poll());
+        }
+
+        System.out.print("\n\n\nCars: ");
+        while (!cars.isEmpty()) {
+            System.out.print(cars.poll());
+        }
+
+        System.out.print("\n\n\nTrucks: ");
+        while (!trucks.isEmpty()) {
+            System.out.print(trucks.poll());
+        }
+
+
     }
 }
