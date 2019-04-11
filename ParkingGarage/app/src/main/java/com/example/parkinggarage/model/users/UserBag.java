@@ -25,7 +25,7 @@ public class UserBag {
     }
 
     /**
-     * Will addSpace a Manager object to the userbag.
+     * Will add a Manager object to the userbag.
      *
      * @param firstName
      * @param lastName
@@ -36,6 +36,15 @@ public class UserBag {
     public boolean addManager(String firstName, String lastName, String password) {
         Manager manager = new Manager(firstName, lastName, password);
 
+        if (users.containsKey(manager.getUsername())) {
+            return false;
+        }
+
+        users.put(manager.getUsername(), manager);
+        return true;
+    }
+
+    public boolean addManager(Manager manager) {
         if (users.containsKey(manager.getUsername())) {
             return false;
         }

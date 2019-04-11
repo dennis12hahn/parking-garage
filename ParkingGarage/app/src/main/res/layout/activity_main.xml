@@ -7,23 +7,24 @@
     tools:context=".controller.MainActivity">
 
     <Button
-        android:id="@+id/activity_main_signInBtn"
+        android:id="@+id/activity_main_createGarageBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="250dp"
-        android:text="sign in"
+        android:layout_marginTop="124dp"
+        android:text="create garage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/activity_main_signUpBtn"
+        android:id="@+id/activity_main_loadGarageBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:layout_marginEnd="100dp"
-        android:text="sign up"
+        android:layout_marginTop="232dp"
+        android:text="load garage"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 </android.support.constraint.ConstraintLayout>

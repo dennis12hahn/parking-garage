@@ -23,7 +23,7 @@ public class GarageTest {
 
     @Test
     public void testAddSpaces() {
-        Garage garage = new Garage();
+        Garage garage = new Garage("first", "last", "pass", 1, 2, 3);
         assertTrue(garage.addSpace(new CarSpace()));
         assertTrue(garage.addSpace(new MotorcycleSpace()));
         assertTrue(garage.addSpace(new TruckSpace()));
@@ -39,7 +39,7 @@ public class GarageTest {
         space1.setOccupied(true);
         space2.setOccupied(true);
 
-        Garage garage = new Garage();
+        Garage garage = new Garage("first", "last", "pass", 0, 0, 0);
         garage.addSpace(space1);
         garage.addSpace(space2);
         garage.addSpace(space3);
@@ -51,7 +51,7 @@ public class GarageTest {
 
     @Test
     void testGenerateSpaces() {
-        Garage garage = new Garage();
+        Garage garage = new Garage("first", "last", "pass", 0, 0, 0);
         garage.generateSpaces(10, 20, 10);
 
         for (int i = 10; i > 0; i--) {
@@ -69,7 +69,7 @@ public class GarageTest {
 
     @Test
     public void testParkAndExit() {
-        Garage garage = new Garage();
+        Garage garage = new Garage("first", "last", "pass", 0, 0, 0);
         Attendant attendant1 = new Attendant("first", "last", "password");
         Attendant attendant2 = new Attendant("attendant", "2", "password");
         Attendant attendant3 = new Attendant("attend", "3", "pass");

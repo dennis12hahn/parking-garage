@@ -4,10 +4,13 @@ import com.example.parkinggarage.model.spaces.CarSpace;
 import com.example.parkinggarage.model.spaces.MotorcycleSpace;
 import com.example.parkinggarage.model.spaces.Space;
 import com.example.parkinggarage.model.spaces.TruckSpace;
+import com.example.parkinggarage.model.users.Manager;
+import com.example.parkinggarage.model.users.UserBag;
 import com.example.parkinggarage.model.vehicles.Car;
 import com.example.parkinggarage.model.vehicles.Motorcycle;
 import com.example.parkinggarage.model.vehicles.Truck;
 import com.example.parkinggarage.model.vehicles.Vehicle;
+import com.example.parkinggarage.model.vehicles.VehicleBag;
 
 import java.util.PriorityQueue;
 
@@ -16,12 +19,26 @@ public class Garage {
     private PriorityQueue<MotorcycleSpace> motorcycleSpaces;
     private PriorityQueue<CarSpace> carSpaces;
     private PriorityQueue<TruckSpace> truckSpaces;
+    private Manager manager;
+    private UserBag userBag;
+    private VehicleBag vehicleBag;
 
-    public Garage() {
+    public Garage(String managerFirstName, String managerLastName, String managerPassword, int motorcycleSpaces, int carSpaces, int truckSpaces) {
+        this.userBag = new UserBag();
+        this.vehicleBag = new VehicleBag();
         this.motorcycleSpaces = new PriorityQueue<>();
         this.carSpaces = new PriorityQueue<>();
         this.truckSpaces = new PriorityQueue<>();
+        this.manager = createManager(managerFirstName, managerLastName, managerPassword);
+        generateSpaces(motorcycleSpaces, carSpaces, truckSpaces);
     }
+
+    private Manager createManager(String managerFirstName, String managerLastName, String managerPassword) {
+        Manager manager = new Manager(managerFirstName, managerLastName, managerPassword);
+        userBag.addManager(manager);
+        return manager;
+    }
+
 
     public boolean addSpace(Space space) {
         if (space == null) {
@@ -127,18 +144,6 @@ public class Garage {
 
     public TruckSpace pollTruckSpaces() {
         return truckSpaces.poll();
-    }
-
-    public PriorityQueue<MotorcycleSpace> getMotorcycleSpaces() {
-        return motorcycleSpaces;
-    }
-
-    public PriorityQueue<CarSpace> getCarSpaces() {
-        return carSpaces;
-    }
-
-    public PriorityQueue<TruckSpace> getTruckSpaces() {
-        return truckSpaces;
     }
 
     public void displayAllSpaces() {
