@@ -4,6 +4,7 @@ import com.example.parkinggarage.model.users.Attendant;
 import com.example.parkinggarage.model.users.Manager;
 import com.example.parkinggarage.model.users.User;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ import java.util.Map;
  * @version 1, 03/29/2019
  */
 
-public class UserBag {
+public class UserBag implements Serializable {
 
     private Map<String, User> users;
 
@@ -73,6 +74,16 @@ public class UserBag {
         return true;
     }
 
+
+    public boolean addAttendant(Attendant attendant) {
+        if (users.containsKey(attendant.getUsername())) {
+            return false;
+        }
+
+        users.put(attendant.getUsername(), attendant);
+        return true;
+    }
+
     /**
      * To be used when creating accounts and logging in.
      * If the userbag already contains the given username, return true, false otherwise
@@ -95,5 +106,9 @@ public class UserBag {
      */
     public boolean verifyPassword(String username, String password) {
         return users.get(username).verifyPassword(password);
+    }
+
+    public User getUser(String username) {
+        return users.get(username);
     }
 }

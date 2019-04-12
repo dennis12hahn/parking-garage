@@ -14,25 +14,25 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SpacesTest {
+class SpacesTest {
 
-    private static Space space1, space2, space3, space4, space5;
-    private static Vehicle vehicle1, vehicle2, vehicle3;
+    static Space space1, space2, space3, space4, space5;
+    static Vehicle vehicle1, vehicle2, vehicle3;
 
     @BeforeAll
-    public static void beforeAll() {
+    static void beforeAll() {
         space1 = new CarSpace();
         space2 = new TruckSpace();
         space3 = new CarSpace();
         space4 = new MotorcycleSpace();
         space5 = new MotorcycleSpace();
-        vehicle1 = new Car("123", "ford", "edge", 3000);
-        vehicle2 = new Motorcycle("abc", "asdf", "uiop", 9);
-        vehicle3 = new Truck("truck", "big", "truck", 95);
+        vehicle1 = new Car("123");
+        vehicle2 = new Motorcycle("abc");
+        vehicle3 = new Truck("truck");
     }
 
     @Test
-    public void testDistance() {
+    void testDistance() {
         assertEquals(space1.getDistanceToExit(), 1);
         assertEquals(space2.getDistanceToExit(), 2);
         assertEquals(space3.getDistanceToExit(), 3);

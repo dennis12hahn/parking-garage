@@ -1,8 +1,8 @@
 package com.example.parkinggarage.model.spaces;
 
-import android.text.BoringLayout;
+import java.io.Serializable;
 
-public abstract class Space implements Comparable<Space> {
+public abstract class Space implements Comparable<Space>, Serializable {
 
     private static int distanceCounter = 0;
     private double rate, earlyBirdPrice;

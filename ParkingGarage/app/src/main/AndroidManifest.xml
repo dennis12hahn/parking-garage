@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.CreateGarageActivity"></activity>
+        <activity android:name=".controller.action_controllers.ParkActivity"></activity>
+        <activity android:name=".controller.user_controllers.AttendantActivity" />
+        <activity android:name=".controller.user_controllers.ManagerActivity" />
+        <activity android:name=".controller.Manager" />
+        <activity android:name=".controller.action_controllers.CreateGarageActivity" />
         <activity android:name=".controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,8 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.SignInActivity" />
-        <activity android:name=".controller.SignUpActivity" />
+        <activity android:name=".controller.action_controllers.SignInActivity" />
+        <activity android:name=".controller.action_controllers.CreateAttendantActivity" />
     </application>
 
 </manifest>

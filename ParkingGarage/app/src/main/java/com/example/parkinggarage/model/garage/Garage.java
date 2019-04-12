@@ -10,22 +10,20 @@ import com.example.parkinggarage.model.vehicles.Car;
 import com.example.parkinggarage.model.vehicles.Motorcycle;
 import com.example.parkinggarage.model.vehicles.Truck;
 import com.example.parkinggarage.model.vehicles.Vehicle;
-import com.example.parkinggarage.model.vehicles.VehicleBag;
 
+import java.io.Serializable;
 import java.util.PriorityQueue;
 
-public class Garage {
+public class Garage implements Serializable {
 
     private PriorityQueue<MotorcycleSpace> motorcycleSpaces;
     private PriorityQueue<CarSpace> carSpaces;
     private PriorityQueue<TruckSpace> truckSpaces;
     private Manager manager;
     private UserBag userBag;
-    private VehicleBag vehicleBag;
 
     public Garage(String managerFirstName, String managerLastName, String managerPassword, int motorcycleSpaces, int carSpaces, int truckSpaces) {
         this.userBag = new UserBag();
-        this.vehicleBag = new VehicleBag();
         this.motorcycleSpaces = new PriorityQueue<>();
         this.carSpaces = new PriorityQueue<>();
         this.truckSpaces = new PriorityQueue<>();
@@ -108,7 +106,7 @@ public class Garage {
         return null;
     }
 
-    public void generateSpaces(int totalMotorcycleSpaces, int totalCarSpaces, int totalTruckSpaces) {
+    private void generateSpaces(int totalMotorcycleSpaces, int totalCarSpaces, int totalTruckSpaces) {
         for (int i = totalMotorcycleSpaces; i > 0; i--) {
             addSpace(new MotorcycleSpace());
         }
@@ -122,38 +120,38 @@ public class Garage {
         }
     }
 
-    public MotorcycleSpace peekMotorcycleSpace() {
-        return motorcycleSpaces.peek();
-    }
-
-    public CarSpace peekCarSpaces() {
-        return carSpaces.peek();
-    }
-
-    public TruckSpace peekTruckSpace() {
-        return truckSpaces.peek();
-    }
-
     public MotorcycleSpace pollMotorcycleSpaces() {
+        if (motorcycleSpaces.isEmpty()) {
+            return null;
+        }
+
         return motorcycleSpaces.poll();
     }
 
     public CarSpace pollCarSpaces() {
+        if (carSpaces.isEmpty()) {
+            return null;
+        }
+
         return carSpaces.poll();
     }
 
     public TruckSpace pollTruckSpaces() {
+        if (truckSpaces.isEmpty()) {
+            return null;
+        }
+
         return truckSpaces.poll();
     }
 
     public void displayAllSpaces() {
-        PriorityQueue<Space> motos = new PriorityQueue<>(motorcycleSpaces);
+        PriorityQueue<Space> motorcycles = new PriorityQueue<>(motorcycleSpaces);
         PriorityQueue<Space> cars = new PriorityQueue<>(carSpaces);
         PriorityQueue<Space> trucks = new PriorityQueue<>(truckSpaces);
 
         System.out.print("\n\n\nMotorcycles: ");
-        while (!motos.isEmpty()) {
-            System.out.print(motos.poll());
+        while (!motorcycles.isEmpty()) {
+            System.out.print(motorcycles.poll());
         }
 
         System.out.print("\n\n\nCars: ");
@@ -165,7 +163,26 @@ public class Garage {
         while (!trucks.isEmpty()) {
             System.out.print(trucks.poll());
         }
-
-
     }
+
+    public PriorityQueue<MotorcycleSpace> getMotorcycleSpaces() {
+        return motorcycleSpaces;
+    }
+
+    public PriorityQueue<CarSpace> getCarSpaces() {
+        return carSpaces;
+    }
+
+    public PriorityQueue<TruckSpace> getTruckSpaces() {
+        return truckSpaces;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public UserBag getUserBag() {
+        return userBag;
+    }
+
 }

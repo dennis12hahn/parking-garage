@@ -8,17 +8,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class UserBagTest {
+class UserBagTest {
 
     private static UserBag userbag;
 
     @BeforeEach
-    public void beforeEach() {
+    void beforeEach() {
         userbag = new UserBag();
     }
 
     @Test
-    public void testAddManager() {
+    void testAddManager() {
         assertTrue(userbag.addManager("new", "manager", "pass"));
         for (int i = 0; i < 999; i++) {
             userbag.addManager("1000", "managers", "password");
@@ -28,7 +28,7 @@ public class UserBagTest {
     }
 
     @Test
-    public void testAddAttendant() {
+    void testAddAttendant() {
         assertTrue(userbag.addAttendant("new", "attendant", "password"));
         for (int i = 0; i < 999; i++) {
             userbag.addAttendant("1000", "attendants", "password");
@@ -38,13 +38,13 @@ public class UserBagTest {
     }
 
     @Test
-    public void testVerifyUsername() {
+    void testVerifyUsername() {
         userbag.addAttendant("dennis", "hahn", "password");
         assertTrue(userbag.verifyUsername("hahnd001"));
     }
 
     @Test
-    public void testVerifyPassword() {
+    void testVerifyPassword() {
         userbag.addAttendant("anne", "smith", "password");
         assertTrue(userbag.verifyPassword("smita001", "password"));
     }

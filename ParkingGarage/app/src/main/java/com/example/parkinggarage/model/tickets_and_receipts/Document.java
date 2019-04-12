@@ -1,16 +1,15 @@
-package com.example.parkinggarage.model.payment;
+package com.example.parkinggarage.model.tickets_and_receipts;
 
 import com.example.parkinggarage.model.spaces.Space;
-import com.example.parkinggarage.model.users.Attendant;
 import com.example.parkinggarage.model.vehicles.Vehicle;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 
-public class Document {
+public class Document implements Serializable {
 
-    private Attendant attendant;
     private Vehicle vehicle;
     private Space space;
     private LocalDateTime timeParked, timeRetrieved;
@@ -18,8 +17,7 @@ public class Document {
     private boolean earlyBird;
     private double paid;
 
-    public Document(Attendant attendant, Vehicle vehicle, Space space) {
-        this.attendant = attendant;
+    public Document(Vehicle vehicle, Space space) {
         this.vehicle = vehicle;
         this.space = space;
         this.timeParked = LocalDateTime.now();
@@ -28,7 +26,6 @@ public class Document {
 
     public String[] getTicketInfo() {
         return new String[]{
-                attendant.getFirstName() + " " + attendant.getLastName(),
                 vehicle.getLicense(),
                 space.getClass().getSimpleName(),
                 timeParked.toLocalDate() + " " + timeParked.toLocalTime(),
@@ -38,7 +35,6 @@ public class Document {
 
     public String[] getReceiptInfo() {
         return new String[]{
-                attendant.getFirstName() + " " + attendant.getLastName(),
                 vehicle.getLicense(),
                 space.getClass().getSimpleName(),
                 timeParked.toLocalDate() + " " + timeParked.toLocalTime(),
@@ -53,8 +49,8 @@ public class Document {
         this.paid = paid;
     }
 
-    public void setTimeRetrieved(LocalDateTime timeRetrieved) {
-        this.timeRetrieved = timeRetrieved;
+    public void setTimeRetrieved() {
+        this.timeRetrieved = LocalDateTime.now();
     }
 
     public double calculateCharge() {

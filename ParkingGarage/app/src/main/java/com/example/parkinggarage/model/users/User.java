@@ -1,5 +1,7 @@
 package com.example.parkinggarage.model.users;
 
+import java.io.Serializable;
+
 /**
  * The User class is not instantiable and is the super class of Attendants and the Manager
  * it contains information about a user such as first name, last name, the username
@@ -9,7 +11,7 @@ package com.example.parkinggarage.model.users;
  * @version 1, 03/28/2019
  */
 
-public abstract class User {
+public abstract class User implements Serializable {
     private String firstName, lastName, username, password, id;
     private static int idCounter = 0;
 

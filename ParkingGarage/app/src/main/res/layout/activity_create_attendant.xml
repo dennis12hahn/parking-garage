@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.SignUpActivity">
+    tools:context=".controller.action_controllers.CreateAttendantActivity">
 
     <EditText
-        android:id="@+id/activity_sign_up_firstNameField"
+        android:id="@+id/activity_create_attendant_firstNameField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -19,50 +19,50 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/activity_sign_up_lastNameField"
+        android:id="@+id/activity_create_attendant_lastNameField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Last Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_create_attendant_firstNameField" />
 
     <EditText
-        android:id="@+id/activity_sign_up_passwordField"
+        android:id="@+id/activity_create_attendant_passwordField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_create_attendant_lastNameField" />
 
     <EditText
-        android:id="@+id/activity_sign_up_confirmPasswordField"
+        android:id="@+id/activity_create_attendant_confirmPasswordField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="252dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_create_attendant_passwordField" />
 
     <Button
-        android:id="@+id/activity_sign_up_signUpBtn"
+        android:id="@+id/activity_create_attendant_createAttendantBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="380dp"
-        android:text="sign up"
+        android:layout_marginTop="50dp"
+        android:text="create attendant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_create_attendant_confirmPasswordField" />
 
 </android.support.constraint.ConstraintLayout>

@@ -9,17 +9,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class ManagerTest {
+class ManagerTest {
 
     private static Manager manager;
 
     @BeforeAll
-    public static void beforeAll() {
+    static void beforeAll() {
         manager = new Manager("first", "last", "password");
     }
 
     @Test
-    public void testCreateAttendant() {
+    void testCreateAttendant() {
         Attendant attendant = manager.createAttendant("new", "attendant", "password1");
         assertNotNull(attendant);
         assertEquals(attendant.getUsername(), "atten002");
