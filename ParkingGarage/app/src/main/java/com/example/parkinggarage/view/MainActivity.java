@@ -20,6 +20,7 @@ import java.io.ObjectInputStream;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int READ_REQUEST_CODE = 44;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
             chooseFile.setType("*/garage");
             chooseFile = Intent.createChooser(chooseFile, "Load file");
-            startActivityForResult(chooseFile, 8778);
+            startActivityForResult(chooseFile, READ_REQUEST_CODE);
         });
     }
 
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 8778) {
+        if (requestCode == READ_REQUEST_CODE) {
             if (resultCode == RESULT_OK && data != null) {
                 Uri uri = data.getData();
                 if (uri != null) {

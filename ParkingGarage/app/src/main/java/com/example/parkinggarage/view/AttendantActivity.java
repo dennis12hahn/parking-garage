@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import com.example.parkinggarage.R;
@@ -11,6 +12,8 @@ import com.example.parkinggarage.controller.GarageController;
 import com.example.parkinggarage.model.garage.Garage;
 import com.example.parkinggarage.model.tickets_and_receipts.Document;
 import com.example.parkinggarage.model.users.Attendant;
+
+import java.util.Arrays;
 
 public class AttendantActivity extends AppCompatActivity {
 
@@ -21,7 +24,8 @@ public class AttendantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendant);
 
-        attendant = (Attendant) getIntent().getSerializableExtra("attendant");
+        String username = (String) getIntent().getSerializableExtra("attendant_username");
+        attendant = (Attendant) GarageController.getGarage().getUserBag().getUser(username);
 
         setTitle(attendant.getUsername());
 
@@ -45,13 +49,13 @@ public class AttendantActivity extends AppCompatActivity {
 
     private void openParkActivity() {
         Intent intent = new Intent(this, ParkActivity.class);
-        intent.putExtra("attendant", attendant);
+        intent.putExtra("attendant_username", attendant.getUsername());
         startActivityForResult(intent, 1);
     }
 
     private void openExitActivity() {
         Intent intent = new Intent(this, RetrieveActivity.class);
-        intent.putExtra("attendant", attendant);
+        intent.putExtra("attendant_username", attendant.getUsername());
         startActivityForResult(intent, 2);
     }
 
@@ -62,12 +66,14 @@ public class AttendantActivity extends AppCompatActivity {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK && data != null) {
                 Document doc = (Document) data.getSerializableExtra("document");
+                Log.v("DOCUMENT", Arrays.toString(doc.getTicketInfo()));
             }
         }
 
         if (requestCode == 2) {
             if (resultCode == RESULT_OK && data != null) {
                 Document doc = (Document) data.getSerializableExtra("document");
+                Log.v("DOCUMENT", Arrays.toString(doc.getReceiptInfo()));
             }
         }
     }

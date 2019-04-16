@@ -49,7 +49,7 @@ public class SignInActivity extends AppCompatActivity {
 
                 if (user instanceof Attendant) {
                     Intent intent = new Intent(this, AttendantActivity.class);
-                    intent.putExtra("attendant", user);
+                    intent.putExtra("attendant_username", user.getUsername());
                     openUserActivity(intent);
                 } else {
                     openUserActivity(new Intent(this, ManagerActivity.class));

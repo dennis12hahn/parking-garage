@@ -31,6 +31,9 @@ public class ParkActivity extends AppCompatActivity implements AdapterView.OnIte
     private String vehicleType;
     private EditText licenseField;
     private Spinner vehicleTypeSpinner;
+    private Attendant attendant;
+    private Vehicle vehicle;
+    private Space space;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,65 +42,78 @@ public class ParkActivity extends AppCompatActivity implements AdapterView.OnIte
 
         setTitle("Park");
 
-        Attendant attendant = (Attendant) getIntent().getSerializableExtra("attendant");
+        String username = (String) getIntent().getSerializableExtra("attendant_username");
+        attendant = (Attendant) GarageController.getGarage().getUserBag().getUser(username);
 
-        createVehicleSpinner();
         licenseField = findViewById(R.id.activity_park_licenseField);
         Button parkBtn = findViewById(R.id.activity_park_parkBtn);
+        createVehicleSpinner();
+
 
         parkBtn.setOnClickListener(v -> {
             if (checkFields()) {
-                Vehicle vehicle = createVehicle();
-                Garage garage = GarageController.getGarage();
-                Space space = garage.getClosestSpace(vehicle, "peek");
+                vehicle = createVehicle();
+                space = GarageController.getGarage().getClosestSpace(vehicle, "peek");
 
-
-                if (space != null) {
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setCancelable(true);
-
-                    StringBuilder title = new StringBuilder();
-                    StringBuilder message = new StringBuilder();
-
-                    if (vehicle.getSize() < space.getSize()) {
-                        title.append("Only Larger Space is Available");
-                        message.append("This space is larger than necessary and costs more but is the only one available. ");
-                    } else {
-                        title.append("Space Found");
-                    }
-
-                    if (LocalDateTime.now().getHour() < 8) {
-                        message.append("The price of this space is $" + space.getEarlyBirdPrice() + " for the day. ");
-                    } else {
-                        message.append("The rate of this space is $" + space.getRate() + "/hr. ");
-                    }
-                    message.append("Park in this space?");
-
-                    builder.setTitle(title.toString());
-                    builder.setMessage(message.toString());
-
-                    builder.setPositiveButton("Confirm",
-                            ((dialog, which) -> {
-                                Document doc = attendant.park(vehicle, garage);
-                                Intent resultIntent = new Intent();
-                                resultIntent.putExtra("document", doc);
-                                setResult(RESULT_OK, resultIntent);
-                                finish();
-                            }));
-
-                    builder.setNegativeButton("Cancel",
-                            (dialog, which) -> {
-                            });
-
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-
-                } else {
+                if (space == null) {
                     Toast.makeText(this, "No spaces available", Toast.LENGTH_SHORT).show();
+                } else {
+                    displayOption();
                 }
+
             }
         });
+    }
+
+    private void displayOption() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+
+        StringBuilder title = new StringBuilder();
+        StringBuilder message = new StringBuilder();
+
+        setTitleAndMessage(title, message);
+
+        builder.setTitle(title.toString());
+        builder.setMessage(message.toString());
+
+        builder.setPositiveButton("Confirm",
+                ((dialog, which) -> {
+                    Document doc = attendant.park(vehicle, GarageController.getGarage());
+
+                    if (doc == null) {
+                        Toast.makeText(this, "Unable to park vehicle", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("document", doc);
+                        setResult(RESULT_OK, resultIntent);
+                        finish();
+                    }
+
+                }));
+
+        builder.setNegativeButton("Cancel",
+                (dialog, which) -> {
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void setTitleAndMessage(StringBuilder title, StringBuilder message) {
+        if (vehicle.getSize() < space.getSize()) {
+            title.append("Only Larger Space is Available");
+            message.append("This space is larger than necessary and costs more but is the only one available. ");
+        } else {
+            title.append("Space Found");
+        }
+
+        if (LocalDateTime.now().getHour() < 8) {
+            message.append("The price of this space is $" + space.getEarlyBirdPrice() + " for the day. ");
+        } else {
+            message.append("The rate of this space is $" + space.getRate() + "/hr. ");
+        }
+        message.append("Park in this space?");
     }
 
     private void createVehicleSpinner() {

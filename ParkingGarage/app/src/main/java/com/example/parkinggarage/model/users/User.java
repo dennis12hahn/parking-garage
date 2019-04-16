@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 public abstract class User implements Serializable {
     private String firstName, lastName, username, password, id;
-    private static int idCounter = 0;
+    protected static int idCounter = 0;
 
     public User(String firstName, String lastName, String password) {
         this.firstName = firstName;

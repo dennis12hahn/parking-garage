@@ -1,10 +1,13 @@
 package com.example.parkinggarage.model.users;
 
+import android.util.Log;
+
 import com.example.parkinggarage.model.garage.Garage;
 import com.example.parkinggarage.model.spaces.Space;
 import com.example.parkinggarage.model.tickets_and_receipts.Document;
 import com.example.parkinggarage.model.vehicles.Vehicle;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Attendant extends User {
@@ -17,10 +20,24 @@ public class Attendant extends User {
     }
 
     public Document park(Vehicle vehicle, Garage garage) {
-        Space space = garage.getClosestSpace(vehicle, "poll");
+        Log.v("LICESNSE", vehicle.getLicense());
+        if (docs.containsKey(vehicle.getLicense())) {
+            return null;
+        }
+
+        Space space = garage.getClosestSpace(vehicle, "peek");
+        Log.v("SPACE", space.toString());
+
+        if (space.isOccupied()) {
+            return null;
+        }
+
+        space = garage.getClosestSpace(vehicle, "poll");
         space.setOccupied(true);
         garage.addSpace(space);
-        return docs.put(vehicle.getLicense(), new Document(vehicle, space));
+        Document doc = new Document(vehicle, space);
+        docs.put(vehicle.getLicense(), doc);
+        return doc;
     }
 
     public Document retrieve(String license, Garage garage, double payment) {

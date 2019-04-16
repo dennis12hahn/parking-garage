@@ -23,7 +23,8 @@ public class RetrieveActivity extends AppCompatActivity {
 
         setTitle("Retrieve");
 
-        Attendant attendant = (Attendant) getIntent().getSerializableExtra("attendant");
+        String username = (String) getIntent().getSerializableExtra("attendant_username");
+        Attendant attendant = (Attendant) GarageController.getGarage().getUserBag().getUser(username);
 
         licenseField = findViewById(R.id.activity_retrieve_licenseField);
         paymentField = findViewById(R.id.activity_retrieve_paymentField);
@@ -36,8 +37,6 @@ public class RetrieveActivity extends AppCompatActivity {
                 Document doc = attendant.retrieve(license, GarageController.getGarage(), payment);
 
                 if (doc == null) {
-                    // todo
-                    // not working
                     Toast.makeText(this, "Vehicle not found", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent resultIntent = new Intent();
