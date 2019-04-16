@@ -27,14 +27,14 @@ public class Garage implements Serializable {
     private PriorityQueue<TruckSpace> truckSpaces;
     private Manager manager;
     private UserBag userBag;
+    private static double motorcycleRate, motorcycleEarlyBird, carRate, carEarlyBird, truckRate, truckEarlybird;
 
-    public Garage(String managerFirstName, String managerLastName, String managerPassword, int motorcycleSpaces, int carSpaces, int truckSpaces) {
+    public Garage(String managerFirstName, String managerLastName, String managerPassword) {
         this.userBag = new UserBag();
         this.motorcycleSpaces = new PriorityQueue<>();
         this.carSpaces = new PriorityQueue<>();
         this.truckSpaces = new PriorityQueue<>();
         this.manager = createManager(managerFirstName, managerLastName, managerPassword);
-        generateSpaces(motorcycleSpaces, carSpaces, truckSpaces);
     }
 
     private Manager createManager(String managerFirstName, String managerLastName, String managerPassword) {
@@ -148,18 +148,42 @@ public class Garage implements Serializable {
         return null;
     }
 
-    private void generateSpaces(int totalMotorcycleSpaces, int totalCarSpaces, int totalTruckSpaces) {
+    public void generateSpaces(int totalMotorcycleSpaces, int totalCarSpaces, int totalTruckSpaces) {
         for (int i = totalMotorcycleSpaces; i > 0; i--) {
-            addSpace(new MotorcycleSpace());
+            addSpace(new MotorcycleSpace(motorcycleRate, motorcycleEarlyBird));
         }
 
         for (int i = totalCarSpaces; i > 0; i--) {
-            addSpace(new CarSpace());
+            addSpace(new CarSpace(carRate, carEarlyBird));
         }
 
         for (int i = totalTruckSpaces; i > 0; i--) {
-            addSpace(new TruckSpace());
+            addSpace(new TruckSpace(truckRate, truckEarlybird));
         }
+    }
+
+    public static void setMotorcycleRate(double motorcycleRate) {
+        Garage.motorcycleRate = motorcycleRate;
+    }
+
+    public static void setMotorcycleEarlyBird(double motorcycleEarlyBird) {
+        Garage.motorcycleEarlyBird = motorcycleEarlyBird;
+    }
+
+    public static void setCarRate(double carRate) {
+        Garage.carRate = carRate;
+    }
+
+    public static void setCarEarlyBird(double carEarlyBird) {
+        Garage.carEarlyBird = carEarlyBird;
+    }
+
+    public static void setTruckRate(double truckRate) {
+        Garage.truckRate = truckRate;
+    }
+
+    public static void setTruckEarlybird(double truckEarlybird) {
+        Garage.truckEarlybird = truckEarlybird;
     }
 
     public MotorcycleSpace pollMotorcycleSpaces() {

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public abstract class Space implements Comparable<Space>, Serializable {
 
-    private static int distanceCounter = 0;
+    protected static int distanceCounter = 0;
     private double rate, earlyBirdPrice;
     private boolean occupied;
     private int distanceToExit, size;

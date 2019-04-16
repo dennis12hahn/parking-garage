@@ -27,18 +27,12 @@ public class CreateGarageActivity extends AppCompatActivity {
         lastNameField = findViewById(R.id.activity_create_garage_lastNameField);
         passwordField = findViewById(R.id.activity_create_garage_passwordField);
         confirmPasswordField = findViewById(R.id.activity_create_garage_confirmPasswordField);
-        numMotoSpacesField = findViewById(R.id.activity_create_garage_numMotoSpacesField);
-        numCarSpacesField = findViewById(R.id.activity_create_garage_numCarSpacesField);
-        numTruckSpacesField = findViewById(R.id.activity_create_garage_numTruckSpacesField);
-        Button createGarageBtn = findViewById(R.id.activity_create_garage_createGarageBtn);
+        Button setPricesBtn = findViewById(R.id.activity_create_garage_setPricesBtn);
 
-        createGarageBtn.setOnClickListener(v -> {
+        setPricesBtn.setOnClickListener(v -> {
             if (checkFields()) {
                 Garage garage = createGarage();
-                String message = "The manager's username is " + garage.getManager().getUsername();
-                Toast.makeText(v.getContext(), message, Toast.LENGTH_SHORT).show();
-                finish();
-                openSignInActivity(garage);
+
             }
         });
     }
@@ -47,11 +41,42 @@ public class CreateGarageActivity extends AppCompatActivity {
         String firstName = firstNameField.getText().toString();
         String lastName = lastNameField.getText().toString();
         String password = passwordField.getText().toString();
-        int numMotoSpaces = Integer.parseInt(numMotoSpacesField.getText().toString());
-        int numCarSpaces = Integer.parseInt(numCarSpacesField.getText().toString());
-        int numTruckSpaces = Integer.parseInt(numTruckSpacesField.getText().toString());
+        Garage garage = new Garage(firstName, lastName, password);
 
-        return new Garage(firstName, lastName, password, numMotoSpaces, numCarSpaces, numTruckSpaces);
+        String message = "The manager's username is " + garage.getManager().getUsername();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+        makePrices(garage);
+        Toast.makeText(this, "Prices set", Toast.LENGTH_SHORT).show();
+
+        generateSpaces(garage);
+        Toast.makeText(this, "Spaces generated", Toast.LENGTH_SHORT).show();
+
+
+        return garage;
+    }
+
+    private void makePrices(Garage garage) {
+        setContentView(R.layout.activity_set_prices);
+
+    }
+
+    private void generateSpaces(Garage garage) {
+        setContentView(R.layout.activity_number_spaces);
+        numMotoSpacesField = findViewById(R.id.activity_number_spaces_numMotoSpacesField);
+        numCarSpacesField = findViewById(R.id.activity_number_spaces_numCarSpacesField);
+        numTruckSpacesField = findViewById(R.id.activity_number_spaces_numTruckSpacesField);
+
+        Button continueBtn = findViewById(R.id.activity_number_spaces_continueBtn);
+
+        continueBtn.setOnClickListener(v -> {
+            if (checkNumberSpacesFields()) {
+                int numMotoSpaces = Integer.parseInt(numMotoSpacesField.getText().toString());
+                int numCarSpaces = Integer.parseInt(numCarSpacesField.getText().toString());
+                int numTruckSpaces = Integer.parseInt(numTruckSpacesField.getText().toString());
+                garage.generateSpaces(numMotoSpaces, numCarSpaces, numTruckSpaces);
+            }
+        });
     }
 
     private void openSignInActivity(Garage garage) {
@@ -87,6 +112,12 @@ public class CreateGarageActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Make sure your passwords match", Toast.LENGTH_SHORT).show();
             result = false;
         }
+
+        return result;
+    }
+
+    private boolean checkNumberSpacesFields() {
+        boolean result = true;
 
         if (isEmpty(numMotoSpacesField)) {
             numMotoSpacesField.setError("Enter total motorcycle spaces");

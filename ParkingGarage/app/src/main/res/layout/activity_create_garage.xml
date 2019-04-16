@@ -10,9 +10,9 @@
         android:id="@+id/activity_create_garage_managerInfoLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Manager Info"
-        android:textSize="18sp"
+        android:layout_marginTop="100dp"
+        android:text="Enter Manager Info"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:id="@+id/activity_create_garage_firstNameField"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:ems="10"
         android:hint="First Name"
         android:inputType="textPersonName"
@@ -66,65 +66,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_create_garage_passwordField" />
 
-    <TextView
-        android:id="@+id/activity_create_garage_garageInfoLbl"
+    <Button
+        android:id="@+id/activity_create_garage_setPricesBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Garage Info"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:layout_marginTop="50dp"
+        android:text="set prices"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_create_garage_confirmPasswordField" />
-
-    <EditText
-        android:id="@+id/activity_create_garage_numMotoSpacesField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="Total Motorcycle Spaces"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_create_garage_garageInfoLbl" />
-
-    <EditText
-        android:id="@+id/activity_create_garage_numCarSpacesField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="Total Car Spaces"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_create_garage_numMotoSpacesField" />
-
-    <EditText
-        android:id="@+id/activity_create_garage_numTruckSpacesField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="Total Truck Spaces"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_create_garage_numCarSpacesField" />
-
-
-    <Button
-        android:id="@+id/activity_create_garage_createGarageBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="create garage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_create_garage_numTruckSpacesField" />
-
 
 </android.support.constraint.ConstraintLayout>

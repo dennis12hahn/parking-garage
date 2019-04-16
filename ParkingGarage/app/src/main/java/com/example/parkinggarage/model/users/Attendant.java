@@ -20,13 +20,11 @@ public class Attendant extends User {
     }
 
     public Document park(Vehicle vehicle, Garage garage) {
-        Log.v("LICESNSE", vehicle.getLicense());
         if (docs.containsKey(vehicle.getLicense())) {
             return null;
         }
 
         Space space = garage.getClosestSpace(vehicle, "peek");
-        Log.v("SPACE", space.toString());
 
         if (space.isOccupied()) {
             return null;

@@ -1,7 +1,5 @@
 package com.example.parkinggarage.model.vehicles;
 
-import com.example.parkinggarage.model.spaces.Space;
-
 import java.io.Serializable;
 
 public abstract class Vehicle implements Serializable {
