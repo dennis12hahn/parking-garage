@@ -11,6 +11,12 @@ import com.example.parkinggarage.model.vehicles.Motorcycle;
 import com.example.parkinggarage.model.vehicles.Truck;
 import com.example.parkinggarage.model.vehicles.Vehicle;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.PriorityQueue;
 
@@ -54,53 +60,89 @@ public class Garage implements Serializable {
         return truckSpaces.add((TruckSpace) space);
     }
 
-    private Space getClosestSpaceForMotorcycle() {
+    private Space getClosestSpaceForMotorcycle(String option) {
         if (motorcycleSpaces.peek() != null && !motorcycleSpaces.peek().isOccupied()) {
-            return motorcycleSpaces.poll();
+            if (option.equals("poll")) {
+                return motorcycleSpaces.poll();
+            }
+
+            if (option.equals("peek")) {
+                return motorcycleSpaces.peek();
+            }
         }
 
         if (carSpaces.peek() != null && !carSpaces.peek().isOccupied()) {
-            return carSpaces.poll();
+            if (option.equals("poll")) {
+                return carSpaces.poll();
+            }
+
+            if (option.equals("peek")) {
+                return carSpaces.peek();
+            }
         }
 
         if (truckSpaces.peek() != null && !truckSpaces.peek().isOccupied()) {
-            return truckSpaces.poll();
+            if (option.equals("poll")) {
+                return truckSpaces.poll();
+            }
+
+            if (option.equals("peek")) {
+                return truckSpaces.peek();
+            }
         }
 
         return null;
     }
 
-    private Space getClosestSpaceForCar() {
+    private Space getClosestSpaceForCar(String option) {
         if (carSpaces.peek() != null && !carSpaces.peek().isOccupied()) {
-            return carSpaces.poll();
+            if (option.equals("poll")) {
+                return carSpaces.poll();
+            }
+
+            if (option.equals("peek")) {
+                return carSpaces.peek();
+            }
         }
 
         if (truckSpaces.peek() != null && !truckSpaces.peek().isOccupied()) {
-            return truckSpaces.poll();
+            if (option.equals("poll")) {
+                return truckSpaces.poll();
+            }
+
+            if (option.equals("peek")) {
+                return truckSpaces.peek();
+            }
         }
 
         return null;
     }
 
-    private Space getClosestSpaceForTruck() {
+    private Space getClosestSpaceForTruck(String option) {
         if (truckSpaces.peek() != null && !truckSpaces.peek().isOccupied()) {
-            return truckSpaces.poll();
+            if (option.equals("poll")) {
+                return truckSpaces.poll();
+            }
+
+            if (option.equals("peek")) {
+                return truckSpaces.peek();
+            }
         }
 
         return null;
     }
 
-    public Space getClosestSpace(Vehicle vehicle) {
+    public Space getClosestSpace(Vehicle vehicle, String option) {
         if (vehicle instanceof Motorcycle) {
-            return getClosestSpaceForMotorcycle();
+            return getClosestSpaceForMotorcycle(option);
         }
 
         if (vehicle instanceof Car) {
-            return getClosestSpaceForCar();
+            return getClosestSpaceForCar(option);
         }
 
         if (vehicle instanceof Truck) {
-            return getClosestSpaceForTruck();
+            return getClosestSpaceForTruck(option);
         }
 
         return null;
@@ -165,24 +207,26 @@ public class Garage implements Serializable {
         }
     }
 
-    public PriorityQueue<MotorcycleSpace> getMotorcycleSpaces() {
-        return motorcycleSpaces;
-    }
-
-    public PriorityQueue<CarSpace> getCarSpaces() {
-        return carSpaces;
-    }
-
-    public PriorityQueue<TruckSpace> getTruckSpaces() {
-        return truckSpaces;
-    }
-
     public Manager getManager() {
         return manager;
     }
 
     public UserBag getUserBag() {
         return userBag;
+    }
+
+    public void removeSpace(Space space) {
+        if (space instanceof MotorcycleSpace) {
+            motorcycleSpaces.remove(space);
+        }
+
+        if (space instanceof CarSpace) {
+            carSpaces.remove(space);
+        }
+
+        if (space instanceof TruckSpace) {
+            truckSpaces.remove(space);
+        }
     }
 
 }

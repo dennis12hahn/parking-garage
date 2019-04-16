@@ -1,4 +1,4 @@
-package com.example.parkinggarage.controller.action_controllers;
+package com.example.parkinggarage.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.parkinggarage.R;
-import com.example.parkinggarage.controller.DataHolder;
+import com.example.parkinggarage.controller.GarageController;
 import com.example.parkinggarage.model.garage.Garage;
 
 public class CreateGarageActivity extends AppCompatActivity {
@@ -37,15 +37,10 @@ public class CreateGarageActivity extends AppCompatActivity {
                 Garage garage = createGarage();
                 String message = "The manager's username is " + garage.getManager().getUsername();
                 Toast.makeText(v.getContext(), message, Toast.LENGTH_SHORT).show();
+                finish();
                 openSignInActivity(garage);
             }
         });
-    }
-
-    private void openSignInActivity(Garage garage) {
-        Intent intent = new Intent(this, SignInActivity.class);
-        DataHolder.setGarage(garage);
-        startActivity(intent);
     }
 
     private Garage createGarage() {
@@ -57,6 +52,12 @@ public class CreateGarageActivity extends AppCompatActivity {
         int numTruckSpaces = Integer.parseInt(numTruckSpacesField.getText().toString());
 
         return new Garage(firstName, lastName, password, numMotoSpaces, numCarSpaces, numTruckSpaces);
+    }
+
+    private void openSignInActivity(Garage garage) {
+        Intent intent = new Intent(this, SignInActivity.class);
+        GarageController.setGarage(garage);
+        startActivity(intent);
     }
 
     private boolean checkFields() {

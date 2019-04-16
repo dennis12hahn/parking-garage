@@ -1,4 +1,4 @@
-package com.example.parkinggarage.controller.action_controllers;
+package com.example.parkinggarage.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.parkinggarage.R;
-import com.example.parkinggarage.controller.DataHolder;
-import com.example.parkinggarage.controller.user_controllers.AttendantActivity;
-import com.example.parkinggarage.controller.user_controllers.ManagerActivity;
+import com.example.parkinggarage.controller.GarageController;
 import com.example.parkinggarage.model.garage.Garage;
 import com.example.parkinggarage.model.users.Attendant;
 import com.example.parkinggarage.model.users.User;
@@ -29,7 +27,7 @@ public class SignInActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.activity_sign_in_passwordField);
         Button signInButton = findViewById(R.id.activity_sign_in_signInBtn);
 
-        garage = DataHolder.getGarage();
+        garage = GarageController.getGarage();
 
         setTitle("Sign In");
 
@@ -65,7 +63,13 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void openUserActivity(Intent intent) {
+        clearFields();
         startActivity(intent);
+    }
+
+    private void clearFields() {
+        usernameField.setText("");
+        passwordField.setText("");
     }
 
     private boolean checkFields() {

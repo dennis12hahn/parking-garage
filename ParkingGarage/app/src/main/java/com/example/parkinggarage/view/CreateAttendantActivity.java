@@ -1,4 +1,4 @@
-package com.example.parkinggarage.controller.action_controllers;
+package com.example.parkinggarage.view;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

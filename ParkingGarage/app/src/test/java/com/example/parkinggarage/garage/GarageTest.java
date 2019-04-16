@@ -60,20 +60,24 @@ class GarageTest {
         Vehicle car = new Car("abc");
         Vehicle truck = new Truck("456");
 
-        Space space1 = garage.getClosestSpace(motorcycle);
-        Space space2 = garage.getClosestSpace(car);
-        Space space3 = garage.getClosestSpace(truck);
-        attendant.park(motorcycle, space1);
-        attendant.park(car, space2);
-        attendant.park(truck, space3);
+        Space space1 = garage.getClosestSpace(motorcycle, "poll");
+        Space space2 = garage.getClosestSpace(car, "poll");
+        Space space3 = garage.getClosestSpace(truck, "poll");
+        attendant.park(motorcycle, garage);
+        attendant.park(car, garage);
+        attendant.park(truck, garage);
 
-        Document receipt1 = attendant.exit("123", 10);
-        Document receipt2 = attendant.exit("abc", 20);
-        Document receipt3 = attendant.exit("456", 10);
+        garage.displayAllSpaces();
+
+        Document receipt1 = attendant.retrieve("123", garage, 10);
+        Document receipt2 = attendant.retrieve("abc", garage, 20);
+        Document receipt3 = attendant.retrieve("456", garage, 10);
 
         assertNotNull(receipt1);
         assertNotNull(receipt2);
         assertNotNull(receipt3);
+
+        garage.displayAllSpaces();
     }
 
 }

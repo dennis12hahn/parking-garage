@@ -1,5 +1,6 @@
 package com.example.parkinggarage.model.users;
 
+import com.example.parkinggarage.model.garage.Garage;
 import com.example.parkinggarage.model.spaces.Space;
 import com.example.parkinggarage.model.tickets_and_receipts.Document;
 import com.example.parkinggarage.model.vehicles.Vehicle;
@@ -15,18 +16,26 @@ public class Attendant extends User {
         this.docs = new HashMap<>();
     }
 
-    public Document park(Vehicle vehicle, Space space) {
+    public Document park(Vehicle vehicle, Garage garage) {
+        Space space = garage.getClosestSpace(vehicle, "poll");
         space.setOccupied(true);
+        garage.addSpace(space);
         return docs.put(vehicle.getLicense(), new Document(vehicle, space));
     }
 
-    public Document exit(String license, double payment) {
-        Document doc = docs.remove(license);
-        Space space = doc.getSpace();
-        doc.setTimeRetrieved();
-        doc.setPaid(payment);
-        space.setOccupied(false);
-        return doc;
+    public Document retrieve(String license, Garage garage, double payment) {
+        if (docs.containsKey(license)) {
+            Document doc = docs.remove(license);
+            Space space = doc.getSpace();
+            doc.setTimeRetrieved();
+            doc.setPaid(payment);
+            garage.removeSpace(space);
+            space.setOccupied(false);
+            garage.addSpace(space);
+            return doc;
+        }
+
+        return null;
     }
 
 }

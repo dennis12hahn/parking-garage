@@ -4,38 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ManagerActivity">
+    tools:context=".view.RetrieveActivity">
 
-    <Button
-        android:id="@+id/activity_manager_signOutBtn"
+    <EditText
+        android:id="@+id/activity_retrieve_licenseField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="sign out"
+        android:ems="10"
+        android:hint="License Plate"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/activity_manager_createAttendantBtn"
+    <EditText
+        android:id="@+id/activity_retrieve_paymentField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="create attendant"
+        android:ems="10"
+        android:hint="Payment"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_manager_signOutBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_retrieve_licenseField" />
 
     <Button
-        android:id="@+id/activity_manager_saveBtn"
+        android:id="@+id/activity_retrieve_retrieveBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="save garage"
+        android:layout_marginTop="50dp"
+        android:text="retrieve"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_manager_createAttendantBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_retrieve_paymentField" />
 </android.support.constraint.ConstraintLayout>

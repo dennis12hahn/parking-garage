@@ -9,20 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.action_controllers.ParkActivity"></activity>
-        <activity android:name=".controller.user_controllers.AttendantActivity" />
-        <activity android:name=".controller.user_controllers.ManagerActivity" />
+        <activity android:name=".view.RetrieveActivity"></activity>
+        <activity android:name=".view.ParkActivity" />
+        <activity android:name=".view.AttendantActivity" />
+        <activity android:name=".view.ManagerActivity" />
         <activity android:name=".controller.Manager" />
-        <activity android:name=".controller.action_controllers.CreateGarageActivity" />
-        <activity android:name=".controller.MainActivity">
+        <activity android:name=".view.CreateGarageActivity" />
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.action_controllers.SignInActivity" />
-        <activity android:name=".controller.action_controllers.CreateAttendantActivity" />
+        <activity android:name=".view.SignInActivity" />
+        <activity android:name=".view.CreateAttendantActivity" />
     </application>
 
 </manifest>

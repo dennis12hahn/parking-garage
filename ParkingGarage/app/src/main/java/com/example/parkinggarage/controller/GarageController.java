@@ -2,7 +2,7 @@ package com.example.parkinggarage.controller;
 
 import com.example.parkinggarage.model.garage.Garage;
 
-public abstract class DataHolder {
+public abstract class GarageController {
 
     private static Garage garage;
 
@@ -11,6 +11,7 @@ public abstract class DataHolder {
     }
 
     public static void setGarage(Garage garage) {
-        DataHolder.garage = garage;
+        GarageController.garage = garage;
     }
+
 }
