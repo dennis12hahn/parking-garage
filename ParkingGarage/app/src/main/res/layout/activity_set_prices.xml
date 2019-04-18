@@ -6,21 +6,21 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/activity_set_prices_numMotoSpacesField2"
+        android:id="@+id/activity_set_prices_motoEarlyBird"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="15dp"
         android:ems="10"
         android:hint="Motorcycle"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/activity_set_prices_numMotoSpacesField"
+        app:layout_constraintStart_toEndOf="@+id/activity_set_prices_motoRate"
         app:layout_constraintTop_toBottomOf="@+id/activity_set_prices_title3" />
 
     <EditText
-        android:id="@+id/activity_set_prices_numCarSpacesField2"
+        android:id="@+id/activity_set_prices_carEarlyBird"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -28,13 +28,14 @@
         android:layout_marginEnd="15dp"
         android:ems="10"
         android:hint="Car"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/activity_set_prices_numCarSpacesField"
-        app:layout_constraintTop_toBottomOf="@+id/activity_set_prices_numMotoSpacesField2" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/activity_set_prices_carRate"
+        app:layout_constraintTop_toBottomOf="@+id/activity_set_prices_motoEarlyBird" />
 
     <EditText
-        android:id="@+id/activity_set_prices_numTruckSpacesField2"
+        android:id="@+id/activity_set_prices_truckEarlyBird"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -42,39 +43,41 @@
         android:layout_marginEnd="15dp"
         android:ems="10"
         android:hint="Truck"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/activity_set_prices_numTruckSpacesField"
-        app:layout_constraintTop_toBottomOf="@+id/activity_set_prices_numCarSpacesField2" />
+        app:layout_constraintStart_toEndOf="@+id/activity_set_prices_truckRate"
+        app:layout_constraintTop_toBottomOf="@+id/activity_set_prices_carEarlyBird" />
 
     <TextView
         android:id="@+id/activity_set_prices_title3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="75dp"
+        android:layout_marginTop="150dp"
         android:text="Early Bird"
+        android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_set_prices_title" />
+        app:layout_constraintHorizontal_bias="0.817"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/activity_set_prices_numMotoSpacesField"
+        android:id="@+id/activity_set_prices_motoRate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="Motorcycle"
-        android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/activity_set_prices_numMotoSpacesField2"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/activity_set_prices_motoEarlyBird"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_set_prices_title2" />
 
     <EditText
-        android:id="@+id/activity_set_prices_numCarSpacesField"
+        android:id="@+id/activity_set_prices_carRate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -82,13 +85,13 @@
         android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="Car"
-        android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/activity_set_prices_numCarSpacesField2"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/activity_set_prices_carEarlyBird"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_set_prices_numMotoSpacesField" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_set_prices_motoRate" />
 
     <EditText
-        android:id="@+id/activity_set_prices_numTruckSpacesField"
+        android:id="@+id/activity_set_prices_truckRate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -96,45 +99,34 @@
         android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="Truck"
-        android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/activity_set_prices_numTruckSpacesField2"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/activity_set_prices_truckEarlyBird"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_set_prices_numCarSpacesField" />
-
-    <Button
-        android:id="@+id/activity_set_prices_continueBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="continue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_set_prices_numTruckSpacesField" />
-
-    <TextView
-        android:id="@+id/activity_set_prices_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Enter the Prices"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_set_prices_carRate" />
 
     <TextView
         android:id="@+id/activity_set_prices_title2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="150dp"
         android:text="Rates"
+        android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_set_prices_title" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/activity_set_prices_setPricesBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="set prices"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_set_prices_truckEarlyBird" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.parkinggarage.controller;
+package com.example.parkinggarage;
 
 import com.example.parkinggarage.model.garage.Garage;
 

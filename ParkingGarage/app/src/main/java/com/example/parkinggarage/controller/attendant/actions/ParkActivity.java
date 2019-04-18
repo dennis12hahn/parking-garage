@@ -1,4 +1,4 @@
-package com.example.parkinggarage.view;
+package com.example.parkinggarage.controller.attendant.actions;
 
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -13,8 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.parkinggarage.R;
-import com.example.parkinggarage.controller.GarageController;
-import com.example.parkinggarage.model.garage.Garage;
+import com.example.parkinggarage.GarageController;
 import com.example.parkinggarage.model.spaces.Space;
 import com.example.parkinggarage.model.tickets_and_receipts.Document;
 import com.example.parkinggarage.model.users.Attendant;
@@ -24,13 +23,11 @@ import com.example.parkinggarage.model.vehicles.Truck;
 import com.example.parkinggarage.model.vehicles.Vehicle;
 
 import java.time.LocalDateTime;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ParkActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private String vehicleType;
     private EditText licenseField;
-    private Spinner vehicleTypeSpinner;
     private Attendant attendant;
     private Vehicle vehicle;
     private Space space;
@@ -55,10 +52,14 @@ public class ParkActivity extends AppCompatActivity implements AdapterView.OnIte
                 vehicle = createVehicle();
                 space = GarageController.getGarage().getClosestSpace(vehicle, "peek");
 
-                if (space == null) {
+                if (space == null || space.isOccupied()) {
                     Toast.makeText(this, "No spaces available", Toast.LENGTH_SHORT).show();
                 } else {
-                    displayOption();
+                    if (attendant.getDocs().containsKey(licenseField.getText().toString())) {
+                        Toast.makeText(this, "Vehicle already parked", Toast.LENGTH_SHORT).show();
+                    } else {
+                        displayOption();
+                    }
                 }
 
             }
@@ -117,7 +118,7 @@ public class ParkActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void createVehicleSpinner() {
-        vehicleTypeSpinner = findViewById(R.id.activity_park_vehicleTypeSpinner);
+        Spinner vehicleTypeSpinner = findViewById(R.id.activity_park_vehicleTypeSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.vehicle_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         vehicleTypeSpinner.setAdapter(adapter);

@@ -1,4 +1,4 @@
-package com.example.parkinggarage.view;
+package com.example.parkinggarage.controller.attendant;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -7,9 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
+import com.example.parkinggarage.GarageController;
 import com.example.parkinggarage.R;
-import com.example.parkinggarage.controller.GarageController;
-import com.example.parkinggarage.model.garage.Garage;
+import com.example.parkinggarage.controller.attendant.actions.ParkActivity;
+import com.example.parkinggarage.controller.attendant.actions.RetrieveActivity;
 import com.example.parkinggarage.model.tickets_and_receipts.Document;
 import com.example.parkinggarage.model.users.Attendant;
 

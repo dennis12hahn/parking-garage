@@ -1,4 +1,4 @@
-package com.example.parkinggarage.view;
+package com.example.parkinggarage.controller.manager;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,8 +9,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.parkinggarage.GarageController;
 import com.example.parkinggarage.R;
-import com.example.parkinggarage.controller.GarageController;
+import com.example.parkinggarage.controller.manager.actions.CreateAttendantActivity;
 import com.example.parkinggarage.model.garage.Garage;
 import com.example.parkinggarage.model.users.Attendant;
 

@@ -4,31 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.CreateGarageActivity">
-
-    <TextView
-        android:id="@+id/activity_create_garage_managerInfoLbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Enter Manager Info"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".controller.create_garage.CreateGarageActivity">
 
     <EditText
         android:id="@+id/activity_create_garage_firstNameField"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="125dp"
         android:ems="10"
         android:hint="First Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_create_garage_managerInfoLbl" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/activity_create_garage_lastNameField"
@@ -67,11 +55,11 @@
         app:layout_constraintTop_toBottomOf="@+id/activity_create_garage_passwordField" />
 
     <Button
-        android:id="@+id/activity_create_garage_setPricesBtn"
+        android:id="@+id/activity_create_garage_createManagerBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="set prices"
+        android:text="create manager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

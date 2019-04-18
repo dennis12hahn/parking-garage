@@ -11,12 +11,6 @@ import com.example.parkinggarage.model.vehicles.Motorcycle;
 import com.example.parkinggarage.model.vehicles.Truck;
 import com.example.parkinggarage.model.vehicles.Vehicle;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.PriorityQueue;
 
@@ -27,7 +21,7 @@ public class Garage implements Serializable {
     private PriorityQueue<TruckSpace> truckSpaces;
     private Manager manager;
     private UserBag userBag;
-    private static double motorcycleRate, motorcycleEarlyBird, carRate, carEarlyBird, truckRate, truckEarlybird;
+    private static double motorcycleRate, motorcycleEarlyBird, carRate, carEarlyBird, truckRate, truckEarlyBird;
 
     public Garage(String managerFirstName, String managerLastName, String managerPassword) {
         this.userBag = new UserBag();
@@ -158,32 +152,8 @@ public class Garage implements Serializable {
         }
 
         for (int i = totalTruckSpaces; i > 0; i--) {
-            addSpace(new TruckSpace(truckRate, truckEarlybird));
+            addSpace(new TruckSpace(truckRate, truckEarlyBird));
         }
-    }
-
-    public static void setMotorcycleRate(double motorcycleRate) {
-        Garage.motorcycleRate = motorcycleRate;
-    }
-
-    public static void setMotorcycleEarlyBird(double motorcycleEarlyBird) {
-        Garage.motorcycleEarlyBird = motorcycleEarlyBird;
-    }
-
-    public static void setCarRate(double carRate) {
-        Garage.carRate = carRate;
-    }
-
-    public static void setCarEarlyBird(double carEarlyBird) {
-        Garage.carEarlyBird = carEarlyBird;
-    }
-
-    public static void setTruckRate(double truckRate) {
-        Garage.truckRate = truckRate;
-    }
-
-    public static void setTruckEarlybird(double truckEarlybird) {
-        Garage.truckEarlybird = truckEarlybird;
     }
 
     public MotorcycleSpace pollMotorcycleSpaces() {
@@ -251,6 +221,30 @@ public class Garage implements Serializable {
         if (space instanceof TruckSpace) {
             truckSpaces.remove(space);
         }
+    }
+
+    public static void setMotorcycleRate(double motorcycleRate) {
+        Garage.motorcycleRate = motorcycleRate;
+    }
+
+    public static void setMotorcycleEarlyBird(double motorcycleEarlyBird) {
+        Garage.motorcycleEarlyBird = motorcycleEarlyBird;
+    }
+
+    public static void setCarRate(double carRate) {
+        Garage.carRate = carRate;
+    }
+
+    public static void setCarEarlyBird(double carEarlyBird) {
+        Garage.carEarlyBird = carEarlyBird;
+    }
+
+    public static void setTruckRate(double truckRate) {
+        Garage.truckRate = truckRate;
+    }
+
+    public static void setTruckEarlyBird(double truckEarlyBird) {
+        Garage.truckEarlyBird = truckEarlyBird;
     }
 
 }

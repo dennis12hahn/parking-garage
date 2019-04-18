@@ -53,4 +53,7 @@ public class Attendant extends User {
         return null;
     }
 
+    public HashMap<String, Document> getDocs() {
+        return docs;
+    }
 }

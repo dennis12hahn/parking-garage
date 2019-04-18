@@ -1,4 +1,4 @@
-package com.example.parkinggarage.view;
+package com.example.parkinggarage.controller;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,8 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.parkinggarage.GarageController;
 import com.example.parkinggarage.R;
-import com.example.parkinggarage.controller.GarageController;
+import com.example.parkinggarage.controller.create_garage.CreateGarageActivity;
 import com.example.parkinggarage.model.garage.Garage;
 
 import java.io.FileInputStream;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setTitle("Parking Garage App");
+        setTitle("Parking Garage");
 
         Button createGarageBtn = findViewById(R.id.activity_main_createGarageBtn);
         Button loadGarageBtn = findViewById(R.id.activity_main_loadGarageBtn);
