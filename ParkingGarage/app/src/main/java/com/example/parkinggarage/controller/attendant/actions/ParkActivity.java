@@ -13,7 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.parkinggarage.R;
-import com.example.parkinggarage.GarageController;
+import com.example.parkinggarage.SingletonGarage;
 import com.example.parkinggarage.model.spaces.Space;
 import com.example.parkinggarage.model.tickets_and_receipts.Document;
 import com.example.parkinggarage.model.users.Attendant;
@@ -40,7 +40,7 @@ public class ParkActivity extends AppCompatActivity implements AdapterView.OnIte
         setTitle("Park");
 
         String username = (String) getIntent().getSerializableExtra("attendant_username");
-        attendant = (Attendant) GarageController.getGarage().getUserBag().getUser(username);
+        attendant = (Attendant) SingletonGarage.getGarage().getUserBag().getUser(username);
 
         licenseField = findViewById(R.id.activity_park_licenseField);
         Button parkBtn = findViewById(R.id.activity_park_parkBtn);
@@ -50,7 +50,7 @@ public class ParkActivity extends AppCompatActivity implements AdapterView.OnIte
         parkBtn.setOnClickListener(v -> {
             if (checkFields()) {
                 vehicle = createVehicle();
-                space = GarageController.getGarage().getClosestSpace(vehicle, "peek");
+                space = SingletonGarage.getGarage().getClosestSpace(vehicle, "peek");
 
                 if (space == null || space.isOccupied()) {
                     Toast.makeText(this, "No spaces available", Toast.LENGTH_SHORT).show();
@@ -80,7 +80,7 @@ public class ParkActivity extends AppCompatActivity implements AdapterView.OnIte
 
         builder.setPositiveButton("Confirm",
                 ((dialog, which) -> {
-                    Document doc = attendant.park(vehicle, GarageController.getGarage());
+                    Document doc = attendant.park(vehicle, SingletonGarage.getGarage());
 
                     if (doc == null) {
                         Toast.makeText(this, "Unable to park vehicle", Toast.LENGTH_SHORT).show();

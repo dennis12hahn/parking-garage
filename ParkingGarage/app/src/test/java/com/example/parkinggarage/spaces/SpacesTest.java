@@ -21,11 +21,11 @@ class SpacesTest {
 
     @BeforeAll
     static void beforeAll() {
-        space1 = new CarSpace();
-        space2 = new TruckSpace();
-        space3 = new CarSpace();
-        space4 = new MotorcycleSpace();
-        space5 = new MotorcycleSpace();
+        space1 = new CarSpace(1, 1);
+        space2 = new TruckSpace(1, 1);
+        space3 = new CarSpace(1, 1);
+        space4 = new MotorcycleSpace(1, 1);
+        space5 = new MotorcycleSpace(1, 1);
         vehicle1 = new Car("123");
         vehicle2 = new Motorcycle("abc");
         vehicle3 = new Truck("truck");
@@ -39,7 +39,6 @@ class SpacesTest {
         assertEquals(space4.getDistanceToExit(), 4);
         assertEquals(space5.getDistanceToExit(), 5);
     }
-
 
 
 }

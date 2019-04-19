@@ -2,7 +2,7 @@ package com.example.parkinggarage;
 
 import com.example.parkinggarage.model.garage.Garage;
 
-public abstract class GarageController {
+public abstract class SingletonGarage {
 
     private static Garage garage;
 
@@ -11,7 +11,7 @@ public abstract class GarageController {
     }
 
     public static void setGarage(Garage garage) {
-        GarageController.garage = garage;
+        SingletonGarage.garage = garage;
     }
 
 }

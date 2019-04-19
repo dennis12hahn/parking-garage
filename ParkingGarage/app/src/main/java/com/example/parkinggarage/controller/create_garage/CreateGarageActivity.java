@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.parkinggarage.GarageController;
+import com.example.parkinggarage.SingletonGarage;
 import com.example.parkinggarage.R;
 import com.example.parkinggarage.controller.SignInActivity;
 import com.example.parkinggarage.model.garage.Garage;
@@ -41,9 +41,9 @@ public class CreateGarageActivity extends AppCompatActivity {
         String firstName = firstNameField.getText().toString();
         String lastName = lastNameField.getText().toString();
         String password = passwordField.getText().toString();
-        GarageController.setGarage(new Garage(firstName, lastName, password));
+        SingletonGarage.setGarage(new Garage(firstName, lastName, password));
 
-        String message = "The manager's username is " + GarageController.getGarage().getManager().getUsername();
+        String message = "The manager's username is " + SingletonGarage.getGarage().getManager().getUsername();
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
     }
@@ -95,7 +95,7 @@ public class CreateGarageActivity extends AppCompatActivity {
                 int numCarSpaces = Integer.parseInt(numCarSpacesField.getText().toString());
                 int numTruckSpaces = Integer.parseInt(numTruckSpacesField.getText().toString());
 
-                GarageController.getGarage().generateSpaces(numMotoSpaces, numCarSpaces, numTruckSpaces);
+                SingletonGarage.getGarage().generateSpaces(numMotoSpaces, numCarSpaces, numTruckSpaces);
 
                 Toast.makeText(this, "Spaces generated", Toast.LENGTH_SHORT).show();
                 openSignInActivity();

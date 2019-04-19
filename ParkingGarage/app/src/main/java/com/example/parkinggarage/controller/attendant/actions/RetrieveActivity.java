@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.parkinggarage.R;
-import com.example.parkinggarage.GarageController;
+import com.example.parkinggarage.SingletonGarage;
 import com.example.parkinggarage.model.tickets_and_receipts.Document;
 import com.example.parkinggarage.model.users.Attendant;
 
@@ -24,7 +24,7 @@ public class RetrieveActivity extends AppCompatActivity {
         setTitle("Retrieve");
 
         String username = (String) getIntent().getSerializableExtra("attendant_username");
-        Attendant attendant = (Attendant) GarageController.getGarage().getUserBag().getUser(username);
+        Attendant attendant = (Attendant) SingletonGarage.getGarage().getUserBag().getUser(username);
 
         licenseField = findViewById(R.id.activity_retrieve_licenseField);
         paymentField = findViewById(R.id.activity_retrieve_paymentField);
@@ -34,7 +34,7 @@ public class RetrieveActivity extends AppCompatActivity {
             if (checkFields()) {
                 String license = licenseField.getText().toString();
                 double payment = Double.parseDouble(paymentField.getText().toString());
-                Document doc = attendant.retrieve(license, GarageController.getGarage(), payment);
+                Document doc = attendant.retrieve(license, SingletonGarage.getGarage(), payment);
 
                 if (doc == null) {
                     Toast.makeText(this, "Vehicle not found", Toast.LENGTH_SHORT).show();

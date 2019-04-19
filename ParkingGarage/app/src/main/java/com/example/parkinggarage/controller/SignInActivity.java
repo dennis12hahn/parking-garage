@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.parkinggarage.GarageController;
+import com.example.parkinggarage.SingletonGarage;
 import com.example.parkinggarage.R;
 import com.example.parkinggarage.controller.attendant.AttendantActivity;
 import com.example.parkinggarage.controller.manager.ManagerActivity;
@@ -29,7 +29,7 @@ public class SignInActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.activity_sign_in_passwordField);
         Button signInButton = findViewById(R.id.activity_sign_in_signInBtn);
 
-        garage = GarageController.getGarage();
+        garage = SingletonGarage.getGarage();
 
         setTitle("Sign In");
 
@@ -72,6 +72,7 @@ public class SignInActivity extends AppCompatActivity {
     private void clearFields() {
         usernameField.setText("");
         passwordField.setText("");
+        usernameField.requestFocus();
     }
 
     private boolean checkFields() {

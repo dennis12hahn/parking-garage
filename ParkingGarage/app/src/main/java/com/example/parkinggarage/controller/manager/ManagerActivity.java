@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.parkinggarage.GarageController;
+import com.example.parkinggarage.SingletonGarage;
 import com.example.parkinggarage.R;
 import com.example.parkinggarage.controller.manager.actions.CreateAttendantActivity;
 import com.example.parkinggarage.model.garage.Garage;
@@ -30,7 +30,7 @@ public class ManagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager);
 
-        garage = GarageController.getGarage();
+        garage = SingletonGarage.getGarage();
 
         Button signOutBtn = findViewById(R.id.activity_manager_signOutBtn);
         Button createAttendantBtn = findViewById(R.id.activity_manager_createAttendantBtn);
@@ -95,7 +95,7 @@ public class ManagerActivity extends AppCompatActivity {
             ParcelFileDescriptor fileDescriptor = this.getContentResolver().openFileDescriptor(uri, "w");
             FileOutputStream fos = new FileOutputStream(fileDescriptor.getFileDescriptor());
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(GarageController.getGarage());
+            oos.writeObject(SingletonGarage.getGarage());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

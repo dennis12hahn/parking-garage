@@ -6,6 +6,8 @@ import com.example.parkinggarage.model.vehicles.Vehicle;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Document implements Serializable {
@@ -24,25 +26,41 @@ public class Document implements Serializable {
         this.earlyBird = timeParked.getHour() < EARLY_BIRD_HOUR;
     }
 
-    public String[] getTicketInfo() {
-        return new String[]{
-                vehicle.getLicense(),
-                space.getClass().getSimpleName(),
-                timeParked.toLocalDate() + " " + timeParked.toLocalTime(),
-                earlyBird ? "Early Bird" : "Hourly"
-        };
+    public ArrayList<String> getTicketInfo() {
+        String spaceType = space.getClass().getSimpleName();
+        spaceType = spaceType.substring(0, spaceType.indexOf("Space"));
+
+        ArrayList<String> ticketInfo = new ArrayList<>();
+
+        ticketInfo.add("License: " + vehicle.getLicense());
+        ticketInfo.add("Type of Space: " + spaceType);
+        ticketInfo.add("Date Parked: " + timeParked.toLocalDate());
+        ticketInfo.add("Time Parked: " + formatTime(timeParked));
+        ticketInfo.add("Payment Scheme: " + (earlyBird ? "Early Bird" : "Hourly"));
+        return ticketInfo;
     }
 
-    public String[] getReceiptInfo() {
-        return new String[]{
-                vehicle.getLicense(),
-                space.getClass().getSimpleName(),
-                timeParked.toLocalDate() + " " + timeParked.toLocalTime(),
-                timeRetrieved.toLocalDate() + " " + timeRetrieved.toLocalTime(),
-                earlyBird ? "Early Bird" : "Hourly",
-                String.valueOf(calculateCharge()),
-                String.valueOf(paid)
-        };
+    public ArrayList<String> getReceiptInfo() {
+        ArrayList<String> receiptInfo = getTicketInfo();
+        receiptInfo.add(4, "Date Retrieved: " + timeRetrieved.toLocalDate());
+        receiptInfo.add("Time Retrieved: " + formatTime(timeRetrieved));
+        receiptInfo.add("Price: " + calculateCharge());
+        receiptInfo.add("Amount Paid: " + paid);
+        return receiptInfo;
+    }
+
+    private String formatTime(LocalDateTime time) {
+        StringBuilder builder = new StringBuilder();
+
+        int hours = time.getHour();
+        int minutes = time.getMinute();
+        boolean pastNoon = hours > 12;
+
+        builder.append(pastNoon ? hours - 12 : hours);
+        builder.append(":").append(minutes);
+        builder.append(pastNoon ? " pm" : " am");
+
+        return builder.toString();
     }
 
     public void setPaid(double paid) {

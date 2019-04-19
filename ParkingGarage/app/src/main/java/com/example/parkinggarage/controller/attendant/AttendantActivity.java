@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
-import com.example.parkinggarage.GarageController;
+import com.example.parkinggarage.SingletonGarage;
 import com.example.parkinggarage.R;
 import com.example.parkinggarage.controller.attendant.actions.ParkActivity;
 import com.example.parkinggarage.controller.attendant.actions.RetrieveActivity;
+import com.example.parkinggarage.controller.attendant.tickets_and_receipts.TicketActivity;
 import com.example.parkinggarage.model.tickets_and_receipts.Document;
 import com.example.parkinggarage.model.users.Attendant;
 
@@ -26,7 +27,7 @@ public class AttendantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_attendant);
 
         String username = (String) getIntent().getSerializableExtra("attendant_username");
-        attendant = (Attendant) GarageController.getGarage().getUserBag().getUser(username);
+        attendant = (Attendant) SingletonGarage.getGarage().getUserBag().getUser(username);
 
         setTitle(attendant.getUsername());
 
@@ -67,14 +68,20 @@ public class AttendantActivity extends AppCompatActivity {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK && data != null) {
                 Document doc = (Document) data.getSerializableExtra("document");
-                Log.v("DOCUMENT", Arrays.toString(doc.getTicketInfo()));
+                Intent intent = new Intent(this, TicketActivity.class);
+                intent.putExtra("doc_type", "Ticket");
+                intent.putExtra("document", doc);
+                startActivity(intent);
             }
         }
 
         if (requestCode == 2) {
             if (resultCode == RESULT_OK && data != null) {
                 Document doc = (Document) data.getSerializableExtra("document");
-                Log.v("DOCUMENT", Arrays.toString(doc.getReceiptInfo()));
+                Intent intent = new Intent(this, TicketActivity.class);
+                intent.putExtra("doc_type", "Receipt");
+                intent.putExtra("document", doc);
+                startActivity(intent);
             }
         }
     }

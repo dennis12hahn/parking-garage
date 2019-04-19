@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.parkinggarage.GarageController;
+import com.example.parkinggarage.SingletonGarage;
 import com.example.parkinggarage.R;
 import com.example.parkinggarage.controller.create_garage.CreateGarageActivity;
 import com.example.parkinggarage.model.garage.Garage;
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             ParcelFileDescriptor fileDescriptor = this.getContentResolver().openFileDescriptor(uri, "r");
             FileInputStream fis = new FileInputStream(fileDescriptor.getFileDescriptor());
             ObjectInputStream ois = new ObjectInputStream(fis);
-            GarageController.setGarage((Garage) ois.readObject());
+            SingletonGarage.setGarage((Garage) ois.readObject());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -35,10 +35,10 @@ class AttendantTest {
         truck1 = new Truck("456");
         car2 = new Car("def");
         car3 = new Car("def");
-        carSpace1 = new CarSpace();
-        truckSpace = new TruckSpace();
-        carSpace2 = new CarSpace();
-        motorcycleSpace = new MotorcycleSpace();
+        carSpace1 = new CarSpace(1, 2);
+        truckSpace = new TruckSpace(1, 1);
+        carSpace2 = new CarSpace(1, 1);
+        motorcycleSpace = new MotorcycleSpace(1, 1);
     }
 
     @Test
