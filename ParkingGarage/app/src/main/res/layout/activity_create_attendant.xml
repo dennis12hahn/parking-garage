@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.manager.actions.CreateAttendantActivity">
+    tools:context=".controller.users.manager.actions.CreateAttendantActivity">
 
     <EditText
         android:id="@+id/activity_create_attendant_firstNameField"

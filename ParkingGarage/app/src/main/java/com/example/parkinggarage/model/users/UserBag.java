@@ -1,114 +1,114 @@
 package com.example.parkinggarage.model.users;
 
-import com.example.parkinggarage.model.users.Attendant;
-import com.example.parkinggarage.model.users.Manager;
-import com.example.parkinggarage.model.users.User;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The UserBag class contains a HashMap of users. A user can be an Attendant or a Manager.
- * The HashMap contains a key of type String which will be the username of the user and a value of type
- * User which will be the actual user object. As of right now there is no maximum size.
+ * A UserBag contains a map of username Strings to Users. The map is a HashMap allowing for quick searching
+ * of usernames and a swift sign in process.
  *
- * @author Dennis Hahn
- * @version 1, 03/29/2019
+ * @author Dennis Hahn <A href="mailto:hahnd62@mail.sunysuffolk.edu">hahnd62@mail.sunysuffolk.edu</A>
+ * @version 04/19/2019
  */
-
 public class UserBag implements Serializable {
 
-    private Map<String, User> users;
+	private Map<String, User> users;
 
-    public UserBag() {
-        this.users = new HashMap<>();
-    }
+	public UserBag() {
+		this.users = new HashMap<>();
+	}
 
-    /**
-     * Will add a Manager object to the userbag.
-     *
-     * @param firstName
-     * @param lastName
-     * @param password
-     * @return true if the user was added, false if not. Will only return false if the bag already contains the generated username.
-     */
+	/**
+	 * Will create and add a Manager to the HashMap
+	 *
+	 * @param firstName
+	 * @param lastName
+	 * @param password
+	 * @return true if the user was added, false if not. Will only return false if the bag already contains the generated username
+	 */
+	public boolean addManager(String firstName, String lastName, String password) {
+		Manager manager = new Manager(firstName, lastName, password);
 
-    public boolean addManager(String firstName, String lastName, String password) {
-        Manager manager = new Manager(firstName, lastName, password);
+		if (users.containsKey(manager.getUsername())) {
+			return false;
+		}
 
-        if (users.containsKey(manager.getUsername())) {
-            return false;
-        }
+		users.put(manager.getUsername(), manager);
+		return true;
+	}
 
-        users.put(manager.getUsername(), manager);
-        return true;
-    }
+	/**
+	 * Will add an already created Manager to the HashMap
+	 *
+	 * @param manager
+	 * @return true if the user was added, false if not. Will only return false if the bag already contains the generated username
+	 */
+	public boolean addManager(Manager manager) {
+		if (users.containsKey(manager.getUsername())) {
+			return false;
+		}
 
-    public boolean addManager(Manager manager) {
-        if (users.containsKey(manager.getUsername())) {
-            return false;
-        }
+		users.put(manager.getUsername(), manager);
+		return true;
+	}
 
-        users.put(manager.getUsername(), manager);
-        return true;
-    }
+	/**
+	 * Will create and add an Attendant to the HashMap
+	 *
+	 * @param firstName
+	 * @param lastName
+	 * @param password
+	 * @return true if the user was added, false if not. Will only return false if the bag already contains the generated username
+	 */
+	public boolean addAttendant(String firstName, String lastName, String password) {
+		Attendant attendant = new Attendant(firstName, lastName, password);
 
-    /**
-     * Will addSpace an Attendant object to the userbag.
-     *
-     * @param firstName
-     * @param lastName
-     * @param password
-     * @return true if the user was added, false if not. Will only return false if the bag already contains the generated username.
-     */
+		if (users.containsKey(attendant.getUsername())) {
+			return false;
+		}
 
-    public boolean addAttendant(String firstName, String lastName, String password) {
-        Attendant attendant = new Attendant(firstName, lastName, password);
+		users.put(attendant.getUsername(), attendant);
+		return true;
+	}
 
-        if (users.containsKey(attendant.getUsername())) {
-            return false;
-        }
+	/**
+	 * Will add an already created Attendant to the HashMap
+	 *
+	 * @param attendant
+	 * @return true if the user was added, false if not. Will only return false if the bag already contains the generated username
+	 */
+	public boolean addAttendant(Attendant attendant) {
+		if (users.containsKey(attendant.getUsername())) {
+			return false;
+		}
 
-        users.put(attendant.getUsername(), attendant);
-        return true;
-    }
+		users.put(attendant.getUsername(), attendant);
+		return true;
+	}
 
+	/**
+	 * Will be used to check if the HashMap contains a given username
+	 *
+	 * @param username
+	 * @return true if the HashMap contains the username, false if it does not
+	 */
+	public boolean verifyUsername(String username) {
+		return users.containsKey(username);
+	}
 
-    public boolean addAttendant(Attendant attendant) {
-        if (users.containsKey(attendant.getUsername())) {
-            return false;
-        }
+	/**
+	 * Will be used to check if the password of the User with the given username matches the given password
+	 *
+	 * @param username
+	 * @param password
+	 * @return true if the passwords match, false if they don't
+	 */
+	public boolean verifyPassword(String username, String password) {
+		return users.get(username).verifyPassword(password);
+	}
 
-        users.put(attendant.getUsername(), attendant);
-        return true;
-    }
-
-    /**
-     * To be used when creating accounts and logging in.
-     * If the userbag already contains the given username, return true, false otherwise
-     *
-     * @param username
-     * @return true if the userbag contains the username, false if it does not
-     */
-    public boolean verifyUsername(String username) {
-        return users.containsKey(username);
-    }
-
-    /**
-     * To be used when logging in.
-     * If the password of the user mapped to the given username matches the supplied password, return true
-     * false otherwise
-     *
-     * @param username
-     * @param password
-     * @return true if the passwords match
-     */
-    public boolean verifyPassword(String username, String password) {
-        return users.get(username).verifyPassword(password);
-    }
-
-    public User getUser(String username) {
-        return users.get(username);
-    }
+	public User getUser(String username) {
+		return users.get(username);
+	}
 }

@@ -7,95 +7,93 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 
 public class Document implements Serializable {
 
-    private Vehicle vehicle;
-    private Space space;
-    private LocalDateTime timeParked, timeRetrieved;
-    private final static int EARLY_BIRD_HOUR = 8;
-    private boolean earlyBird;
-    private double paid;
+	private final static int EARLY_BIRD_HOUR = 8;
+	private Vehicle vehicle;
+	private Space space;
+	private LocalDateTime timeParked, timeRetrieved;
+	private boolean earlyBird;
+	private double paid;
 
-    public Document(Vehicle vehicle, Space space) {
-        this.vehicle = vehicle;
-        this.space = space;
-        this.timeParked = LocalDateTime.now();
-        this.earlyBird = timeParked.getHour() < EARLY_BIRD_HOUR;
-    }
+	public Document(Vehicle vehicle, Space space) {
+		this.vehicle = vehicle;
+		this.space = space;
+		this.timeParked = LocalDateTime.now();
+		this.earlyBird = timeParked.getHour() < EARLY_BIRD_HOUR;
+	}
 
-    public ArrayList<String> getTicketInfo() {
-        String spaceType = space.getClass().getSimpleName();
-        spaceType = spaceType.substring(0, spaceType.indexOf("Space"));
+	private String formatTime(LocalDateTime time) {
+		StringBuilder builder = new StringBuilder();
 
-        ArrayList<String> ticketInfo = new ArrayList<>();
+		int hours = time.getHour();
+		int minutes = time.getMinute();
+		boolean pastNoon = hours > 12;
 
-        ticketInfo.add("License: " + vehicle.getLicense());
-        ticketInfo.add("Type of Space: " + spaceType);
-        ticketInfo.add("Date Parked: " + timeParked.toLocalDate());
-        ticketInfo.add("Time Parked: " + formatTime(timeParked));
-        ticketInfo.add("Payment Scheme: " + (earlyBird ? "Early Bird" : "Hourly"));
-        return ticketInfo;
-    }
+		builder.append(pastNoon ? hours - 12 : hours);
+		builder.append(":").append(minutes);
+		builder.append(pastNoon ? " pm" : " am");
 
-    public ArrayList<String> getReceiptInfo() {
-        ArrayList<String> receiptInfo = getTicketInfo();
-        receiptInfo.add(4, "Date Retrieved: " + timeRetrieved.toLocalDate());
-        receiptInfo.add("Time Retrieved: " + formatTime(timeRetrieved));
-        receiptInfo.add("Price: " + calculateCharge());
-        receiptInfo.add("Amount Paid: " + paid);
-        return receiptInfo;
-    }
+		return builder.toString();
+	}
 
-    private String formatTime(LocalDateTime time) {
-        StringBuilder builder = new StringBuilder();
+	public void setTimeRetrieved() {
+		this.timeRetrieved = LocalDateTime.now();
+	}
 
-        int hours = time.getHour();
-        int minutes = time.getMinute();
-        boolean pastNoon = hours > 12;
+	public double calculateCharge() {
+		if (earlyBird) {
+			return space.getEarlyBirdPrice();
+		}
 
-        builder.append(pastNoon ? hours - 12 : hours);
-        builder.append(":").append(minutes);
-        builder.append(pastNoon ? " pm" : " am");
+		return getDurationParked() * space.getRate();
+	}
 
-        return builder.toString();
-    }
+	public ArrayList<String> getTicketInfo() {
+		String spaceType = space.getClass().getSimpleName();
+		spaceType = spaceType.substring(0, spaceType.indexOf("Space"));
 
-    public void setPaid(double paid) {
-        this.paid = paid;
-    }
+		ArrayList<String> ticketInfo = new ArrayList<>();
 
-    public void setTimeRetrieved() {
-        this.timeRetrieved = LocalDateTime.now();
-    }
+		ticketInfo.add("License: " + vehicle.getLicense());
+		ticketInfo.add("Type of Space: " + spaceType);
+		ticketInfo.add("Date Parked: " + timeParked.toLocalDate());
+		ticketInfo.add("Time Parked: " + formatTime(timeParked));
+		ticketInfo.add("Payment Scheme: " + (earlyBird ? "Early Bird" : "Hourly"));
+		return ticketInfo;
+	}
 
-    public double calculateCharge() {
-        if (earlyBird) {
-            return space.getEarlyBirdPrice();
-        }
+	public ArrayList<String> getReceiptInfo() {
+		ArrayList<String> receiptInfo = getTicketInfo();
+		receiptInfo.add(4, "Date Retrieved: " + timeRetrieved.toLocalDate());
+		receiptInfo.add("Time Retrieved: " + formatTime(timeRetrieved));
+		receiptInfo.add("Price: " + calculateCharge());
+		receiptInfo.add("Amount Paid: " + paid);
+		return receiptInfo;
+	}
 
-        return getDurationParked() * space.getRate();
-    }
+	private int getDurationParked() {
+		long parked = timeParked.atZone(ZoneId.systemDefault()).toEpochSecond();
+		long retrieved = timeRetrieved.atZone(ZoneId.systemDefault()).toEpochSecond();
+		long diff = retrieved - parked;
 
-    private int getDurationParked() {
-        long parked = timeParked.atZone(ZoneId.systemDefault()).toEpochSecond();
-        long retrieved = timeRetrieved.atZone(ZoneId.systemDefault()).toEpochSecond();
-        long diff = retrieved - parked;
+		if (diff % 3600 != 0) {
+			diff += 3600;
+		}
 
-        if (diff % 3600 != 0) {
-            diff += 3600;
-        }
+		return (int) diff / 3600;
+	}
 
-        return (int) diff / 3600;
-    }
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
+	public Space getSpace() {
+		return space;
+	}
 
-    public Space getSpace() {
-        return space;
-    }
+	public void setPaid(double paid) {
+		this.paid = paid;
+	}
 }
