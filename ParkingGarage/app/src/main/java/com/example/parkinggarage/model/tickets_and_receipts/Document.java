@@ -32,7 +32,7 @@ public class Document implements Serializable {
 		boolean pastNoon = hours > 12;
 
 		builder.append(pastNoon ? hours - 12 : hours);
-		builder.append(":").append(minutes);
+		builder.append(":").append(minutes < 10 ? "0" + minutes : minutes);
 		builder.append(pastNoon ? " pm" : " am");
 
 		return builder.toString();
@@ -42,7 +42,7 @@ public class Document implements Serializable {
 		this.timeRetrieved = LocalDateTime.now();
 	}
 
-	public double calculateCharge() {
+	private double calculateCharge() {
 		if (earlyBird) {
 			return space.getEarlyBirdPrice();
 		}

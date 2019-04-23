@@ -11,6 +11,7 @@ import com.example.parkinggarage.R;
 import com.example.parkinggarage.controller.SignInActivity;
 import com.example.parkinggarage.model.garage.Garage;
 import com.example.parkinggarage.model.garage.SingletonGarage;
+import com.example.parkinggarage.model.spaces.SpaceBag;
 
 public class CreateGarageActivity extends AppCompatActivity {
 
@@ -66,13 +67,13 @@ public class CreateGarageActivity extends AppCompatActivity {
 				double carEarlyBird = Double.parseDouble(carEarlyBirdField.getText().toString());
 				double truckEarlyBird = Double.parseDouble(truckEarlyBirdField.getText().toString());
 
-				Garage.setMotorcycleRate(motoRate);
-				Garage.setCarRate(carRate);
-				Garage.setTruckRate(truckRate);
+				SpaceBag.setMotorcycleRate(motoRate);
+				SpaceBag.setCarRate(carRate);
+				SpaceBag.setTruckRate(truckRate);
 
-				Garage.setMotorcycleEarlyBird(motoEarlyBird);
-				Garage.setCarEarlyBird(carEarlyBird);
-				Garage.setTruckEarlyBird(truckEarlyBird);
+				SpaceBag.setMotorcycleEarlyBird(motoEarlyBird);
+				SpaceBag.setCarEarlyBird(carEarlyBird);
+				SpaceBag.setTruckEarlyBird(truckEarlyBird);
 
 				Toast.makeText(this, "Prices set", Toast.LENGTH_SHORT).show();
 				openMakeSpacesLayout();
@@ -95,7 +96,7 @@ public class CreateGarageActivity extends AppCompatActivity {
 				int numCarSpaces = Integer.parseInt(numCarSpacesField.getText().toString());
 				int numTruckSpaces = Integer.parseInt(numTruckSpacesField.getText().toString());
 
-				SingletonGarage.getGarage().generateSpaces(numMotoSpaces, numCarSpaces, numTruckSpaces);
+				SingletonGarage.getGarage().getSpaceBag().generateSpaces(numMotoSpaces, numCarSpaces, numTruckSpaces);
 
 				Toast.makeText(this, "Spaces generated", Toast.LENGTH_SHORT).show();
 				openSignInActivity();

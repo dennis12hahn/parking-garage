@@ -16,15 +16,15 @@ public class Attendant extends User {
 			return null;
 		}
 
-		Space space = garage.getClosestSpace(vehicle, "peek");
+		Space space = garage.getSpaceBag().getClosestSpace(vehicle, "peek");
 
 		if (space.isOccupied()) {
 			return null;
 		}
 
-		space = garage.getClosestSpace(vehicle, "poll");
+		space = garage.getSpaceBag().getClosestSpace(vehicle, "poll");
 		space.setOccupied(true);
-		garage.addSpace(space);
+		garage.getSpaceBag().addSpace(space);
 		Document doc = new Document(vehicle, space);
 		garage.getTicketsAndReceipts().put(vehicle.getLicense(), doc);
 		return doc;
@@ -39,9 +39,9 @@ public class Attendant extends User {
 		Space space = doc.getSpace();
 		doc.setTimeRetrieved();
 		doc.setPaid(payment);
-		garage.removeSpace(space);
+		garage.getSpaceBag().removeSpace(space);
 		space.setOccupied(false);
-		garage.addSpace(space);
+		garage.getSpaceBag().addSpace(space);
 		return doc;
 	}
 

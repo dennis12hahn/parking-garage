@@ -52,7 +52,7 @@ public class ParkActivity extends AppCompatActivity implements AdapterView.OnIte
 		parkBtn.setOnClickListener(v -> {
 			if (checkFields()) {
 				vehicle = createVehicle();
-				space = garage.getClosestSpace(vehicle, "peek");
+				space = garage.getSpaceBag().getClosestSpace(vehicle, "peek");
 
 				if (space == null || space.isOccupied()) {
 					Toast.makeText(this, "No spaces available", Toast.LENGTH_SHORT).show();

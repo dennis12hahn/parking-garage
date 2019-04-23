@@ -35,8 +35,6 @@ public class ManagerActivity extends AppCompatActivity {
 	private Manager manager;
 
 	// todo
-	// park
-	// retrieve
 	// manage spaces
 
 	@Override
