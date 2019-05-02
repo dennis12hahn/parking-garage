@@ -58,7 +58,13 @@ public class ParkActivity extends AppCompatActivity implements AdapterView.OnIte
 					Toast.makeText(this, "No spaces available", Toast.LENGTH_SHORT).show();
 				} else {
 					if (garage.getTicketsAndReceipts().containsKey(licenseField.getText().toString())) {
-						Toast.makeText(this, "Vehicle already parked", Toast.LENGTH_SHORT).show();
+						Vehicle vehicle = garage.getTicketsAndReceipts().get(licenseField.getText().toString()).peek().getVehicle();
+
+						if (vehicle.isParked()) {
+							Toast.makeText(this, "Vehicle already parked", Toast.LENGTH_SHORT).show();
+						} else {
+							displayOption();
+						}
 					} else {
 						displayOption();
 					}

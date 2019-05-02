@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.parkinggarage.R;
+import com.example.parkinggarage.model.garage.Garage;
 import com.example.parkinggarage.model.garage.SingletonGarage;
 import com.example.parkinggarage.model.tickets_and_receipts.Document;
 import com.example.parkinggarage.model.users.Attendant;
@@ -15,6 +16,7 @@ import com.example.parkinggarage.model.users.Attendant;
 public class RetrieveActivity extends AppCompatActivity {
 
 	private EditText licenseField, paymentField;
+	private Garage garage;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class RetrieveActivity extends AppCompatActivity {
 
 		String username = (String) getIntent().getSerializableExtra("username");
 		Attendant attendant = (Attendant) SingletonGarage.getGarage().getUserBag().getUser(username);
+		garage = SingletonGarage.getGarage();
 
 		licenseField = findViewById(R.id.activity_retrieve_licenseField);
 		paymentField = findViewById(R.id.activity_retrieve_paymentField);
@@ -34,16 +37,22 @@ public class RetrieveActivity extends AppCompatActivity {
 			if (checkFields()) {
 				String license = licenseField.getText().toString();
 				double payment = Double.parseDouble(paymentField.getText().toString());
-				Document doc = attendant.retrieve(license, SingletonGarage.getGarage(), payment);
 
-				if (doc == null) {
-					Toast.makeText(this, "Vehicle not found", Toast.LENGTH_SHORT).show();
+				if (garage.getTicketsAndReceipts().containsKey(license)) {
+					if (garage.getTicketsAndReceipts().get(license).peek().getVehicle().isParked()) {
+						Document doc = attendant.retrieve(license, garage, payment);
+
+						Intent resultIntent = new Intent();
+						resultIntent.putExtra("document", doc);
+						setResult(RESULT_OK, resultIntent);
+						finish();
+					} else {
+						Toast.makeText(this, "Vehicle is not currently parked", Toast.LENGTH_SHORT).show();
+					}
 				} else {
-					Intent resultIntent = new Intent();
-					resultIntent.putExtra("document", doc);
-					setResult(RESULT_OK, resultIntent);
-					finish();
+					Toast.makeText(this, "Vehicle not found", Toast.LENGTH_SHORT).show();
 				}
+
 			}
 		});
 	}

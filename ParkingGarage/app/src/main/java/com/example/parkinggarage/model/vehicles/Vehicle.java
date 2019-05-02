@@ -17,10 +17,19 @@ public abstract class Vehicle implements Serializable {
 	 */
 	private String license;
 	private int size;
+	private boolean parked;
 
 	public Vehicle(String license, int size) {
 		this.license = license;
 		this.size = size;
+	}
+
+	public boolean isParked() {
+		return parked;
+	}
+
+	public void setParked(boolean parked) {
+		this.parked = parked;
 	}
 
 	public String getLicense() {

@@ -8,10 +8,11 @@ import com.example.parkinggarage.model.users.UserBag;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class Garage implements Serializable {
 
-	private Map<String, Document> ticketsAndReceipts;
+	private Map<String, Stack<Document>> ticketsAndReceipts;
 	private Manager manager;
 	private UserBag userBag;
 	private SpaceBag spaceBag;
@@ -41,7 +42,7 @@ public class Garage implements Serializable {
 		return userBag;
 	}
 
-	public Map<String, Document> getTicketsAndReceipts() {
+	public Map<String, Stack<Document>> getTicketsAndReceipts() {
 		return ticketsAndReceipts;
 	}
 
