@@ -26,8 +26,8 @@ public class RetrieveActivity extends AppCompatActivity {
 		setTitle("Retrieve");
 
 		String username = (String) getIntent().getSerializableExtra("username");
-		Attendant attendant = (Attendant) SingletonGarage.getGarage().getUserBag().getUser(username);
 		garage = SingletonGarage.getGarage();
+		Attendant attendant = (Attendant) garage.getUserBag().getUser(username);
 
 		licenseField = findViewById(R.id.activity_retrieve_licenseField);
 		paymentField = findViewById(R.id.activity_retrieve_paymentField);

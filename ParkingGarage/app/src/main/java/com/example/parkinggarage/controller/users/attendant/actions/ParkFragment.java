@@ -2,9 +2,13 @@ package com.example.parkinggarage.controller.users.attendant.actions;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.parkinggarage.R;
+import com.example.parkinggarage.controller.tickets_and_receipts.TicketActivity;
 import com.example.parkinggarage.model.garage.Garage;
 import com.example.parkinggarage.model.garage.SingletonGarage;
 import com.example.parkinggarage.model.spaces.Space;
@@ -25,29 +30,39 @@ import com.example.parkinggarage.model.vehicles.Vehicle;
 
 import java.time.LocalDateTime;
 
-public class ParkActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class ParkFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
 	private String vehicleType;
 	private EditText licenseField;
-	private Attendant attendant;
 	private Vehicle vehicle;
 	private Space space;
+	private Attendant attendant;
 	private Garage garage;
 
+	public static ParkFragment newInstance(String username) {
+		ParkFragment fragment = new ParkFragment();
+		Bundle args = new Bundle();
+		args.putString("username", username);
+		fragment.setArguments(args);
+		return fragment;
+	}
+
+	@Nullable
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_park);
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.activity_park, null);
+	}
 
-		setTitle("Park");
-
-		String username = (String) getIntent().getSerializableExtra("username");
+	@Override
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 		garage = SingletonGarage.getGarage();
+		String username = getArguments().getString("username");
 		attendant = (Attendant) garage.getUserBag().getUser(username);
 
-		licenseField = findViewById(R.id.activity_park_licenseField);
-		Button parkBtn = findViewById(R.id.activity_park_parkBtn);
+		licenseField = getView().findViewById(R.id.activity_park_licenseField);
 		createVehicleSpinner();
+		Button parkBtn = getView().findViewById(R.id.activity_park_parkBtn);
 
 		parkBtn.setOnClickListener(v -> {
 			if (checkFields()) {
@@ -55,13 +70,13 @@ public class ParkActivity extends AppCompatActivity implements AdapterView.OnIte
 				space = garage.getSpaceBag().getClosestSpace(vehicle, "peek");
 
 				if (space == null || space.isOccupied()) {
-					Toast.makeText(this, "No spaces available", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getView().getContext(), "No spaces available", Toast.LENGTH_SHORT).show();
 				} else {
 					if (garage.getTicketsAndReceipts().containsKey(licenseField.getText().toString())) {
 						Vehicle vehicle = garage.getTicketsAndReceipts().get(licenseField.getText().toString()).peek().getVehicle();
 
 						if (vehicle.isParked()) {
-							Toast.makeText(this, "Vehicle already parked", Toast.LENGTH_SHORT).show();
+							Toast.makeText(getView().getContext(), "Vehicle already parked", Toast.LENGTH_SHORT).show();
 						} else {
 							displayOption();
 						}
@@ -74,8 +89,44 @@ public class ParkActivity extends AppCompatActivity implements AdapterView.OnIte
 		});
 	}
 
+	private void createVehicleSpinner() {
+		Spinner vehicleTypeSpinner = getView().findViewById(R.id.activity_park_vehicleTypeSpinner);
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getView().getContext(), R.array.vehicle_types, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		vehicleTypeSpinner.setAdapter(adapter);
+		vehicleTypeSpinner.setOnItemSelectedListener(this);
+	}
+
+	private boolean checkFields() {
+		boolean result = true;
+
+		if (isEmpty(licenseField)) {
+			licenseField.setError("Enter a license plate number");
+			result = false;
+		}
+
+		if (vehicleType.equals("")) {
+			Toast.makeText(getView().getContext(), "Select a vehicle type", Toast.LENGTH_SHORT).show();
+			result = false;
+		}
+
+		return result;
+	}
+
+	private Vehicle createVehicle() {
+		switch (vehicleType) {
+			case "Motorcycle":
+				return new Motorcycle(licenseField.getText().toString());
+			case "Car":
+				return new Car(licenseField.getText().toString());
+			case "Truck":
+				return new Truck(licenseField.getText().toString());
+		}
+		return null;
+	}
+
 	private void displayOption() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(getView().getContext());
 		builder.setCancelable(true);
 
 		StringBuilder title = new StringBuilder();
@@ -91,12 +142,12 @@ public class ParkActivity extends AppCompatActivity implements AdapterView.OnIte
 					Document doc = attendant.park(vehicle, garage);
 
 					if (doc == null) {
-						Toast.makeText(this, "Unable to park vehicle", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getView().getContext(), "Unable to park vehicle", Toast.LENGTH_SHORT).show();
 					} else {
-						Intent resultIntent = new Intent();
-						resultIntent.putExtra("document", doc);
-						setResult(RESULT_OK, resultIntent);
-						finish();
+						Intent intent = new Intent(getView().getContext(), TicketActivity.class);
+						intent.putExtra("document", doc);
+						intent.putExtra("doc_type", "Ticket");
+						startActivity(intent);
 					}
 
 				}));
@@ -107,6 +158,10 @@ public class ParkActivity extends AppCompatActivity implements AdapterView.OnIte
 
 		AlertDialog dialog = builder.create();
 		dialog.show();
+	}
+
+	private boolean isEmpty(EditText field) {
+		return field.getText().toString().equals("");
 	}
 
 	private void setTitleAndMessage(StringBuilder title, StringBuilder message) {
@@ -123,46 +178,6 @@ public class ParkActivity extends AppCompatActivity implements AdapterView.OnIte
 			message.append("The rate of this space is $").append(space.getRate()).append("/hr. ");
 		}
 		message.append("Park in this space?");
-	}
-
-	private void createVehicleSpinner() {
-		Spinner vehicleTypeSpinner = findViewById(R.id.activity_park_vehicleTypeSpinner);
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.vehicle_types, android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		vehicleTypeSpinner.setAdapter(adapter);
-		vehicleTypeSpinner.setOnItemSelectedListener(this);
-	}
-
-	private Vehicle createVehicle() {
-		switch (vehicleType) {
-			case "Motorcycle":
-				return new Motorcycle(licenseField.getText().toString());
-			case "Car":
-				return new Car(licenseField.getText().toString());
-			case "Truck":
-				return new Truck(licenseField.getText().toString());
-		}
-		return null;
-	}
-
-	private boolean checkFields() {
-		boolean result = true;
-
-		if (isEmpty(licenseField)) {
-			licenseField.setError("Enter a license plate number");
-			result = false;
-		}
-
-		if (vehicleType.equals("")) {
-			Toast.makeText(this, "Select a vehicle type", Toast.LENGTH_SHORT).show();
-			result = false;
-		}
-
-		return result;
-	}
-
-	private boolean isEmpty(EditText field) {
-		return field.getText().toString().equals("");
 	}
 
 	@Override

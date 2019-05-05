@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.parkinggarage.R;
-import com.example.parkinggarage.controller.users.attendant.AttendantActivity;
+import com.example.parkinggarage.controller.users.attendant.AttendantActivityBottomNav;
 import com.example.parkinggarage.controller.users.manager.ManagerActivity;
 import com.example.parkinggarage.model.garage.Garage;
 import com.example.parkinggarage.model.garage.SingletonGarage;
@@ -51,7 +51,7 @@ public class SignInActivity extends AppCompatActivity {
 				if (user instanceof Manager) {
 					openUserActivity(new Intent(this, ManagerActivity.class));
 				} else {
-					Intent intent = new Intent(this, AttendantActivity.class);
+					Intent intent = new Intent(this, AttendantActivityBottomNav.class);
 					intent.putExtra("attendant_username", user.getUsername());
 					openUserActivity(intent);
 				}

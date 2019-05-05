@@ -22,6 +22,7 @@
         <activity android:name=".controller.users.attendant.actions.RetrieveActivity" />
         <activity android:name=".controller.users.attendant.actions.ParkActivity" />
         <activity android:name=".controller.users.attendant.AttendantActivity" />
+        <activity android:name=".controller.users.attendant.AttendantActivityBottomNav" />
         <activity android:name=".controller.users.manager.ManagerActivity" />
         <activity android:name=".controller.create_garage.CreateGarageActivity" />
         <activity android:name=".controller.MainActivity">

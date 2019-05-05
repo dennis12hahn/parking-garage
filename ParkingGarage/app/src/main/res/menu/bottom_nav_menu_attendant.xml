@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_park"
+        android:icon="@drawable/ic_park"
+        android:title="Park" />
+
+    <item
+        android:id="@+id/navigation_retrieve"
+        android:icon="@drawable/ic_retrieve"
+        android:title="Retrieve" />
+
+</menu>
