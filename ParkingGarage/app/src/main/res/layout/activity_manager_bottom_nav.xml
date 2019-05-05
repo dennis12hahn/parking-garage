@@ -2,13 +2,12 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.users.attendant.AttendantActivityBottomNav">
+    tools:context=".controller.users.manager.ManagerActivityBottomNav">
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/nav_view"
+        android:id="@+id/manager_nav_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
@@ -19,17 +18,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu_attendant" />
+        app:menu="@menu/bottom_nav_menu_manager" />
 
     <FrameLayout
-        android:id="@+id/activity_attendant_fragmentContainer"
+        android:id="@+id/activity_manager_fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="56dp"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
-
-    </FrameLayout>
+        tools:layout_editor_absoluteY="8dp" />
 
 
 </android.support.constraint.ConstraintLayout>

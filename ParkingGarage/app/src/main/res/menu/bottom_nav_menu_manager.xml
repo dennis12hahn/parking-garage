@@ -2,13 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/attendant_nav_park"
+        android:id="@+id/manager_nav_park"
         android:icon="@drawable/ic_park"
         android:title="Park" />
 
     <item
-        android:id="@+id/attendant_nav_retrieve"
+        android:id="@+id/manager_nav_retrieve"
         android:icon="@drawable/ic_retrieve"
         android:title="Retrieve" />
+
+    <item
+        android:id="@+id/manager_nav_create_attendant"
+        android:icon="@drawable/ic_plus_symbol"
+        android:title="Add Attendant" />
 
 </menu>

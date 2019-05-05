@@ -9,6 +9,7 @@ import android.widget.EditText;
 import com.example.parkinggarage.R;
 import com.example.parkinggarage.controller.users.attendant.AttendantActivityBottomNav;
 import com.example.parkinggarage.controller.users.manager.ManagerActivity;
+import com.example.parkinggarage.controller.users.manager.ManagerActivityBottomNav;
 import com.example.parkinggarage.model.garage.Garage;
 import com.example.parkinggarage.model.garage.SingletonGarage;
 import com.example.parkinggarage.model.users.Manager;
@@ -49,7 +50,7 @@ public class SignInActivity extends AppCompatActivity {
 				User user = garage.getUserBag().getUser(username);
 
 				if (user instanceof Manager) {
-					openUserActivity(new Intent(this, ManagerActivity.class));
+					openUserActivity(new Intent(this, ManagerActivityBottomNav.class));
 				} else {
 					Intent intent = new Intent(this, AttendantActivityBottomNav.class);
 					intent.putExtra("attendant_username", user.getUsername());

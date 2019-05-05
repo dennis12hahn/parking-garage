@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.users.manager.actions.manage_spaces.ManageSpacesActivity">
+    tools:context=".controller.users.attendant.AttendantActivityBottomNav">
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/attendant_nav_view"
@@ -19,18 +19,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu_manage_spaces" />
+        app:menu="@menu/bottom_nav_menu_attendant" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/activity_manage_spaces_recyclerView"
+    <FrameLayout
+        android:id="@+id/activity_attendant_fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="56dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
+
 
 </android.support.constraint.ConstraintLayout>

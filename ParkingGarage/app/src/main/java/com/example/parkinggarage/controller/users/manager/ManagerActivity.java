@@ -35,9 +35,6 @@ public class ManagerActivity extends AppCompatActivity {
 	private Garage garage;
 	private Manager manager;
 
-	// todo
-	// manage spaces
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
