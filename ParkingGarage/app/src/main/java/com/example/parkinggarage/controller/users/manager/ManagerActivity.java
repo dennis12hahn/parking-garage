@@ -14,6 +14,7 @@ import com.example.parkinggarage.controller.tickets_and_receipts.TicketActivity;
 import com.example.parkinggarage.controller.users.attendant.actions.ParkActivity;
 import com.example.parkinggarage.controller.users.attendant.actions.RetrieveActivity;
 import com.example.parkinggarage.controller.users.manager.actions.CreateAttendantActivity;
+import com.example.parkinggarage.controller.users.manager.actions.manage_spaces.ManageSpacesActivity;
 import com.example.parkinggarage.model.garage.Garage;
 import com.example.parkinggarage.model.garage.SingletonGarage;
 import com.example.parkinggarage.model.tickets_and_receipts.Document;
@@ -50,6 +51,7 @@ public class ManagerActivity extends AppCompatActivity {
 		Button saveGarageBtn = findViewById(R.id.activity_manager_saveBtn);
 		Button parkBtn = findViewById(R.id.activity_manager_parkBtn);
 		Button retrieveBtn = findViewById(R.id.activity_manager_retrieveBtn);
+		Button manageSpacesBtn = findViewById(R.id.activity_manager_manageSpacesBtn);
 
 		setTitle(garage.getManager().getUsername());
 
@@ -61,6 +63,8 @@ public class ManagerActivity extends AppCompatActivity {
 
 		createAttendantBtn.setOnClickListener(v -> openCreateAttendantView());
 
+		manageSpacesBtn.setOnClickListener(v -> openManageSpacesActivity());
+
 		saveGarageBtn.setOnClickListener(v -> {
 			Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
 			intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -69,6 +73,11 @@ public class ManagerActivity extends AppCompatActivity {
 			startActivityForResult(intent, WRITE_REQUEST_CODE);
 		});
 
+	}
+
+	private void openManageSpacesActivity() {
+		Intent intent = new Intent(this, ManageSpacesActivity.class);
+		startActivity(intent);
 	}
 
 	private void openParkActivity() {

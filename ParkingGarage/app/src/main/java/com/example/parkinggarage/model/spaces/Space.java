@@ -30,6 +30,17 @@ public abstract class Space implements Comparable<Space>, Serializable {
 		return Integer.compare(this.distanceToExit, space.distanceToExit);
 	}
 
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "{" +
+				"distanceToExit=" + distanceToExit +
+				", rate=" + rate +
+				", earlyBirdPrice=" + earlyBirdPrice +
+				", occupied=" + occupied +
+				", size=" + size +
+				'}';
+	}
+
 	public int getDistanceToExit() {
 		return distanceToExit;
 	}
@@ -56,16 +67,5 @@ public abstract class Space implements Comparable<Space>, Serializable {
 
 	public void setSize(int size) {
 		this.size = size;
-	}
-
-	@Override
-	public String toString() {
-		return '\n' + getClass().getSimpleName() + "{" +
-				"distanceToExit=" + distanceToExit +
-				", rate=" + rate +
-				", earlyBirdPrice=" + earlyBirdPrice +
-				", occupied=" + occupied +
-				", size=" + size +
-				'}';
 	}
 }
