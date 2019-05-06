@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".controller.users.manager.actions.manage_spaces.ManageSpacesActivity">
 
+    <include
+        android:id="@+id/manage_spaces_toolbar"
+        layout="@layout/blank_toolbar" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_manage_spaces_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/attendant_nav_view"
+        app:layout_constraintTop_toBottomOf="@+id/manage_spaces_toolbar" />
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/attendant_nav_view"
         android:layout_width="0dp"
@@ -19,18 +31,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu_manage_spaces" />
+        app:menu="@menu/bottom_nav_menu_manage_spaces">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/activity_manage_spaces_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="56dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    </android.support.design.widget.BottomNavigationView>
 
 </android.support.constraint.ConstraintLayout>

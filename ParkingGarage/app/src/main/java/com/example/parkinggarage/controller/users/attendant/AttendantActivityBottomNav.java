@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.parkinggarage.R;
 import com.example.parkinggarage.controller.users.attendant.actions.ParkFragment;
@@ -25,6 +28,24 @@ public class AttendantActivityBottomNav extends AppCompatActivity {
 	};
 
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_attendant, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		switch (item.getItemId()) {
+			case R.id.attendant_sign_out:
+				finish();
+				return true;
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_attendant_bottom_nav);
@@ -32,7 +53,11 @@ public class AttendantActivityBottomNav extends AppCompatActivity {
 		navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 		username = (String) getIntent().getSerializableExtra("attendant_username");
-		setTitle(username);
+
+		Toolbar toolbar = findViewById(R.id.attendant_bottom_nav_toolbar);
+		setSupportActionBar(toolbar);
+		toolbar.setTitle(username);
+
 		loadFragment(ParkFragment.newInstance(username));
 	}
 

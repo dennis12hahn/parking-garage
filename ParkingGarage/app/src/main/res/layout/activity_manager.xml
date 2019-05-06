@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".controller.users.manager.ManagerActivity">
 
+    <include layout="@layout/blank_toolbar" />
+
     <Button
         android:id="@+id/activity_manager_signOutBtn"
         android:layout_width="wrap_content"

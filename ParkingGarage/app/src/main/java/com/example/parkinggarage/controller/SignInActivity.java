@@ -3,12 +3,12 @@ package com.example.parkinggarage.controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.parkinggarage.R;
 import com.example.parkinggarage.controller.users.attendant.AttendantActivityBottomNav;
-import com.example.parkinggarage.controller.users.manager.ManagerActivity;
 import com.example.parkinggarage.controller.users.manager.ManagerActivityBottomNav;
 import com.example.parkinggarage.model.garage.Garage;
 import com.example.parkinggarage.model.garage.SingletonGarage;
@@ -31,13 +31,31 @@ public class SignInActivity extends AppCompatActivity {
 
 		garage = SingletonGarage.getGarage();
 
-		setTitle("Sign In");
+		Toolbar toolbar = findViewById(R.id.blank_toolbar);
+		setSupportActionBar(toolbar);
+		toolbar.setTitle("Sign In");
 
 		signInButton.setOnClickListener(v -> {
 			if (checkFields()) {
 				signIn();
 			}
 		});
+	}
+
+	private boolean checkFields() {
+		boolean result = true;
+
+		if (isEmpty(usernameField)) {
+			usernameField.setError("Enter a username");
+			result = false;
+		}
+
+		if (isEmpty(passwordField)) {
+			passwordField.setError("Enter a password");
+			result = false;
+		}
+
+		return result;
 	}
 
 	private void signIn() {
@@ -65,6 +83,10 @@ public class SignInActivity extends AppCompatActivity {
 		}
 	}
 
+	private boolean isEmpty(EditText field) {
+		return field.getText().toString().equals("");
+	}
+
 	public void openUserActivity(Intent intent) {
 		clearFields();
 		startActivity(intent);
@@ -74,26 +96,6 @@ public class SignInActivity extends AppCompatActivity {
 		usernameField.setText("");
 		passwordField.setText("");
 		usernameField.requestFocus();
-	}
-
-	private boolean checkFields() {
-		boolean result = true;
-
-		if (isEmpty(usernameField)) {
-			usernameField.setError("Enter a username");
-			result = false;
-		}
-
-		if (isEmpty(passwordField)) {
-			passwordField.setError("Enter a password");
-			result = false;
-		}
-
-		return result;
-	}
-
-	private boolean isEmpty(EditText field) {
-		return field.getText().toString().equals("");
 	}
 
 }

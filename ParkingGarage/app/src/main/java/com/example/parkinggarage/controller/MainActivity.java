@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -29,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		setTitle("Parking Garage");
 
 		Button createGarageBtn = findViewById(R.id.activity_main_createGarageBtn);
 		Button loadGarageBtn = findViewById(R.id.activity_main_loadGarageBtn);

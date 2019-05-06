@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".controller.MainActivity">
 
+    <include layout="@layout/blank_toolbar" />
+
     <Button
         android:id="@+id/activity_main_createGarageBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="225dp"
+        android:layout_marginTop="300dp"
         android:text="create garage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

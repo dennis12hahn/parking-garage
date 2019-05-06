@@ -5,6 +5,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.example.parkinggarage.R;
 import com.example.parkinggarage.model.garage.SingletonGarage;
@@ -45,6 +46,10 @@ public class ManageSpacesActivity extends AppCompatActivity {
 		spacesAdapter = new SpacesAdapter(spaceBag.getMotorcycleSpaces());
 		recyclerView.setAdapter(spacesAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+		Toolbar toolbar = findViewById(R.id.manage_spaces_toolbar);
+		setSupportActionBar(toolbar);
+		toolbar.setTitle("Manage Spaces");
 	}
 
 }
