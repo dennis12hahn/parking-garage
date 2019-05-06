@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -14,6 +13,8 @@ import com.example.parkinggarage.R;
 import com.example.parkinggarage.controller.create_garage.CreateGarageActivity;
 import com.example.parkinggarage.model.garage.Garage;
 import com.example.parkinggarage.model.garage.SingletonGarage;
+import com.example.parkinggarage.model.utils.IncrementalDataContainer;
+import com.example.parkinggarage.model.utils.SingletonIncrementalDataContainer;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 			FileInputStream fis = new FileInputStream(fileDescriptor.getFileDescriptor());
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			SingletonGarage.setGarage((Garage) ois.readObject());
+			SingletonIncrementalDataContainer.setDataContainer((IncrementalDataContainer) ois.readObject());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

@@ -20,6 +20,7 @@ import com.example.parkinggarage.model.garage.SingletonGarage;
 import com.example.parkinggarage.model.tickets_and_receipts.Document;
 import com.example.parkinggarage.model.users.Attendant;
 import com.example.parkinggarage.model.users.Manager;
+import com.example.parkinggarage.model.utils.SingletonIncrementalDataContainer;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -72,11 +73,6 @@ public class ManagerActivity extends AppCompatActivity {
 
 	}
 
-	private void openManageSpacesActivity() {
-		Intent intent = new Intent(this, ManageSpacesActivity.class);
-		startActivity(intent);
-	}
-
 	private void openParkActivity() {
 		Intent intent = new Intent(this, ParkActivity.class);
 		intent.putExtra("username", manager.getUsername());
@@ -92,6 +88,11 @@ public class ManagerActivity extends AppCompatActivity {
 	private void openCreateAttendantView() {
 		Intent intent = new Intent(this, CreateAttendantActivity.class);
 		startActivityForResult(intent, CREATE_ATTENDANT_REQUEST_CODE);
+	}
+
+	private void openManageSpacesActivity() {
+		Intent intent = new Intent(this, ManageSpacesActivity.class);
+		startActivity(intent);
 	}
 
 	@Override
@@ -149,6 +150,7 @@ public class ManagerActivity extends AppCompatActivity {
 			FileOutputStream fos = new FileOutputStream(fileDescriptor.getFileDescriptor());
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(garage);
+			oos.writeObject(SingletonIncrementalDataContainer.getDataContainer());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

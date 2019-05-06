@@ -1,13 +1,11 @@
 package com.example.parkinggarage.model.users;
 
+import com.example.parkinggarage.model.utils.SingletonIncrementalDataContainer;
+
 import java.io.Serializable;
 
-/**
- * A User will be used to
- */
 public abstract class User implements Serializable {
 
-	protected static int idCounter = 0;
 	private String firstName, lastName, username, password, id;
 
 	public User(String firstName, String lastName, String password) {
@@ -19,14 +17,13 @@ public abstract class User implements Serializable {
 		setUsername();
 	}
 
-	/**
-	 * Creates a username to be associated with the user based off the last 4 letters of the
-	 * last name, the first letter of the first name, and the last 3 digits of id.
-	 * If the last name is less than or equal to 4 letters than the entire last name will be used.
-	 * The username will be entirely lowercase.
-	 *
-	 * @author Dennis Hahn
-	 */
+	private void setId() {
+		int idCounter = SingletonIncrementalDataContainer.getDataContainer().getUserIdCounter(true);
+		this.id = String.valueOf(idCounter);
+		for (int i = 8; i > String.valueOf(idCounter).length(); i--) {
+			id = '0' + id;
+		}
+	}
 
 	private void setUsername() {
 		String lastNamePart;
@@ -41,40 +38,12 @@ public abstract class User implements Serializable {
 		this.username = username.toLowerCase();
 	}
 
-	/**
-	 * Sets the id for the user. The id is guaranteed to be unique as it will count
-	 * from 00000001 to 99999999 and it will always be 8 digits long.
-	 *
-	 * @author Dennis Hahn
-	 */
-
-	private void setId() {
-		this.id = String.valueOf(++idCounter);
-		for (int i = 8; i > String.valueOf(idCounter).length(); i--) {
-			id = '0' + id;
-		}
-	}
-
-	/**
-	 * Verifies an incoming password with the password stored in the account.
-	 *
-	 * @param inputPassword: the String entered by the client
-	 * @return boolean value based on if the passwords matched. True if they did, false if the did not.
-	 */
 	public boolean verifyPassword(String inputPassword) {
 		return password.equals(inputPassword);
 	}
 
 	public String getId() {
 		return id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
 	}
 
 	public String getUsername() {
