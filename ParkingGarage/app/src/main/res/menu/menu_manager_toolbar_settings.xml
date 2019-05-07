@@ -16,4 +16,10 @@
         android:title="Manage Spaces"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/manager_save_garage"
+        android:orderInCategory="300"
+        android:title="Save Garage"
+        app:showAsAction="never" />
+
 </menu>

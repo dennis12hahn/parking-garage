@@ -29,7 +29,7 @@ public class AttendantActivityBottomNav extends AppCompatActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.menu_attendant, menu);
+		getMenuInflater().inflate(R.menu.menu_attendant_toolbar_settings, menu);
 		return true;
 	}
 
@@ -48,7 +48,7 @@ public class AttendantActivityBottomNav extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_attendant_bottom_nav);
+		setContentView(R.layout.layout_attendant_activity_bottom_nav);
 		BottomNavigationView navView = findViewById(R.id.attendant_nav_view);
 		navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 

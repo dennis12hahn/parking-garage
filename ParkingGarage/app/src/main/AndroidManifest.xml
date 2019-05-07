@@ -19,12 +19,8 @@
             android:name=".controller.tickets_and_receipts.TicketActivity"
             android:label="@string/title_activity_ticket"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".controller.users.attendant.actions.RetrieveActivity" />
-        <activity android:name=".controller.users.attendant.actions.ParkActivity" />
-        <activity android:name=".controller.users.attendant.AttendantActivity" />
         <activity android:name=".controller.users.attendant.AttendantActivityBottomNav" />
         <activity android:name=".controller.users.manager.ManagerActivityBottomNav" />
-        <activity android:name=".controller.users.manager.ManagerActivity" />
         <activity android:name=".controller.create_garage.CreateGarageActivity" />
         <activity android:name=".controller.MainActivity">
             <intent-filter>
@@ -34,7 +30,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".controller.SignInActivity" />
-        <activity android:name=".controller.users.manager.actions.CreateAttendantActivity" />
     </application>
 
 </manifest>

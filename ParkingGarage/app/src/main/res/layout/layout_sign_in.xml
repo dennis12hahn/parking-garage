@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".controller.SignInActivity">
 
-    <include layout="@layout/blank_toolbar" />
+    <include layout="@layout/layout_custom_toolbar" />
 
     <EditText
         android:id="@+id/activity_sign_in_usernameField"

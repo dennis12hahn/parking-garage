@@ -31,7 +31,7 @@ public class SpacesAdapter extends RecyclerView.Adapter<SpacesAdapter.ViewHolder
 		Context context = viewGroup.getContext();
 		LayoutInflater inflater = LayoutInflater.from(context);
 
-		View spaceView = inflater.inflate(R.layout.item_space, viewGroup, false);
+		View spaceView = inflater.inflate(R.layout.layout_space_item, viewGroup, false);
 
 		return new ViewHolder(spaceView);
 	}

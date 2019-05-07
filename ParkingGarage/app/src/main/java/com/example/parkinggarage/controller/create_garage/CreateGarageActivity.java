@@ -24,7 +24,7 @@ public class CreateGarageActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_create_garage);
+		setContentView(R.layout.layout_create_manager);
 
 		Toolbar toolbar = findViewById(R.id.blank_toolbar);
 		setSupportActionBar(toolbar);
@@ -91,7 +91,7 @@ public class CreateGarageActivity extends AppCompatActivity {
 	}
 
 	private void openSetPricesLayout() {
-		setContentView(R.layout.activity_set_prices);
+		setContentView(R.layout.layout_create_prices);
 
 		Toolbar toolbar = findViewById(R.id.blank_toolbar);
 		setSupportActionBar(toolbar);
@@ -174,7 +174,7 @@ public class CreateGarageActivity extends AppCompatActivity {
 	}
 
 	private void openMakeSpacesLayout() {
-		setContentView(R.layout.activity_number_spaces);
+		setContentView(R.layout.layout_create_spaces);
 
 		Toolbar toolbar = findViewById(R.id.blank_toolbar);
 		setSupportActionBar(toolbar);

@@ -50,7 +50,7 @@ public class ParkFragment extends Fragment implements AdapterView.OnItemSelected
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.activity_park, null);
+		return inflater.inflate(R.layout.layout_park, null);
 	}
 
 	@Override

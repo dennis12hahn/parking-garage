@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".controller.create_garage.CreateGarageActivity">
 
-    <include layout="@layout/blank_toolbar" />
+    <include layout="@layout/layout_custom_toolbar" />
 
     <EditText
         android:id="@+id/activity_create_garage_firstNameField"

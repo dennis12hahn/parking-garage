@@ -36,7 +36,7 @@ public class ManageSpacesActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_manage_spaces);
+		setContentView(R.layout.layout_manage_spaces);
 		BottomNavigationView navView = findViewById(R.id.attendant_nav_view);
 		navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
