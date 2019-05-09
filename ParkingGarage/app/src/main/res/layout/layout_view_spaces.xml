@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.users.manager.actions.manage_spaces.ManageSpacesActivity">
+    tools:context=".controller.users.manager.actions.manage_spaces.ViewSpacesActivity">
 
     <include
         android:id="@+id/manage_spaces_toolbar"

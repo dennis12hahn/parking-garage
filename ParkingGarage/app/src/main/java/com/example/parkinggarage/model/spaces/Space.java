@@ -26,8 +26,16 @@ public abstract class Space implements Comparable<Space>, Serializable {
 		return rate;
 	}
 
+	public void setRate(double rate) {
+		this.rate = rate;
+	}
+
 	public double getEarlyBirdPrice() {
 		return earlyBirdPrice;
+	}
+
+	public void setEarlyBirdPrice(double earlyBirdPrice) {
+		this.earlyBirdPrice = earlyBirdPrice;
 	}
 
 	public boolean isOccupied() {

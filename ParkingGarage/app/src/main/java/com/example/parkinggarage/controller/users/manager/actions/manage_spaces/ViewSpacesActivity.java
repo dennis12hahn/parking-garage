@@ -11,7 +11,7 @@ import com.example.parkinggarage.R;
 import com.example.parkinggarage.model.garage.SingletonGarage;
 import com.example.parkinggarage.model.spaces.SpaceBag;
 
-public class ManageSpacesActivity extends AppCompatActivity {
+public class ViewSpacesActivity extends AppCompatActivity {
 
 	private SpaceBag spaceBag;
 	private RecyclerView recyclerView;
@@ -21,13 +21,13 @@ public class ManageSpacesActivity extends AppCompatActivity {
 			= item -> {
 		switch (item.getItemId()) {
 			case R.id.navigation_motorcycle_spaces:
-				recyclerView.setAdapter(new SpacesAdapter(spaceBag.getMotorcycleSpaces()));
+				recyclerView.setAdapter(new SpacesAdapter(spaceBag.getMotorcycleSpaces(), this));
 				return true;
 			case R.id.navigation_car_spaces:
-				recyclerView.setAdapter(new SpacesAdapter(spaceBag.getCarSpaces()));
+				recyclerView.setAdapter(new SpacesAdapter(spaceBag.getCarSpaces(), this));
 				return true;
 			case R.id.navigation_truck_spaces:
-				recyclerView.setAdapter(new SpacesAdapter(spaceBag.getTruckSpaces()));
+				recyclerView.setAdapter(new SpacesAdapter(spaceBag.getTruckSpaces(), this));
 				return true;
 		}
 		return false;
@@ -36,14 +36,14 @@ public class ManageSpacesActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.layout_manage_spaces);
+		setContentView(R.layout.layout_view_spaces);
 		BottomNavigationView navView = findViewById(R.id.attendant_nav_view);
 		navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 		spaceBag = SingletonGarage.getGarage().getSpaceBag();
 		recyclerView = findViewById(R.id.activity_manage_spaces_recyclerView);
 
-		spacesAdapter = new SpacesAdapter(spaceBag.getMotorcycleSpaces());
+		spacesAdapter = new SpacesAdapter(spaceBag.getMotorcycleSpaces(), this);
 		recyclerView.setAdapter(spacesAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

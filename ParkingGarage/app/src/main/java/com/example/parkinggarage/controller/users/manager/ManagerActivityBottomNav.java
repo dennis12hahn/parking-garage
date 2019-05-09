@@ -17,7 +17,7 @@ import com.example.parkinggarage.R;
 import com.example.parkinggarage.controller.users.attendant.actions.ParkFragment;
 import com.example.parkinggarage.controller.users.attendant.actions.RetrieveFragment;
 import com.example.parkinggarage.controller.users.manager.actions.CreateAttendantFragment;
-import com.example.parkinggarage.controller.users.manager.actions.manage_spaces.ManageSpacesActivity;
+import com.example.parkinggarage.controller.users.manager.actions.manage_spaces.ViewSpacesActivity;
 import com.example.parkinggarage.model.garage.Garage;
 import com.example.parkinggarage.model.garage.SingletonGarage;
 import com.example.parkinggarage.model.utils.SingletonIncrementalDataContainer;
@@ -89,7 +89,7 @@ public class ManagerActivityBottomNav extends AppCompatActivity {
 				finish();
 				return true;
 			case R.id.manager_manage_spaces:
-				startActivity(new Intent(this, ManageSpacesActivity.class));
+				startActivity(new Intent(this, ViewSpacesActivity.class));
 				return true;
 			case R.id.manager_save_garage:
 				Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
