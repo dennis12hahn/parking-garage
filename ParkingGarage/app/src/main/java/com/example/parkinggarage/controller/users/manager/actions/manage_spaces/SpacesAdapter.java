@@ -26,14 +26,10 @@ public class SpacesAdapter extends RecyclerView.Adapter<SpacesAdapter.SpaceViewH
 	private List<Space> spacesList;
 	private Context context;
 
-	public SpacesAdapter(Queue<Space> spaces, Context context) {
+	SpacesAdapter(Queue<Space> spaces, Context context) {
 		this.spacesQueue = spaces;
 		this.spacesList = new ArrayList<>(spaces);
 		this.context = context;
-	}
-
-	public List<Space> getSpacesList() {
-		return spacesList;
 	}
 
 	@NonNull
@@ -66,7 +62,7 @@ public class SpacesAdapter extends RecyclerView.Adapter<SpacesAdapter.SpaceViewH
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setCancelable(true);
 		builder.setTitle("Edit Space");
-		builder.setMessage("Leave fields empty if you don't want to change them");
+		builder.setMessage("Leave fields empty if you wish to leave them unchanged. Click remove to remove the space from the garage. Click confirm to confirm changes.");
 
 		LinearLayout view = new LinearLayout(context);
 		EditText rateField = new EditText(context);
@@ -103,9 +99,14 @@ public class SpacesAdapter extends RecyclerView.Adapter<SpacesAdapter.SpaceViewH
 			space.setRate(rate);
 			space.setEarlyBirdPrice(earlyBirdPrice);
 			notifyDataSetChanged();
+			dialog.dismiss();
 		});
 
-		builder.setNegativeButton("Cancel", (dialog, which) -> {
+		builder.setNegativeButton("Remove", (dialog, which) -> {
+			spacesList.remove(space);
+			spacesQueue.remove(space);
+			notifyDataSetChanged();
+			dialog.dismiss();
 		});
 
 		builder.show();
@@ -120,18 +121,18 @@ public class SpacesAdapter extends RecyclerView.Adapter<SpacesAdapter.SpaceViewH
 
 		private TextView leftText, rightText;
 
-		public SpaceViewHolder(@NonNull View itemView) {
+		SpaceViewHolder(@NonNull View itemView) {
 			super(itemView);
 
 			leftText = itemView.findViewById(R.id.space_details_left);
 			rightText = itemView.findViewById(R.id.space_details_right);
 		}
 
-		public TextView getLeftText() {
+		TextView getLeftText() {
 			return leftText;
 		}
 
-		public TextView getRightText() {
+		TextView getRightText() {
 			return rightText;
 		}
 	}
