@@ -15,7 +15,6 @@ public class ViewSpacesActivity extends AppCompatActivity {
 
 	private SpaceBag spaceBag;
 	private RecyclerView recyclerView;
-	private SpacesAdapter spacesAdapter;
 
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 			= item -> {
@@ -43,7 +42,7 @@ public class ViewSpacesActivity extends AppCompatActivity {
 		spaceBag = SingletonGarage.getGarage().getSpaceBag();
 		recyclerView = findViewById(R.id.activity_manage_spaces_recyclerView);
 
-		spacesAdapter = new SpacesAdapter(spaceBag.getMotorcycleSpaces(), this);
+		SpacesAdapter spacesAdapter = new SpacesAdapter(spaceBag.getMotorcycleSpaces(), this);
 		recyclerView.setAdapter(spacesAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

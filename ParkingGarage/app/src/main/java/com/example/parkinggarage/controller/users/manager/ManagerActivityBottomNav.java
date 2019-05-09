@@ -32,7 +32,6 @@ public class ManagerActivityBottomNav extends AppCompatActivity {
 	private static final int WRITE_REQUEST_CODE = 43;
 	private String username;
 	private Garage garage;
-	private Toolbar toolbar;
 
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 			= item -> {
@@ -53,8 +52,6 @@ public class ManagerActivityBottomNav extends AppCompatActivity {
 		setContentView(R.layout.layout_manager_activity_bottom_nav);
 		BottomNavigationView navView = findViewById(R.id.manager_nav_view);
 		navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-		toolbar = findViewById(R.id.blank_toolbar);
-		setSupportActionBar(toolbar);
 
 		garage = SingletonGarage.getGarage();
 		username = garage.getManager().getUsername();
