@@ -15,12 +15,12 @@
         android:id="@+id/activity_attendant_fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/attendant_nav_view"
+        app:layout_constraintBottom_toTopOf="@+id/view_spaces_nav_view"
         app:layout_constraintTop_toBottomOf="@+id/attendant_bottom_nav_toolbar"
         tools:layout_editor_absoluteX="-3dp" />
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/attendant_nav_view"
+        android:id="@+id/view_spaces_nav_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"

@@ -2,6 +2,7 @@ package com.example.parkinggarage.controller.users.manager.actions.manage_spaces
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
@@ -14,7 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.parkinggarage.R;
+import com.example.parkinggarage.model.spaces.CarSpace;
+import com.example.parkinggarage.model.spaces.MotorcycleSpace;
 import com.example.parkinggarage.model.spaces.Space;
+import com.example.parkinggarage.model.spaces.SpaceBag;
+import com.example.parkinggarage.model.spaces.TruckSpace;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +27,18 @@ import java.util.Queue;
 
 public class SpacesAdapter extends RecyclerView.Adapter<SpacesAdapter.SpaceViewHolder> {
 
+	private String spaceType;
 	private Queue<Space> spacesQueue;
 	private List<Space> spacesList;
 	private Context context;
+	private FloatingActionButton fab;
 
-	SpacesAdapter(Queue<Space> spaces, Context context) {
+	SpacesAdapter(Queue<Space> spaces, Context context, FloatingActionButton fab, String spaceType) {
 		this.spacesQueue = spaces;
 		this.spacesList = new ArrayList<>(spaces);
 		this.context = context;
+		this.fab = fab;
+		this.spaceType = spaceType;
 	}
 
 	@NonNull
@@ -56,6 +65,27 @@ public class SpacesAdapter extends RecyclerView.Adapter<SpacesAdapter.SpaceViewH
 		viewHolder.getRightText().setText(occupied + '\n' + earlyBird);
 
 		viewHolder.itemView.setOnClickListener(v -> displayDialog(space));
+
+		fab.setOnClickListener(v -> {
+			Space newSpace = null;
+
+			switch (spaceType) {
+				case "motorcycle":
+					newSpace = new MotorcycleSpace(space.getRate(), space.getEarlyBirdPrice());
+					break;
+				case "car":
+					newSpace = new CarSpace(space.getRate(), space.getEarlyBirdPrice());
+					break;
+				case "truck":
+					newSpace = new TruckSpace(space.getRate(), space.getEarlyBirdPrice());
+					break;
+
+			}
+
+			spacesList.add(newSpace);
+			spacesQueue.add(newSpace);
+			notifyDataSetChanged();
+		});
 	}
 
 	private void displayDialog(Space space) {

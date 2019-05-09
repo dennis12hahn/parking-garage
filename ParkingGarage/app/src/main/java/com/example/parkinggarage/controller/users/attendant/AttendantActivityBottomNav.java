@@ -49,7 +49,7 @@ public class AttendantActivityBottomNav extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_attendant_activity_bottom_nav);
-		BottomNavigationView navView = findViewById(R.id.attendant_nav_view);
+		BottomNavigationView navView = findViewById(R.id.view_spaces_nav_view);
 		navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 		username = (String) getIntent().getSerializableExtra("attendant_username");

@@ -21,44 +21,20 @@ public class SpaceBag implements Serializable {
 		this.truckSpaces = new PriorityQueue<>();
 	}
 
-	public static void setMotorcycleRate(double motorcycleRate) {
-		SpaceBag.motorcycleRate = motorcycleRate;
-	}
-
-	public static void setMotorcycleEarlyBird(double motorcycleEarlyBird) {
-		SpaceBag.motorcycleEarlyBird = motorcycleEarlyBird;
-	}
-
-	public static void setCarRate(double carRate) {
-		SpaceBag.carRate = carRate;
-	}
-
-	public static void setCarEarlyBird(double carEarlyBird) {
-		SpaceBag.carEarlyBird = carEarlyBird;
-	}
-
-	public static void setTruckRate(double truckRate) {
-		SpaceBag.truckRate = truckRate;
-	}
-
-	public static void setTruckEarlyBird(double truckEarlyBird) {
-		SpaceBag.truckEarlyBird = truckEarlyBird;
-	}
-
-	public boolean addSpace(Space space) {
-		if (space == null) {
-			return false;
+	public Space getClosestSpace(Vehicle vehicle, String option) {
+		if (vehicle instanceof Motorcycle) {
+			return getClosestSpaceForMotorcycle(option);
 		}
 
-		if (space instanceof MotorcycleSpace) {
-			return motorcycleSpaces.add(space);
+		if (vehicle instanceof Car) {
+			return getClosestSpaceForCar(option);
 		}
 
-		if (space instanceof CarSpace) {
-			return carSpaces.add(space);
+		if (vehicle instanceof Truck) {
+			return getClosestSpaceForTruck(option);
 		}
 
-		return truckSpaces.add(space);
+		return null;
 	}
 
 	private Space getClosestSpaceForMotorcycle(String option) {
@@ -133,22 +109,6 @@ public class SpaceBag implements Serializable {
 		return null;
 	}
 
-	public Space getClosestSpace(Vehicle vehicle, String option) {
-		if (vehicle instanceof Motorcycle) {
-			return getClosestSpaceForMotorcycle(option);
-		}
-
-		if (vehicle instanceof Car) {
-			return getClosestSpaceForCar(option);
-		}
-
-		if (vehicle instanceof Truck) {
-			return getClosestSpaceForTruck(option);
-		}
-
-		return null;
-	}
-
 	public void generateSpaces(int totalMotorcycleSpaces, int totalCarSpaces, int totalTruckSpaces) {
 		for (int i = totalMotorcycleSpaces; i > 0; i--) {
 			addSpace(new MotorcycleSpace(motorcycleRate, motorcycleEarlyBird));
@@ -161,6 +121,22 @@ public class SpaceBag implements Serializable {
 		for (int i = totalTruckSpaces; i > 0; i--) {
 			addSpace(new TruckSpace(truckRate, truckEarlyBird));
 		}
+	}
+
+	public boolean addSpace(Space space) {
+		if (space == null) {
+			return false;
+		}
+
+		if (space instanceof MotorcycleSpace) {
+			return motorcycleSpaces.add(space);
+		}
+
+		if (space instanceof CarSpace) {
+			return carSpaces.add(space);
+		}
+
+		return truckSpaces.add(space);
 	}
 
 	public MotorcycleSpace pollMotorcycleSpaces() {
@@ -220,6 +196,54 @@ public class SpaceBag implements Serializable {
 		if (space instanceof TruckSpace) {
 			truckSpaces.remove(space);
 		}
+	}
+
+	public static double getMotorcycleRate() {
+		return motorcycleRate;
+	}
+
+	public static void setMotorcycleRate(double motorcycleRate) {
+		SpaceBag.motorcycleRate = motorcycleRate;
+	}
+
+	public static double getMotorcycleEarlyBird() {
+		return motorcycleEarlyBird;
+	}
+
+	public static void setMotorcycleEarlyBird(double motorcycleEarlyBird) {
+		SpaceBag.motorcycleEarlyBird = motorcycleEarlyBird;
+	}
+
+	public static double getCarRate() {
+		return carRate;
+	}
+
+	public static void setCarRate(double carRate) {
+		SpaceBag.carRate = carRate;
+	}
+
+	public static double getCarEarlyBird() {
+		return carEarlyBird;
+	}
+
+	public static void setCarEarlyBird(double carEarlyBird) {
+		SpaceBag.carEarlyBird = carEarlyBird;
+	}
+
+	public static double getTruckRate() {
+		return truckRate;
+	}
+
+	public static void setTruckRate(double truckRate) {
+		SpaceBag.truckRate = truckRate;
+	}
+
+	public static double getTruckEarlyBird() {
+		return truckEarlyBird;
+	}
+
+	public static void setTruckEarlyBird(double truckEarlyBird) {
+		SpaceBag.truckEarlyBird = truckEarlyBird;
 	}
 
 	public PriorityQueue<Space> getMotorcycleSpaces() {

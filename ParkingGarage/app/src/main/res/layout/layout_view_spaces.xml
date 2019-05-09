@@ -11,16 +11,31 @@
         android:id="@+id/manage_spaces_toolbar"
         layout="@layout/layout_custom_toolbar" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/view_spaces_floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:tint="@color/cardview_dark_background"
+        app:backgroundTint="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/view_spaces_nav_view"
+        app:layout_constraintEnd_toEndOf="@+id/activity_manage_spaces_recyclerView"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/activity_manage_spaces_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/attendant_nav_view"
-        app:layout_constraintTop_toBottomOf="@+id/manage_spaces_toolbar" />
+        app:layout_constraintBottom_toTopOf="@+id/view_spaces_nav_view"
+        app:layout_constraintTop_toBottomOf="@+id/manage_spaces_toolbar" >
+
+    </android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/attendant_nav_view"
+        android:id="@+id/view_spaces_nav_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
