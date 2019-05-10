@@ -20,6 +20,7 @@ public class CreateGarageActivity extends AppCompatActivity {
 			numMotoSpacesField, numCarSpacesField, numTruckSpacesField,
 			motoRateField, carRateField, truckRateField,
 			motoEarlyBirdField, carEarlyBirdField, truckEarlyBirdField;
+	private SpaceBag spaceBag;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,7 @@ public class CreateGarageActivity extends AppCompatActivity {
 		String lastName = lastNameField.getText().toString();
 		String password = passwordField.getText().toString();
 		SingletonGarage.setGarage(new Garage(firstName, lastName, password));
+		spaceBag = SingletonGarage.getGarage().getSpaceBag();
 
 		String message = "The manager's username is " + SingletonGarage.getGarage().getManager().getUsername();
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -111,13 +113,13 @@ public class CreateGarageActivity extends AppCompatActivity {
 				double carEarlyBird = Double.parseDouble(carEarlyBirdField.getText().toString());
 				double truckEarlyBird = Double.parseDouble(truckEarlyBirdField.getText().toString());
 
-				SpaceBag.setMotorcycleRate(motoRate);
-				SpaceBag.setCarRate(carRate);
-				SpaceBag.setTruckRate(truckRate);
+				spaceBag.setMotorcycleRate(motoRate);
+				spaceBag.setCarRate(carRate);
+				spaceBag.setTruckRate(truckRate);
 
-				SpaceBag.setMotorcycleEarlyBird(motoEarlyBird);
-				SpaceBag.setCarEarlyBird(carEarlyBird);
-				SpaceBag.setTruckEarlyBird(truckEarlyBird);
+				spaceBag.setMotorcycleEarlyBird(motoEarlyBird);
+				spaceBag.setCarEarlyBird(carEarlyBird);
+				spaceBag.setTruckEarlyBird(truckEarlyBird);
 
 				Toast.makeText(this, "Prices set", Toast.LENGTH_SHORT).show();
 				openMakeSpacesLayout();
@@ -190,7 +192,7 @@ public class CreateGarageActivity extends AppCompatActivity {
 				int numCarSpaces = Integer.parseInt(numCarSpacesField.getText().toString());
 				int numTruckSpaces = Integer.parseInt(numTruckSpacesField.getText().toString());
 
-				SingletonGarage.getGarage().getSpaceBag().generateSpaces(numMotoSpaces, numCarSpaces, numTruckSpaces);
+				spaceBag.generateSpaces(numMotoSpaces, numCarSpaces, numTruckSpaces);
 
 				Toast.makeText(this, "Spaces generated", Toast.LENGTH_SHORT).show();
 				openSignInActivity();

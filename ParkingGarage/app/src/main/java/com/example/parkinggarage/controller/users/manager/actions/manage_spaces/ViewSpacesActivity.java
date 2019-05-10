@@ -22,13 +22,13 @@ public class ViewSpacesActivity extends AppCompatActivity {
 			= item -> {
 		switch (item.getItemId()) {
 			case R.id.navigation_motorcycle_spaces:
-				recyclerView.setAdapter(new SpacesAdapter(spaceBag.getMotorcycleSpaces(), this, fab, "motorcycle"));
+				recyclerView.setAdapter(new SpacesAdapter(spaceBag.getMotorcycleSpaces(), this, fab, "motorcycle", spaceBag));
 				return true;
 			case R.id.navigation_car_spaces:
-				recyclerView.setAdapter(new SpacesAdapter(spaceBag.getCarSpaces(), this, fab, "car"));
+				recyclerView.setAdapter(new SpacesAdapter(spaceBag.getCarSpaces(), this, fab, "car", spaceBag));
 				return true;
 			case R.id.navigation_truck_spaces:
-				recyclerView.setAdapter(new SpacesAdapter(spaceBag.getTruckSpaces(), this, fab, "truck"));
+				recyclerView.setAdapter(new SpacesAdapter(spaceBag.getTruckSpaces(), this, fab, "truck", spaceBag));
 				return true;
 		}
 		return false;
@@ -46,7 +46,7 @@ public class ViewSpacesActivity extends AppCompatActivity {
 
 		fab = findViewById(R.id.view_spaces_floating_action_button);
 
-		SpacesAdapter spacesAdapter = new SpacesAdapter(spaceBag.getMotorcycleSpaces(), this, fab, "motorcycle");
+		SpacesAdapter spacesAdapter = new SpacesAdapter(spaceBag.getMotorcycleSpaces(), this, fab, "motorcycle", spaceBag);
 		recyclerView.setAdapter(spacesAdapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

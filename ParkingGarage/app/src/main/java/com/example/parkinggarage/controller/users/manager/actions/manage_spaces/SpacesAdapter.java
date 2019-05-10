@@ -32,13 +32,15 @@ public class SpacesAdapter extends RecyclerView.Adapter<SpacesAdapter.SpaceViewH
 	private List<Space> spacesList;
 	private Context context;
 	private FloatingActionButton fab;
+	private SpaceBag spaceBag;
 
-	SpacesAdapter(Queue<Space> spaces, Context context, FloatingActionButton fab, String spaceType) {
+	SpacesAdapter(Queue<Space> spaces, Context context, FloatingActionButton fab, String spaceType, SpaceBag spaceBag) {
 		this.spacesQueue = spaces;
 		this.spacesList = new ArrayList<>(spaces);
 		this.context = context;
 		this.fab = fab;
 		this.spaceType = spaceType;
+		this.spaceBag = spaceBag;
 	}
 
 	@NonNull
@@ -71,13 +73,13 @@ public class SpacesAdapter extends RecyclerView.Adapter<SpacesAdapter.SpaceViewH
 
 			switch (spaceType) {
 				case "motorcycle":
-					newSpace = new MotorcycleSpace(space.getRate(), space.getEarlyBirdPrice());
+					newSpace = new MotorcycleSpace(spaceBag.getMotorcycleRate(), spaceBag.getMotorcycleEarlyBird());
 					break;
 				case "car":
-					newSpace = new CarSpace(space.getRate(), space.getEarlyBirdPrice());
+					newSpace = new CarSpace(spaceBag.getCarRate(), spaceBag.getCarEarlyBird());
 					break;
 				case "truck":
-					newSpace = new TruckSpace(space.getRate(), space.getEarlyBirdPrice());
+					newSpace = new TruckSpace(spaceBag.getTruckRate(), spaceBag.getTruckEarlyBird());
 					break;
 
 			}

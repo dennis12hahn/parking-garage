@@ -10,7 +10,7 @@ import java.util.PriorityQueue;
 
 public class SpaceBag implements Serializable {
 
-	private static double motorcycleRate, motorcycleEarlyBird, carRate, carEarlyBird, truckRate, truckEarlyBird;
+	private double motorcycleRate, motorcycleEarlyBird, carRate, carEarlyBird, truckRate, truckEarlyBird;
 	private PriorityQueue<Space> motorcycleSpaces;
 	private PriorityQueue<Space> carSpaces;
 	private PriorityQueue<Space> truckSpaces;
@@ -198,52 +198,52 @@ public class SpaceBag implements Serializable {
 		}
 	}
 
-	public static double getMotorcycleRate() {
+	public double getMotorcycleRate() {
 		return motorcycleRate;
 	}
 
-	public static void setMotorcycleRate(double motorcycleRate) {
-		SpaceBag.motorcycleRate = motorcycleRate;
+	public void setMotorcycleRate(double motorcycleRate) {
+		this.motorcycleRate = motorcycleRate;
 	}
 
-	public static double getMotorcycleEarlyBird() {
+	public double getMotorcycleEarlyBird() {
 		return motorcycleEarlyBird;
 	}
 
-	public static void setMotorcycleEarlyBird(double motorcycleEarlyBird) {
-		SpaceBag.motorcycleEarlyBird = motorcycleEarlyBird;
+	public void setMotorcycleEarlyBird(double motorcycleEarlyBird) {
+		this.motorcycleEarlyBird = motorcycleEarlyBird;
 	}
 
-	public static double getCarRate() {
+	public double getCarRate() {
 		return carRate;
 	}
 
-	public static void setCarRate(double carRate) {
-		SpaceBag.carRate = carRate;
+	public void setCarRate(double carRate) {
+		this.carRate = carRate;
 	}
 
-	public static double getCarEarlyBird() {
+	public double getCarEarlyBird() {
 		return carEarlyBird;
 	}
 
-	public static void setCarEarlyBird(double carEarlyBird) {
-		SpaceBag.carEarlyBird = carEarlyBird;
+	public void setCarEarlyBird(double carEarlyBird) {
+		this.carEarlyBird = carEarlyBird;
 	}
 
-	public static double getTruckRate() {
+	public double getTruckRate() {
 		return truckRate;
 	}
 
-	public static void setTruckRate(double truckRate) {
-		SpaceBag.truckRate = truckRate;
+	public void setTruckRate(double truckRate) {
+		this.truckRate = truckRate;
 	}
 
-	public static double getTruckEarlyBird() {
+	public double getTruckEarlyBird() {
 		return truckEarlyBird;
 	}
 
-	public static void setTruckEarlyBird(double truckEarlyBird) {
-		SpaceBag.truckEarlyBird = truckEarlyBird;
+	public void setTruckEarlyBird(double truckEarlyBird) {
+		this.truckEarlyBird = truckEarlyBird;
 	}
 
 	public PriorityQueue<Space> getMotorcycleSpaces() {

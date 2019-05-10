@@ -1,8 +1,6 @@
 package com.example.parkinggarage.controller.tickets_and_receipts;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
@@ -16,16 +14,12 @@ public class TicketActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_ticket);
-		Toolbar toolbar = findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
-
-		FloatingActionButton fab = findViewById(R.id.fab);
-		fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-				.setAction("Action", null).show());
 
 		Document doc = (Document) getIntent().getSerializableExtra("document");
 		String docType = (String) getIntent().getSerializableExtra("doc_type");
 
+		Toolbar toolbar = findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
 		getSupportActionBar().setTitle(docType);
 
 		TextView contentView = findViewById(R.id.ticket_activity_content_textView);
