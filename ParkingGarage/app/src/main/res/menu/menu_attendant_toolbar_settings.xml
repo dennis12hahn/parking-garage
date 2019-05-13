@@ -10,4 +10,11 @@
         android:title="Sign Out"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/attendant_view_documents"
+        android:orderInCategory="200"
+        android:title="View Tickets &amp; Receipts"
+        app:showAsAction="never"
+        />
+
 </menu>

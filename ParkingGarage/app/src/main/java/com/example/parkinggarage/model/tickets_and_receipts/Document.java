@@ -24,30 +24,26 @@ public class Document implements Serializable {
 		this.earlyBird = timeParked.getHour() < EARLY_BIRD_HOUR;
 	}
 
-	private String formatTime(LocalDateTime time) {
-		StringBuilder builder = new StringBuilder();
-
-		int hours = time.getHour();
-		int minutes = time.getMinute();
-		boolean pastNoon = hours > 12;
-
-		builder.append(pastNoon ? hours - 12 : hours);
-		builder.append(":").append(minutes < 10 ? "0" + minutes : minutes);
-		builder.append(pastNoon ? " pm" : " am");
-
-		return builder.toString();
-	}
-
 	public void setTimeRetrieved() {
 		this.timeRetrieved = LocalDateTime.now();
 	}
 
-	private double calculateCharge() {
-		if (earlyBird) {
-			return space.getEarlyBirdPrice();
-		}
+	public void setPaid(double paid) {
+		this.paid = paid;
+	}
 
-		return getDurationParked() * space.getRate();
+	public ArrayList<String> getReceiptInfo() {
+		ArrayList<String> receiptInfo = getTicketInfo();
+		if (timeRetrieved == null) {
+			receiptInfo.add(null);
+			receiptInfo.add(null);
+		} else {
+			receiptInfo.add(4, "Date Retrieved: " + timeRetrieved.toLocalDate());
+			receiptInfo.add("Time Retrieved: " + formatTime(timeRetrieved));
+			receiptInfo.add("Price: " + calculateCharge());
+			receiptInfo.add("Amount Paid: " + paid);
+		}
+		return receiptInfo;
 	}
 
 	public ArrayList<String> getTicketInfo() {
@@ -64,13 +60,26 @@ public class Document implements Serializable {
 		return ticketInfo;
 	}
 
-	public ArrayList<String> getReceiptInfo() {
-		ArrayList<String> receiptInfo = getTicketInfo();
-		receiptInfo.add(4, "Date Retrieved: " + timeRetrieved.toLocalDate());
-		receiptInfo.add("Time Retrieved: " + formatTime(timeRetrieved));
-		receiptInfo.add("Price: " + calculateCharge());
-		receiptInfo.add("Amount Paid: " + paid);
-		return receiptInfo;
+	private String formatTime(LocalDateTime time) {
+		StringBuilder builder = new StringBuilder();
+
+		int hours = time.getHour();
+		int minutes = time.getMinute();
+		boolean pastNoon = hours > 12;
+
+		builder.append(pastNoon ? hours - 12 : hours);
+		builder.append(":").append(minutes < 10 ? "0" + minutes : minutes);
+		builder.append(pastNoon ? " pm" : " am");
+
+		return builder.toString();
+	}
+
+	private double calculateCharge() {
+		if (earlyBird) {
+			return space.getEarlyBirdPrice();
+		}
+
+		return getDurationParked() * space.getRate();
 	}
 
 	private int getDurationParked() {
@@ -91,9 +100,5 @@ public class Document implements Serializable {
 
 	public Space getSpace() {
 		return space;
-	}
-
-	public void setPaid(double paid) {
-		this.paid = paid;
 	}
 }

@@ -49,7 +49,7 @@ public class SpacesAdapter extends RecyclerView.Adapter<SpacesAdapter.SpaceViewH
 		Context context = viewGroup.getContext();
 		LayoutInflater inflater = LayoutInflater.from(context);
 
-		View spaceView = inflater.inflate(R.layout.layout_space_item, viewGroup, false);
+		View spaceView = inflater.inflate(R.layout.layout_list_item, viewGroup, false);
 
 		return new SpaceViewHolder(spaceView);
 	}
@@ -156,8 +156,8 @@ public class SpacesAdapter extends RecyclerView.Adapter<SpacesAdapter.SpaceViewH
 		SpaceViewHolder(@NonNull View itemView) {
 			super(itemView);
 
-			leftText = itemView.findViewById(R.id.space_details_left);
-			rightText = itemView.findViewById(R.id.space_details_right);
+			leftText = itemView.findViewById(R.id.details_left);
+			rightText = itemView.findViewById(R.id.details_right);
 		}
 
 		TextView getLeftText() {

@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".controller.users.attendant.actions.ViewDocumentsActivity"></activity>
         <activity
             android:name=".controller.users.manager.actions.manage_spaces.ViewSpacesActivity"
             android:label="@string/title_activity_manage_spaces" />

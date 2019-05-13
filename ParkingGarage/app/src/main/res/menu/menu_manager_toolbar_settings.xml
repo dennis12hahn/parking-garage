@@ -11,14 +11,21 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/manager_manage_spaces"
+        android:id="@+id/manager_view_documents"
         android:orderInCategory="200"
+        android:title="View Tickets &amp; Receipts"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/manager_manage_spaces"
+        android:orderInCategory="300"
         android:title="Manage Spaces"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/manager_save_garage"
-        android:orderInCategory="300"
+        android:orderInCategory="400"
         android:title="Save Garage"
         app:showAsAction="never" />
 
