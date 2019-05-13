@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.parkinggarage.R;
 import com.example.parkinggarage.controller.users.attendant.actions.ParkFragment;
 import com.example.parkinggarage.controller.users.attendant.actions.RetrieveFragment;
-import com.example.parkinggarage.controller.users.attendant.actions.ViewDocumentsActivity;
+import com.example.parkinggarage.controller.users.attendant.actions.view_documents.ViewDocumentsActivity;
 import com.example.parkinggarage.model.garage.SingletonGarage;
 
 public class AttendantActivityBottomNav extends AppCompatActivity {
@@ -67,7 +67,6 @@ public class AttendantActivityBottomNav extends AppCompatActivity {
 
 		licenseField.setInputType(InputType.TYPE_CLASS_TEXT);
 		licenseField.setHint("License");
-		licenseField.setPadding(20, 20, 20, 20);
 
 		builder.setView(licenseField);
 

@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.example.parkinggarage.R;
 import com.example.parkinggarage.controller.users.attendant.actions.ParkFragment;
 import com.example.parkinggarage.controller.users.attendant.actions.RetrieveFragment;
-import com.example.parkinggarage.controller.users.attendant.actions.ViewDocumentsActivity;
+import com.example.parkinggarage.controller.users.attendant.actions.view_documents.ViewDocumentsActivity;
 import com.example.parkinggarage.controller.users.manager.actions.CreateAttendantFragment;
 import com.example.parkinggarage.controller.users.manager.actions.manage_spaces.ViewSpacesActivity;
 import com.example.parkinggarage.model.garage.Garage;

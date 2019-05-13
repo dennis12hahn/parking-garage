@@ -1,4 +1,4 @@
-package com.example.parkinggarage.controller.users.attendant.actions;
+package com.example.parkinggarage.controller.users.attendant.actions.view_documents;
 
 import android.content.Context;
 import android.content.Intent;

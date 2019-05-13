@@ -38,7 +38,7 @@ public class Document implements Serializable {
 			receiptInfo.add(null);
 			receiptInfo.add(null);
 		} else {
-			receiptInfo.add(4, "Date Retrieved: " + timeRetrieved.toLocalDate());
+			receiptInfo.add("Date Retrieved: " + timeRetrieved.toLocalDate());
 			receiptInfo.add("Time Retrieved: " + formatTime(timeRetrieved));
 			receiptInfo.add("Price: " + calculateCharge());
 			receiptInfo.add("Amount Paid: " + paid);
@@ -56,7 +56,15 @@ public class Document implements Serializable {
 		ticketInfo.add("Type of Space: " + spaceType);
 		ticketInfo.add("Date Parked: " + timeParked.toLocalDate());
 		ticketInfo.add("Time Parked: " + formatTime(timeParked));
-		ticketInfo.add("Payment Scheme: " + (earlyBird ? "Early Bird" : "Hourly"));
+
+		StringBuilder paymentScheme = new StringBuilder("Payment Scheme: ");
+		if (earlyBird) {
+			paymentScheme.append("Early Bird ($" + space.getEarlyBirdPrice() + ")");
+		} else {
+			paymentScheme.append("Hourly ($" + space.getRate() + "/hr)");
+		}
+		ticketInfo.add(paymentScheme.toString());
+
 		return ticketInfo;
 	}
 
