@@ -4,6 +4,14 @@ import com.example.parkinggarage.model.utils.SingletonIncrementalDataContainer;
 
 import java.io.Serializable;
 
+/**
+ * The Space class is used to hold data relevant to each space associated with the garage.
+ * Will contain an hourly rate for the space and an early bird price which is the price for the entire day.
+ * Will contain the occupied status of the space and its size and the distance it is away from the exit.
+ *
+ * @author Dennis Hahn <A href="mailto:hahnd62@mail.sunysuffolk.edu">hahnd62@mail.sunysuffolk.edu</A>
+ * @version 05/2019
+ */
 public abstract class Space implements Comparable<Space>, Serializable {
 
 	private double rate, earlyBirdPrice;
@@ -54,6 +62,14 @@ public abstract class Space implements Comparable<Space>, Serializable {
 		this.size = size;
 	}
 
+	/**
+	 * Used to order the priority queues of spaces in the garage.
+	 * If both spaces are occupied, the closer space has priority.
+	 * The unoccupied space always has priority over occupied spaces.
+	 *
+	 * @param space the space being compared to this space
+	 * @return an integer designating which space has priority
+	 */
 	@Override
 	public int compareTo(Space space) {
 		if (!this.occupied && space.occupied) {

@@ -9,7 +9,7 @@ import java.util.Map;
  * of usernames and a swift sign in process.
  *
  * @author Dennis Hahn <A href="mailto:hahnd62@mail.sunysuffolk.edu">hahnd62@mail.sunysuffolk.edu</A>
- * @version 04/19/2019
+ * @version 05/2019
  */
 public class UserBag implements Serializable {
 
@@ -22,9 +22,9 @@ public class UserBag implements Serializable {
 	/**
 	 * Will create and add a Manager to the HashMap
 	 *
-	 * @param firstName
-	 * @param lastName
-	 * @param password
+	 * @param firstName the first name of the manager
+	 * @param lastName  the last name of the manager
+	 * @param password  the password of the manager
 	 * @return true if the user was added, false if not. Will only return false if the bag already contains the generated username
 	 */
 	public boolean addManager(String firstName, String lastName, String password) {
@@ -41,7 +41,7 @@ public class UserBag implements Serializable {
 	/**
 	 * Will add an already created Manager to the HashMap
 	 *
-	 * @param manager
+	 * @param manager the created manager object
 	 * @return true if the user was added, false if not. Will only return false if the bag already contains the generated username
 	 */
 	public boolean addManager(Manager manager) {
@@ -56,9 +56,9 @@ public class UserBag implements Serializable {
 	/**
 	 * Will create and add an Attendant to the HashMap
 	 *
-	 * @param firstName
-	 * @param lastName
-	 * @param password
+	 * @param firstName the first name of the attendant
+	 * @param lastName  the last name of the attendant
+	 * @param password  the password of the attendant
 	 * @return true if the user was added, false if not. Will only return false if the bag already contains the generated username
 	 */
 	public boolean addAttendant(String firstName, String lastName, String password) {
@@ -75,7 +75,7 @@ public class UserBag implements Serializable {
 	/**
 	 * Will add an already created Attendant to the HashMap
 	 *
-	 * @param attendant
+	 * @param attendant the created attendant object
 	 * @return true if the user was added, false if not. Will only return false if the bag already contains the generated username
 	 */
 	public boolean addAttendant(Attendant attendant) {
@@ -90,7 +90,7 @@ public class UserBag implements Serializable {
 	/**
 	 * Will be used to check if the HashMap contains a given username
 	 *
-	 * @param username
+	 * @param username the username to check
 	 * @return true if the HashMap contains the username, false if it does not
 	 */
 	public boolean verifyUsername(String username) {
@@ -100,8 +100,8 @@ public class UserBag implements Serializable {
 	/**
 	 * Will be used to check if the password of the User with the given username matches the given password
 	 *
-	 * @param username
-	 * @param password
+	 * @param username the username to check
+	 * @param password the password to check
 	 * @return true if the passwords match, false if they don't
 	 */
 	public boolean verifyPassword(String username, String password) {

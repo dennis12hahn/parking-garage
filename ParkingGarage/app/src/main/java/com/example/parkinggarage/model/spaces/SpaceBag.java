@@ -8,6 +8,13 @@ import com.example.parkinggarage.model.vehicles.Vehicle;
 import java.io.Serializable;
 import java.util.PriorityQueue;
 
+/**
+ * A SpaceBag contains the priority queues of the different types of spaces in the garage as well as
+ * the prices designated by the manager.
+ *
+ * @author Dennis Hahn <A href="mailto:hahnd62@mail.sunysuffolk.edu">hahnd62@mail.sunysuffolk.edu</A>
+ * @version 05/2019
+ */
 public class SpaceBag implements Serializable {
 
 	private double motorcycleRate, motorcycleEarlyBird, carRate, carEarlyBird, truckRate, truckEarlyBird;
@@ -21,6 +28,13 @@ public class SpaceBag implements Serializable {
 		this.truckSpaces = new PriorityQueue<>();
 	}
 
+	/**
+	 * Returns the closest space in the garage for the given vehicle.
+	 *
+	 * @param vehicle the vehicle that we're trying to find a space for
+	 * @param option  gives an option for peek or poll
+	 * @return the smallest and closest space in the garge, null if there aren't any
+	 */
 	public Space getClosestSpace(Vehicle vehicle, String option) {
 		if (vehicle instanceof Motorcycle) {
 			return getClosestSpaceForMotorcycle(option);
@@ -37,6 +51,15 @@ public class SpaceBag implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Returns the closest space for a motorcycle with the desired option.
+	 * Checks space at the head of the motorcycle space queue first.
+	 * If that space is occupied, check the space at the head of the car space queue.
+	 * If the space is occupied, check the space at the head of the truck space queue.
+	 *
+	 * @param option gives an option for peek or poll
+	 * @return the smallest and closest space for a motorcycle in the garage, null if all are occupied
+	 */
 	private Space getClosestSpaceForMotorcycle(String option) {
 		if (motorcycleSpaces.peek() != null && !motorcycleSpaces.peek().isOccupied()) {
 			if (option.equals("poll")) {
@@ -71,6 +94,14 @@ public class SpaceBag implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Returns the closest space for a car with the desired option.
+	 * Checks space at the head of the car space queue first.
+	 * If that space is occupied, check the space at the head of the truck space queue.
+	 *
+	 * @param option gives an option for peek or poll
+	 * @return the smallest and closest space for a motorcycle in the garage, null if all are occupied
+	 */
 	private Space getClosestSpaceForCar(String option) {
 		if (carSpaces.peek() != null && !carSpaces.peek().isOccupied()) {
 			if (option.equals("poll")) {
@@ -95,6 +126,13 @@ public class SpaceBag implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Returns the closest space for a truck with the desired option.
+	 * Checks space at the head of the truck space queue.
+	 *
+	 * @param option gives an option for peek or poll
+	 * @return the closest space for a truck in the garage, null if all are occupied
+	 */
 	private Space getClosestSpaceForTruck(String option) {
 		if (truckSpaces.peek() != null && !truckSpaces.peek().isOccupied()) {
 			if (option.equals("poll")) {
@@ -109,6 +147,15 @@ public class SpaceBag implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Fills the queues with the desired amount of each space.
+	 * Motorcycle spaces are placed in the front,
+	 * car spaces are placed after, and truck spaces at the end.
+	 *
+	 * @param totalMotorcycleSpaces the desired amount of motorcycle spaces
+	 * @param totalCarSpaces        the desired amount of car spaces
+	 * @param totalTruckSpaces      the desired amount of truck spaces
+	 */
 	public void generateSpaces(int totalMotorcycleSpaces, int totalCarSpaces, int totalTruckSpaces) {
 		for (int i = totalMotorcycleSpaces; i > 0; i--) {
 			addSpace(new MotorcycleSpace(motorcycleRate, motorcycleEarlyBird));
@@ -123,6 +170,12 @@ public class SpaceBag implements Serializable {
 		}
 	}
 
+	/**
+	 * Will add the given space to the correct queue.
+	 *
+	 * @param space the desired space to be added to the garage
+	 * @return true if the space has been added, false if not
+	 */
 	public boolean addSpace(Space space) {
 		if (space == null) {
 			return false;
@@ -137,30 +190,6 @@ public class SpaceBag implements Serializable {
 		}
 
 		return truckSpaces.add(space);
-	}
-
-	public MotorcycleSpace pollMotorcycleSpaces() {
-		if (motorcycleSpaces.isEmpty()) {
-			return null;
-		}
-
-		return (MotorcycleSpace) motorcycleSpaces.poll();
-	}
-
-	public CarSpace pollCarSpaces() {
-		if (carSpaces.isEmpty()) {
-			return null;
-		}
-
-		return (CarSpace) carSpaces.poll();
-	}
-
-	public TruckSpace pollTruckSpaces() {
-		if (truckSpaces.isEmpty()) {
-			return null;
-		}
-
-		return (TruckSpace) truckSpaces.poll();
 	}
 
 	public void displayAllSpaces() {
@@ -184,6 +213,11 @@ public class SpaceBag implements Serializable {
 		}
 	}
 
+	/**
+	 * Removes the designated space from the correct queue.
+	 *
+	 * @param space the desired space to be removed
+	 */
 	public void removeSpace(Space space) {
 		if (space instanceof MotorcycleSpace) {
 			motorcycleSpaces.remove(space);

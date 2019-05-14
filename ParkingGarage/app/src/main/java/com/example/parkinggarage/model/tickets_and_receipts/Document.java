@@ -8,6 +8,16 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 
+/**
+ * A Document is a ticket and a receipt. It contains the vehicle that has been parked/retrieved and its space.
+ * The date and time for when it was parked and retrieved.
+ * The early bird hour.
+ * Whether or not the vehicle was parked before the early bird hour.
+ * And the amount paid.
+ *
+ * @author Dennis Hahn <A href="mailto:hahnd62@mail.sunysuffolk.edu">hahnd62@mail.sunysuffolk.edu</A>
+ * @version 05/2019
+ */
 public class Document implements Serializable {
 
 	private final static int EARLY_BIRD_HOUR = 8;
@@ -32,6 +42,9 @@ public class Document implements Serializable {
 		this.paid = paid;
 	}
 
+	/**
+	 * @return an ArrayList containing the ticket info and the info for the receipt
+	 */
 	public ArrayList<String> getReceiptInfo() {
 		ArrayList<String> receiptInfo = getTicketInfo();
 		if (timeRetrieved == null) {
@@ -46,6 +59,9 @@ public class Document implements Serializable {
 		return receiptInfo;
 	}
 
+	/**
+	 * @return an ArrayList containing the ticket info
+	 */
 	public ArrayList<String> getTicketInfo() {
 		String spaceType = space.getClass().getSimpleName();
 		spaceType = spaceType.substring(0, spaceType.indexOf("Space"));
@@ -82,6 +98,12 @@ public class Document implements Serializable {
 		return builder.toString();
 	}
 
+	/**
+	 * Will calculate the proper amount to charge the customer.
+	 *
+	 * @return the early bird price of the space if the vehicle was parked before the early brid hour
+	 * or the duration parked (in hours) times the hourly rate of the space
+	 */
 	private double calculateCharge() {
 		if (earlyBird) {
 			return space.getEarlyBirdPrice();
@@ -90,6 +112,17 @@ public class Document implements Serializable {
 		return getDurationParked() * space.getRate();
 	}
 
+	/**
+	 * Example:
+	 * <p>
+	 * Vehicle parked at 10:00am
+	 * Vehicle retrieved at 10:01am
+	 * <p>
+	 * will return 1
+	 *
+	 * @return the number of hours the vehicle was parked in the space.
+	 * Rounds up to the nearest hour.
+	 */
 	private int getDurationParked() {
 		long parked = timeParked.atZone(ZoneId.systemDefault()).toEpochSecond();
 		long retrieved = timeRetrieved.atZone(ZoneId.systemDefault()).toEpochSecond();

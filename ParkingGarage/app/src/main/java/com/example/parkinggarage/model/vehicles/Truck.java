@@ -4,7 +4,7 @@ package com.example.parkinggarage.model.vehicles;
  * A Truck is a {@link com.example.parkinggarage.model.vehicles.Vehicle} with a size of 3
  *
  * @author Dennis Hahn <A href="mailto:hahnd62@mail.sunysuffolk.edu">hahnd62@mail.sunysuffolk.edu</A>
- * @version 04/19/2019
+ * @version 05/2019
  */
 public class Truck extends Vehicle {
 
