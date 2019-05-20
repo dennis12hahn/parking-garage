@@ -1,0 +1,16 @@
+com.example.parkinggarage
+com.example.parkinggarage.controller
+com.example.parkinggarage.controller.create_garage
+com.example.parkinggarage.controller.tickets_and_receipts
+com.example.parkinggarage.controller.users.attendant
+com.example.parkinggarage.controller.users.attendant.actions
+com.example.parkinggarage.controller.users.attendant.actions.view_documents
+com.example.parkinggarage.controller.users.manager
+com.example.parkinggarage.controller.users.manager.actions
+com.example.parkinggarage.controller.users.manager.actions.manage_spaces
+com.example.parkinggarage.model.garage
+com.example.parkinggarage.model.spaces
+com.example.parkinggarage.model.tickets_and_receipts
+com.example.parkinggarage.model.users
+com.example.parkinggarage.model.utils
+com.example.parkinggarage.model.vehicles
