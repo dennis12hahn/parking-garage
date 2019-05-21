@@ -2,23 +2,14 @@
 
 # Use of Data Structures
 
-A garage will contain multiple bags.
+A Garage contains a Map and two bags. 
 
-A level bag will contain each level object of the garage in an array. For now the array will have a size of 1 signifying the one and only level in the garage.
+The Map is a HashMap which maps a String to a Stack. The String key represents the license plates of all vehicles that of been parked in the parking garage. The Stack value is a Stack of Document objects. Since the receipt contains all the information of a ticket, they are combined into one Document object. When a vehicle is parked, just the relevant ticket information is used and when a vehicle is retrieved the Document object is retrieved from the Stack by simply peeking the top and gets updated with the relevant receipt information. Whenever a vehicle is parked, a new Document object is created. If the license is found in the Map, that Document gets pushed onto the proper Stack. If the license is not found, a new Stack is created and the Document gets pushed onto it and is put onto the Map with the license as a new entry.
 
-Each level will contain a priority queue of spaces. The priority queue will be based on the distance from the space to the exit in ascending order and the occupied status of the space. For example, the first space in the queue will be the closest space to the exit if it is not occupied.
+The first bag is a UserBag. The UserBag is a HashMap mapping String keys to User objects as values. The String key is the generated username of the User object and the User value is the User object with that username. There are two types of Users, Attendants and Managers. Both extend the User class and the Manager class extends the Attendant class. The HashMap is used to store all the Attendants and Managers at the garage and log them in quickly.
 
-The garage will contain a user bag which utilizes a hash map with the key corresponding to the unique username and the value corresponding to the user object itself. The hash map will allow for fast searching of accounts for login and account creation purposes.
-
-The garage will contain a vehicle bag (similar to the user bag) utilizing a hash map with the key corresponding to the unique license plate of each vehicle and the value corresponding to the vehicle object itself. The hash map will allow fast searching for vehicles already registered in the garage and accounts for the uniqueness of license plates tied to vehicles.
-
-Each attendant will also have a vehicle bag so they are able to have multiple vehicles tied to their account.
+The second bag is a SpaceBag. The SpaceBag contains all the data associated with the spaces in the parking garage. It contains three PriorityQueues, one for each type of space (Motorcycle, Car, Truck). Each of the queues are sorted based first on the occupied status of the space and second on the distance to the exit. The spaces that are unoccupied and closest to the exit are closer to the head of the queue. When a Space is requested to be parked in, the vehicle is taken in and the smallest and closest open space is returned. The Java PriorityQueue will only reorder when an element is added or removed. So when a vehicle is being parked and one of the Space queues gets polled, the occupied status of that Space gets updated (true when parking, false when retrieving) and is added back to the queue. When a vehicle is being retrieved, the Space that the vehicle is parked in will be removed from the queue, updated, and added back to the queue so it finds its correct place in the queue.
 
 ![burndown-chart](https://github.com/Dennis12Hahn/CSE248ParkingGarage/blob/master/burndown-chart.svg "Burndown Chart")
 
-##### After the app can be run locally on one device, add some of the following
-
-* Transfer the data over to a database
-* Use SQL, mySQL, mongoDB or something else
-* Host the database on a remote server
-* Have to learn how to create the backend or use firebase
+* Learning and tying the Android UI to the project was compiled into one task. This is why task #25 is significantly larger than the rest.
