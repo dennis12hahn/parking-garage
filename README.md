@@ -1,5 +1,7 @@
 # Parking Garage
 
+Android app that simulates a parking garage by organizing, managing, and keeping track of available and occupied spaces through a priority queue. Automatically calculates prices based on criteria such as time parked and the size of the parking space. Features a user account management system with varying permissions based on account type. Project developed with Agile methodology in mind. Utilized Git, Github, the Model View Controller and Singleton design patterns, Unit Testing, and JavaDocs to develop the project.
+
 # Use of Data Structures
 
 A Garage contains a Map and two bags. 
